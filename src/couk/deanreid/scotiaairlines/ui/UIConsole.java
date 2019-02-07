@@ -1,48 +1,42 @@
 /*
  Scotia Airlines - HND Computer Science
- Version 1.4
- @Author: Dean D. Reid *
+ Program Version: 2.4
+ Code Version: 1.1
+ @Author: Dean D. Reid
  */
-package couk.deanreid.scotiaairlines;
+package couk.deanreid.scotiaairlines.ui;
 
+import couk.deanreid.scotiaairlines.core.Airline;
+import couk.deanreid.scotiaairlines.core.Flight;
+import couk.deanreid.scotiaairlines.core.Seat;
+import java.awt.AWTException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class UIConsole {
 
-    private HashMap<String, Flight> flights;
-
+    private int buttonCounter = 2;
+   Airline scotiaAirline;
+    Flight scFlight;
+    Seat scSeat;
+        Scanner reader;
+    
+    
+    
     String menuChoice = "";
     boolean stopMainMenu = false;
     boolean stopSubMenu = false;
     boolean stopSubSubMenu = false;
 
-    Scanner reader;
-    Flight aFlight;
-    Seat aS;
-
-    public Flight getFlights(String flightNo) {
-        flights = new HashMap<>();
-        if (flights.containsKey(flightNo)) {
-            return flights.get(flightNo);
-        } else {
-            Flight aNewFlight = new Flight(0, 0);
-            flights.put(aNewFlight.getFlightNumber(), aNewFlight);
-            return aNewFlight;
-        }
-
-    }
-
-    public void addFlight(Flight aFlight) {
-        flights.put(aFlight.getFlightNumber(), aFlight);
-    }
 
     public UIConsole() {
         reader = new Scanner(System.in);
     }
 
-    public void loadConsoleInterface() throws IOException {
+    public void loadConsoleInterface() throws IOException, AWTException, MalformedURLException, ParseException {
 
         do {
             this.displayMainMenu();
@@ -67,16 +61,15 @@ public class UIConsole {
                             //start of 1.Add flight details
                             case "1":
 
-                                Flight flight = new Flight();
-
+         
                                 System.out.println("Enter flight number: ");
-                                flight.setFlightNumber(reader.next());
+                                scFlight.setFlightNumber(reader.next());
 
                                 System.out.println("Enter flight departure: ");
-                                flight.setDeparture(reader.next());
+                                scFlight.setDeparture(reader.next());
 
                                 System.out.println("Enter flight arrival: ");
-                                flight.setArrival(reader.next());
+                                scFlight.setArrival(reader.next());
 
                                 System.out.println("0. No Status");
                                 System.out.println("1. Checking in");
@@ -84,12 +77,12 @@ public class UIConsole {
                                 System.out.println("3. Flight closed");
                                 System.out.println("Enter flight status: ");
 
-                                flight.setStatus(reader.next());
+                                scFlight.setStatus(reader.next());
 
                                 System.out.println("Enter seat price: ");
-                                flight.setSeatPrice(Double.parseDouble(reader.next()));
+                                scFlight.setSeatPrice(Double.parseDouble(reader.next()));
 
-                                flight.addFlightToDB();
+                                scFlight.addFlightToDB();
                                 break;
                             //2.Update flight status
                             case "2":
@@ -103,9 +96,9 @@ public class UIConsole {
                                 String arrival = null;
                                 int rows = 0;
                                 int columns = 0;
-                                Flight aNewFlight = new Flight(flightNo, departure, arrival, rows, columns);
-                                addFlight(aNewFlight);
-                                Flight Flight = aNewFlight;
+                                //Flight aNewFlight = new Flight(flightNo, departure, arrival, rows, columns);
+                                //addFlight(aNewFlight);
+                                //Flight Flight = aNewFlight;
                                 String newStatus = "";
 
                                 boolean terminate = false;

@@ -1,12 +1,23 @@
 /*
  Scotia Airlines - HND Computer Science
- Version 1.4
+ Program Version: 2.6
+ Code Version: 2.3
  @Author: Dean D. Reid
  */
-package couk.deanreid.scotiaairlines;
+package couk.deanreid.scotiaairlines.core;
+
+import couk.deanreid.scotiaairlines.handler.NotificationHandler;
+import couk.deanreid.scotiaairlines.ui.UI;
+import java.awt.AWTException;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Seat {
 
+    /**
+     @TODO: Add Windows 10 Notifications.
+     */
     //Attributes
     private String seatNumber;
     private float seatPrice;
@@ -35,12 +46,12 @@ public class Seat {
 
     public int getCurrentStatus() {
         return currentStatus;
-    }    
+    }
 
     public Passenger getaPassenger() {
         return aPassenger;
     }
-    
+
     //Setters
     public void setSeatPrice(float seatPriceIn) {
         seatPrice = seatPriceIn;
@@ -72,9 +83,10 @@ public class Seat {
     }
 
     /**
-     * Constructor
-     * @param column
-     * @param row
+     Constructor
+
+     @param column
+     @param row
      */
     public Seat(int column, char row) {
         seatNumber = String.valueOf(column) + row;
@@ -85,8 +97,9 @@ public class Seat {
     }
 
     /**
-     * Constructor
-     * @param seatNo
+     Constructor
+
+     @param seatNo
      */
     public Seat(String seatNo) {
         seatNumber = seatNo;
@@ -184,24 +197,25 @@ public class Seat {
     //Method which changes status of particular seat depending on booking choice made by passenger
     public int changeSeatStatus(Airline scotiaAirline, int newStatus, Passenger newPassenger, Flight newFlight) {
         UI UI = new UI(scotiaAirline);
+
         //cancel seat
         switch (newStatus) {
             case 1:
                 switch (currentStatus) {
                     case 1:
-                        UI.genericOutput("Seat Number: '" + seatNumber + "' Is Already Free");
+                        UI.genericPopup("Seat Number: '" + seatNumber + "' Is Already Free");
                         return -1;
                     case 2:
                         currentStatus = 1;
                         aPassenger = null;
                         completeSeatStatus = 1;
-                        UI.genericOutput("Seat Number: '" + seatNumber + "' Has Been Cancelled");
+                        UI.genericPopup("Seat Number: '" + seatNumber + "' Has Been Cancelled");
                         break;
                     case 3:
                         currentStatus = 1;
                         aPassenger = null;
                         completeSeatStatus = 2;
-                        UI.genericOutput("Seat Number: '" + seatNumber + "' Has Been Cancelled - No Refund Eligible");
+                        UI.genericPopup("Seat Number: '" + seatNumber + "' Has Been Cancelled - No Refund Eligible");
                         break;
                     default:
                         break;
@@ -214,13 +228,13 @@ public class Seat {
                         currentStatus = 2;
                         aPassenger = newPassenger;
                         completeSeatStatus = 3;
-                        UI.genericOutput("Seat Number: '" + seatNumber + "' Has Now Been Reserved By '" + newPassenger.getPassengerName() + "'");
+                        UI.genericPopup("Seat Number: '" + seatNumber + "' Has Now Been Reserved By '" + newPassenger.getPassengerName() + "'");
                         break;
                     case 2:
-                        UI.genericOutput("Seat Number: '" + seatNumber + "' Is Already Reserved By '" + aPassenger.getPassengerName() + "'");
+                        UI.genericPopup("Seat Number: '" + seatNumber + "' Is Already Reserved By '" + aPassenger.getPassengerName() + "'");
                         return -1;
                     case 3:
-                        UI.genericOutput("Seat Number: '" + seatNumber + "' Is Already Booked By '" + aPassenger.getPassengerName() + "'");
+                        UI.genericPopup("Seat Number: '" + seatNumber + "' Is Already Booked By '" + aPassenger.getPassengerName() + "'");
                         return -1;
                     default:
                         break;
@@ -235,7 +249,13 @@ public class Seat {
                         aPassenger = newPassenger;
                         completeSeatStatus = 4;
                         seatTakings += (seatPrice * newPassenger.getDiscountAmount());
-                        UI.genericOutput("Seat Number: '" + seatNumber + "' Has Now Been Booked By '" + newPassenger.getPassengerName() + "'");
+                         {
+                            try {
+                                NotificationHandler.Notify("Seat Booked", "Seat Number: '" + seatNumber + "' Has Now Been Booked By '" + newPassenger.getPassengerName() + "'");
+                            } catch (AWTException | MalformedURLException ex) {
+                                Logger.getLogger(Seat.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                         break;
                     case 2:
                         if (newPassenger.getPassengerName().equalsIgnoreCase(aPassenger.getPassengerName())) {
@@ -243,15 +263,28 @@ public class Seat {
                             aPassenger = newPassenger;
                             completeSeatStatus = 5;
                             seatTakings += (seatPrice * newPassenger.getDiscountAmount());
-                            UI.genericOutput("Seat Number: '" + seatNumber + "' Has Now Been Booked By '" + newPassenger.getPassengerName() + "'");
+                            try {
+                                NotificationHandler.Notify("Seat Booked", "Seat Number: '" + seatNumber + "' Has Now Been Booked By '" + newPassenger.getPassengerName() + "'");
+                            } catch (AWTException | MalformedURLException ex) {
+                                Logger.getLogger(Seat.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         } else {
-                            UI.genericOutput("Seat Number: '" + seatNumber + "' Is Already Reserved By '" + aPassenger.getPassengerName() + "'");
+                            try {
+                                NotificationHandler.Notify("Seat Already Reserved", "Seat Number: '" + seatNumber + "' Is Already Reserved By '" + aPassenger.getPassengerName() + "'");
+                            } catch (AWTException | MalformedURLException ex) {
+                                Logger.getLogger(Seat.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                             return -1;
                         }
                         break;
-                    case 3:
-                        UI.genericOutput("Seat Number: '" + seatNumber + "' Is Already Booked By '" + aPassenger.getPassengerName() + "'");
-                        return -1;
+                    case 3: {
+                        try {
+                            NotificationHandler.Notify("Seat Already Booked", "Seat Number: '" + seatNumber + "' Is Already Booked By '" + aPassenger.getPassengerName() + "'");
+                        } catch (AWTException | MalformedURLException ex) {
+                            Logger.getLogger(Seat.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    return -1;
                     default:
                         break;
                 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane id="mainMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Test Menu" textAlignment="CENTER" textFill="RED" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" />
+         </effect>
+      </Button>
+      <Button layoutX="119.0" layoutY="115.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="175.0" text="Book Flight">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button layoutX="119.0" layoutY="183.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="175.0" text="Flight Details" />
+      <Button layoutX="119.0" layoutY="256.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="175.0" text="Seat Details" />
+      <Button layoutX="31.0" layoutY="323.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="175.0" text="Flight Admin" textFill="#3c00ff" wrapText="true" />
+      <Button fx:id="saQuit" layoutX="241.0" layoutY="323.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="175.0" text="Quit" textAlignment="CENTER" />
+      <ImageView blendMode="HARD_LIGHT" fitHeight="112.0" fitWidth="305.0" layoutX="107.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../assets/mainmenu.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

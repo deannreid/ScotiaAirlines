@@ -1,31 +1,45 @@
 /*
  Scotia Airlines - HND Computer Science
- Version 1.4
+ Program Version: 2.6
+ Code Version: 1.3
  @Author: Dean D. Reid
  */
-package couk.deanreid.scotiaairlines;
+package couk.deanreid.scotiaairlines.core;
 
 public class PassengerWestern extends Passenger {
 
     //Attribute 
     private String islandOfResidence;
 
-    //Getter
+    /**
+     * Get the Island of Residence
+     * @return
+     */
     public String getIslandOfResidence() {
         return islandOfResidence;
     }
 
-    //Setter
+    /**
+     * Set the Island of Residence
+     * @param islandOfResidenceIn
+     */
     public void setIslandOfResidence(String islandOfResidenceIn) {
         islandOfResidence = islandOfResidenceIn;
     }
 
-    //Constructors
+    /**
+     * Constructor
+     */
     public PassengerWestern() {
         super();
         islandOfResidence = "";
     }
 
+    /**
+     * Constructor
+     * @param passengerNameIn
+     * @param islandOfResidenceIn
+     */
     public PassengerWestern(String passengerNameIn, String islandOfResidenceIn) {
         super(0.9f, passengerNameIn);
         islandOfResidence = islandOfResidenceIn;

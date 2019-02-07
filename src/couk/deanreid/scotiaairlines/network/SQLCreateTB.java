@@ -1,13 +1,14 @@
 /*
  Scotia Airlines - HND Computer Science
- Version 1.4
- @Author: Dean D. Reid *
+ Program Version: 2.6
+ Code Version: 1.1
+ @Author: Dean D. Reid
  */
-package couk.deanreid.scotiaairlines;
+package couk.deanreid.scotiaairlines.network;
 
 /*
-    @Not Implemented
-*/
+ @Not Implemented
+ */
 public class SQLCreateTB {
 
     public SQLCreateTB() {

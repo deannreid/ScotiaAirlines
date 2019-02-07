@@ -1,26 +1,35 @@
 /*
  Scotia Airlines - HND Computer Science
- Version 1.4
+ Program Version: 2.6
+ Code Version: 1.3
  @Author: Dean D. Reid
  */
-package couk.deanreid.scotiaairlines;
+package couk.deanreid.scotiaairlines.core;
 
 public class PassengerOrdinary extends Passenger {
 
     //Attributes
     private char currentPromotion;
 
-    //Getter
+    /**
+     * Get the Current Promotion
+     * @return currentPromotion
+     */
     public char getCurrentPromotion() {
         return currentPromotion;
     }
 
-    //Setter
+    /**
+     * Set the Current Promotion
+     * @param currentPromotionIn
+     */
     public void setCurrentPromotion(char currentPromotionIn) {
         currentPromotion = currentPromotionIn;
     }
 
-    //Constructors
+    /**
+     * Constructor
+     */
     public PassengerOrdinary() {
         super();
         currentPromotion = ' ';
@@ -31,6 +40,7 @@ public class PassengerOrdinary extends Passenger {
      * @param passengerNameIn
      * @param currentPromotionIn
      */
+    @SuppressWarnings("OverridableMethodCallInConstructor")
     public PassengerOrdinary(String passengerNameIn, char currentPromotionIn) {
         super(passengerNameIn);
 

@@ -1,10 +1,14 @@
 /*
  Scotia Airlines - HND Computer Science
- Version 1.4
+ Program Version: 2.6
+ Code Version: 1.4
  @Author: Dean D. Reid
  */
-package couk.deanreid.scotiaairlines;
+package couk.deanreid.scotiaairlines.core;
 
+import couk.deanreid.scotiaairlines.network.DBProxy;
+import couk.deanreid.scotiaairlines.ui.UI;
+import couk.deanreid.scotiaairlines.utils.Reference;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,17 +18,29 @@ public class Airline {
     //attributes
     private final HashMap<String, Flight> flights;
 
-    //Getter for Flight Hashmap
+    /**
+     Getter for Flight Hashmap
+
+     @return
+     */
     public HashMap<String, Flight> getFlights() {
         return flights;
     }
 
-    //Constructor
+    /**
+     Constructor
+     */
     public Airline() {
         flights = new HashMap<>();
     }
 
-    //Getter for Specific Flights
+    /**
+     Getter for Flights
+
+     @param flightNo
+
+     @return
+     */
     public Flight getFlights(String flightNo) {
 
         if (flights.containsKey(flightNo)) {
@@ -37,48 +53,69 @@ public class Airline {
 
     }
 
-    //Add Flight to Hashmap
+    /**
+     Add Flights to Hashmap
+
+     @param aFlight
+     */
     public void addFlight(Flight aFlight) {
         flights.put(aFlight.getFlightNumber(), aFlight);
     }
 
-    //Loads all Flights from the Database and inserts into Hashmap
-    public void loadFlightsFromDB() {
+    /**
+     Loads all Flights from the Database and inserts into Hashmap
+
+     @throws SQLException
+     */
+    public void loadFlightsFromDB() throws SQLException {
         try {
-            Connection connection = SQLConnector.getConnection();
+            Connection connection = DBProxy.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Flight");
-            System.out.println("=======================");
-            System.out.println("Loading Flight Database");
-            System.out.println("=======================");
+            if (Reference.DEBUG_MODE) {
+                System.out.println(Reference.TextPaint.GREEN + "=======================");
+                System.out.println("Loading Flight Database");
+                System.out.println("=======================" + Reference.TextPaint.RESET);
+            }
             while (rs.next()) {
                 String flightNo = rs.getString(1);
                 String departure = rs.getString(2);
                 String arrival = rs.getString(3);
                 int rows = rs.getInt(4);
                 int columns = rs.getInt(5);
+                String date = rs.getString(6);
 
-                Flight aNewFlight = new Flight(flightNo, departure, arrival, rows, columns);
+                Flight aNewFlight = new Flight(flightNo, departure, arrival, rows, columns, date);
                 addFlight(aNewFlight);
                 Flight Flight = aNewFlight;
-                System.out.println("Database Flight: '" + flightNo + "' Loaded");
+                if (Reference.DEBUG_MODE) {
+                    System.out.println(Reference.TextPaint.BLUE + "Flight: '" + flightNo + "' Loaded from Database" + Reference.TextPaint.RESET);
+                }
             }
         } catch (SQLException e) {
-            System.out.println("Database Flights Failed to Load");
-            e.printStackTrace();
+            System.out.println(Reference.TextPaint.RED + "Flights Failed to Load from Database" + Reference.TextPaint.RESET);
+            //e.printStackTrace();
         }
     }
 
-    //Loads Seats from the Database into Hashmap
+    /**
+     Load Seats from Database
+
+     @throws SQLException
+     */
     public void loadSeatsFromDB() throws SQLException {
         try {
-            System.out.println("");
-            System.out.println("=======================");
-            System.out.println("Loading Seat and Passenger Database");
-            System.out.println("=======================");
-            Connection connection = SQLConnector.getConnection();
+            if (Reference.DEBUG_MODE) {
+                    System.out.println("");
+                    System.out.println(Reference.TextPaint.GREEN + "===================================");
+                    System.out.println("Loading Seat and Passenger Database");
+                    System.out.println("===================================" + Reference.TextPaint.RESET);
+                
+            }
+            Connection connection = DBProxy.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Seat");
+
             while (rs.next()) {
                 String SeatNo = rs.getString(1);
                 int status = rs.getInt(2);
@@ -88,19 +125,28 @@ public class Airline {
                 Seat passengerSeat = getSeat(FlightNo, SeatNo);
                 passengerSeat.setSeatTakings(takings);
                 loadPassengersFromDB(FlightNo, passengerSeat, status, takings);
-                System.out.println("Seat '" + SeatNo + "' on flight: '" + FlightNo + "' Loaded");
+                if (Reference.DEBUG_MODE) {
+                    System.out.println(Reference.TextPaint.BLUE + "Seat " + SeatNo + "' on flight: '" + FlightNo + "' Loaded from Database" + Reference.TextPaint.RESET);
+                }
             }
 
         } catch (SQLException e) {
-            System.out.println("Database Seats Failed to Load");
-            e.printStackTrace();
+            System.out.println(Reference.TextPaint.RED + "Seats Failed to Load from database" + Reference.TextPaint.RESET);
+            //e.printStackTrace();
         }
     }
 
-    //Loads Passengers from the Database
+    /**
+     Loads Passengers from the Database
+
+     @param flightNo
+     @param passengerSeat
+     @param status
+     @param takings
+     */
     public void loadPassengersFromDB(String flightNo, Seat passengerSeat, int status, float takings) {
         try {
-            Connection connection = SQLConnector.getConnection();
+            Connection connection = DBProxy.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Passenger");
             while (rs.next()) {
@@ -114,27 +160,31 @@ public class Airline {
                     int choice = passengerSeat.changeSeatStatus(status, takings, passengerName, passengerType, passengerInfo);
                     passengersFlight.updateSeat(choice);
                     passengersFlight.CalculateTotalFlightTakings();
-                    System.out.println("Passenger: '" + passengerName + "' on flight: '" + flightNumber + "' Loaded");
+                    if (Reference.DEBUG_MODE) {
+                        System.out.println(Reference.TextPaint.BLUE + "Passenger: '" + passengerName + "' on flight: '" + flightNumber + "' Loaded from database" + Reference.TextPaint.RESET);
+                    }
                 }
 
             }
         } catch (SQLException e) {
-            System.out.println("Database Passengers Failed to Load");
+            System.out.println(Reference.TextPaint.RED + "Passengers Failed to Load from database" + Reference.TextPaint.RESET);
         }
     }
 
-    /*
+    /**
      Empties the Database of all entities
      so that new values can be written
      */
     public void EmptyDB() {
         UI ui = new UI(this);
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;// = null;
         String deleteSeat = "DELETE FROM Seat";
         String deletePassenger = "DELETE FROM Passenger";
         try {
-            System.out.println("Cleaning DB");
-            Connection connection = SQLConnector.getConnection();
+            if (Reference.DEBUG_MODE) {
+                System.out.println("DATABASE DEBUG: Cleaning DB");
+            }
+            Connection connection = DBProxy.getConnection();
             //Statement stmt = connection.createStatement();
             //int rs = stmt.executeUpdate("DELETE * FROM Seat");
             preparedStatement = connection.prepareStatement(deleteSeat);
@@ -142,14 +192,16 @@ public class Airline {
             int rs = preparedStatement.executeUpdate();
 
             if (rs > 0) {
-                System.out.println("Seat Tables Emptied");
+                if (Reference.DEBUG_MODE) {
+                    System.out.println(Reference.TextPaint.BLUE + "SEAT DEBUG: Seat Tables Emptied" + Reference.TextPaint.RESET);
+                }
             }
         } catch (SQLException e) {
-            System.out.println("Seat table cannot be emptied");
-            e.printStackTrace();
+            System.out.println(Reference.TextPaint.RED + "SEAT ERROR: Seat table cannot be emptied" + Reference.TextPaint.RESET);
+            //e.printStackTrace();
         }
         try {
-            Connection connection = SQLConnector.getConnection();
+            Connection connection = DBProxy.getConnection();
             //Statement stmt = connection.createStatement();
             //int rs = stmt.executeUpdate("DELETE * FROM Passenger");
             preparedStatement = connection.prepareStatement(deletePassenger);
@@ -157,16 +209,20 @@ public class Airline {
             int rs = preparedStatement.executeUpdate();
 
             if (rs > 0) {
-                System.out.println("Passengers Emptied");
+                if (Reference.DEBUG_MODE) {
+                    System.out.println(Reference.TextPaint.BLUE + "PASSENGER DEBUG: Passengers Emptied" + Reference.TextPaint.RESET);
+                }
 
             }
         } catch (SQLException e) {
-            System.out.println("Passenger table cannot be emptied");
-            e.printStackTrace();
+            System.out.println(Reference.TextPaint.RED + "PASSENGER ERROR: Passenger table cannot be emptied" + Reference.TextPaint.RESET);
+            //e.printStackTrace();
         }
     }
 
-    //Saves Seat information to Database
+    /**
+     Saves Seat information to Database
+     */
     public void SaveSeatsToDB() {
         try {
             //for each flight
@@ -178,22 +234,32 @@ public class Airline {
                     String seatTakings = String.valueOf(currentSeat.getValue().getSeatTakings());
                     String seatStatus = String.valueOf(currentSeat.getValue().getCurrentStatus());
                     String flightNo = currentFlight.getValue().getFlightNumber();
-
-                    Connection connection = SQLConnector.getConnection();
+                    if (Reference.DEBUG_MODE) {
+                        System.out.println("SEAT DEBUG: Connecting and Preparing Statement");
+                    }
+                    Connection connection = DBProxy.getConnection();
                     Statement stmt = connection.createStatement();
+                    if (Reference.DEBUG_MODE) {
+                        System.out.println("SEAT DEBUG: Execute Statement: " + stmt);
+                    }
                     int rs = stmt.executeUpdate("INSERT INTO Seat (SeatNo, Status, Takings, FlightID) VALUES('" + seatNo + "','" + seatStatus + "','" + seatTakings + "','" + flightNo + "')");
-                    System.out.println(rs);
+
                     if (rs > 0) {
-                        System.out.println("Seat: '" + seatNo + "' booked on flight: '" + flightNo + "' by passenger: '" + currentSeat.getValue().getaPassenger().getPassengerName() +"'");
+                        if (Reference.DEBUG_MODE) {
+                            //System.out.println("SEAT DEBUG:" + Reference.TextPaint.BLUE + "Seat: " + seatNo + " booked on flight: " + flightNo + " by passenger: " + currentSeat.getValue().getaPassenger().getPassengerName() + Reference.TextPaint.RESET);
+                                System.out.println(rs);
+                        }                        
                     }
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Seats failed to save to DB");
+            System.out.println(Reference.TextPaint.RED + "SEAT ERROR: Seats failed to save to DB" + Reference.TextPaint.RESET);
         }
     }
 
-    //Saves Passenger information to Database
+    /**
+     Saves Passenger information to Database
+     */
     public void SavePassengersToDB() {
         UI ui = new UI(this);
         try {
@@ -222,23 +288,38 @@ public class Airline {
                         String passengerType = String.valueOf(type);
                         String passengerInfo = info;
                         String flightNo = currentFlight.getValue().getFlightNumber();
-                        Connection connection = SQLConnector.getConnection();
+                        if (Reference.DEBUG_MODE) {
+                            System.out.println("SEAT DEBUG: Connecting and Preparing Statement");
+                        }
+                        Connection connection = DBProxy.getConnection();
                         Statement stmt = connection.createStatement();
+                        if (Reference.DEBUG_MODE) {
+                            System.out.println("PASSENGER DEBUG: Execute Statement: " + stmt);
+                        }
                         int rs = stmt.executeUpdate("INSERT INTO Passenger(SeatNo, PassengerName, Type, Information, FlightID) VALUES('" + currentSeat.getValue().getSeatNumber() + "','" + currentSeat.getValue().getaPassenger().getPassengerName() + "','" + passengerType + "','" + passengerInfo + "','" + flightNo + "')");
-                        System.out.println(rs);
+                        
                         for (int i = 0; i < rs; i++) {
-                            System.out.println("Passenger Saved: '" + currentSeat.getValue().getaPassenger().getPassengerName() + "'");
+                            if (Reference.DEBUG_MODE) {
+                                System.out.println("PASSENGER DEBUG:" + Reference.TextPaint.BLUE + "Passenger Saved: " + currentSeat.getValue().getaPassenger().getPassengerName() + Reference.TextPaint.RESET);
+                            }
+                            // System.out.println(Reference.TextPaint.BLUE + "Passenger Saved: " + currentSeat.getValue().getaPassenger().getPassengerName() + Reference.TextPaint.RESET);
                         }
                     }
                 }
-
             }
         } catch (SQLException e) {
-            System.out.println("Seats failed to save to DB");
+            System.out.println(Reference.TextPaint.RED + "PASSENGER ERROR: Passenger failed to save to DB" + Reference.TextPaint.RESET);
         }
     }
+    
+    /**
+     Gets seat and adds them to the specific Flight Number
 
-    //Gets seat and adds them to the specific Flight Number
+     @param FlightNo
+     @param SeatNo
+
+     @return
+     */
     public Seat getSeat(String FlightNo, String SeatNo) {
         if (flights.containsKey(FlightNo)) {
             //if flight exists input flightNo
@@ -247,7 +328,9 @@ public class Airline {
             //if seat exists within flight return seat found
             if (currentFlight.getSeats().containsKey(SeatNo)) {
                 Seat foundSeat = currentFlight.getSeats().get(SeatNo);
-
+                if (Reference.DEBUG_MODE) {
+                    System.out.println("SEAT DEBUG:" + Reference.TextPaint.BLUE + "Seat Found: " + foundSeat + Reference.TextPaint.RESET);
+                }
                 return foundSeat;
             } else {
                 Seat tempSeat = new Seat(SeatNo);

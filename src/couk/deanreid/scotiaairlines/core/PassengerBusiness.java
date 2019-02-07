@@ -1,29 +1,46 @@
 /*
  Scotia Airlines - HND Computer Science
- Version 1.4
+ Program Version: 2.6
+ Code Version: 1.3
  @Author: Dean D. Reid
  */
-package couk.deanreid.scotiaairlines;
+package couk.deanreid.scotiaairlines.core;
 
 public class PassengerBusiness extends Passenger {
 
     //Attributes
     private String companyName;
 
-    //Getter and Setter
+    /**
+     * Get the Company Name
+     * @return companyName
+     */
     public String getCompanyName() {
         return companyName;
     }
 
+    /**
+     * Set the Company Name
+     * @param companyNameIn
+     */
     public void setCompanyName(String companyNameIn) {
         companyName = companyNameIn;
     }
-
-    //Constructors
+    
+    /**
+     * Constructor
+     */
     public PassengerBusiness() {
         super();
     }
 
+    /**
+     * Constructor
+     * @param companyNameIn
+     * @param discountAmountIn
+     * @param passengerNameIn
+     */
+    @SuppressWarnings("UnusedAssignment")
     public PassengerBusiness(String companyNameIn, float discountAmountIn, String passengerNameIn) {
         super(discountAmountIn, passengerNameIn);
 
