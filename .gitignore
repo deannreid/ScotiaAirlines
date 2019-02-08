@@ -39,7 +39,10 @@ target/
 # NetBeans specific
 nbproject/private/
 build/
+bin/
 nbbuild/
+test/
+nbproject/
 dist/
 nbdist/
 nbactions.xml
@@ -52,5 +55,6 @@ nb-configuration.xml
 # Misc
 *.swp
 release.properties
+manifest.mf
 pom.xml.releaseBackup
 pom.xml.tag
