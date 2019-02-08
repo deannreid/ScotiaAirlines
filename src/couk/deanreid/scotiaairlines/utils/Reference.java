@@ -29,7 +29,7 @@ public class Reference {
     /**
      * Force the CLI - for Testing purposes
      */
-    public static final boolean FORCE_CLI = true;
+    public static final boolean FORCE_CLI = false;
     
     /**
      * Set Configuration Filename.

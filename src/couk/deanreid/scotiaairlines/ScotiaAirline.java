@@ -8,11 +8,9 @@ package couk.deanreid.scotiaairlines;
 
 //Local Imports
 import couk.deanreid.scotiaairlines.core.Airline;
-import couk.deanreid.scotiaairlines.handler.ConfigurationHandler;
 import couk.deanreid.scotiaairlines.handler.NotificationHandler;
 import couk.deanreid.scotiaairlines.ui.UI;
 import couk.deanreid.scotiaairlines.ui.UIConsole;
-import couk.deanreid.scotiaairlines.ui.UIPreLoad;
 import couk.deanreid.scotiaairlines.utils.Reference;
 import couk.deanreid.scotiaairlines.utils.Reference.TextPaint;
 
@@ -66,7 +64,7 @@ public class ScotiaAirline {
                     System.out.println(Reference.TextPaint.GREEN + "===========================" + Reference.TextPaint.RESET);
                 }
                 UIConsole uic = new UIConsole(scotiaAirline);
-                uic.loadInterface();
+                uic.mainMenu();
             }
         } else {
             if (Reference.DARK_MODE) {

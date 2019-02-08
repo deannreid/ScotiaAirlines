@@ -7,14 +7,8 @@
 package couk.deanreid.scotiaairlines.ui;
 
 import couk.deanreid.scotiaairlines.core.Airline;
-import couk.deanreid.scotiaairlines.core.Flight;
 import couk.deanreid.scotiaairlines.utils.Reference;
-import java.awt.AWTException;
-import java.net.MalformedURLException;
-import java.text.ParseException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class UIConsole {
 
@@ -40,7 +34,7 @@ public class UIConsole {
     }
 
     public void loadInterface() {
-
+/*
         do {
 
             mainMenu();
@@ -94,7 +88,7 @@ public class UIConsole {
 
                                 String flightNumber = reader.next();
 
-                                Flight flightToEdit = Airline.getFlights(flightNumber);
+                                Flight flightToEdit = aFlight.getFlightFromFile(flightNumber);
 
                                 String newStatus = "";
 
@@ -162,11 +156,6 @@ public class UIConsole {
                                 seatnosToCancel = reader.nextInt();
                                 flight.updateSeat(seatnosToCancel);
                         {
-                            try {
-                                Airline.SaveSeatsToDB();
-                            } catch (AWTException | MalformedURLException | ParseException ex) {
-                                Logger.getLogger(UIConsole.class.getName()).log(Level.SEVERE, null, ex);
-                            }
                         }
                                 break;
                         }
@@ -185,12 +174,6 @@ public class UIConsole {
                                     System.out.println("Please enter seat number (1-" + flight.getFreeSeats()+ ")");
                                     seatnosToReserve = reader.nextInt();
                                     flight.updateSeat(seatnosToReserve);
-                                    
-                            try {
-                                Airline.SaveSeatsToDB();
-                            } catch (AWTException | MalformedURLException | ParseException ex) {
-                                Logger.getLogger(UIConsole.class.getName()).log(Level.SEVERE, null, ex);
-                            }
                                 }
 
                                 break;
@@ -209,7 +192,6 @@ public class UIConsole {
                                     System.out.println("Please enter seat number (1-" + flight.getNosSeats() + ")");
                                     seatnosToBook = reader.nextInt();
                                     flight.updateSeat(seatnosToBook);
-                                    Airline.SaveSeatsToDB();
                                 }
 
                                 break;
@@ -243,7 +225,7 @@ public class UIConsole {
                     stopMainMenu = true;
             } // end switch comind1				
         } while (!stopMainMenu);// end do while
-
+*/
     }
 
     public void mainMenu() {
