@@ -66,7 +66,7 @@ public class ScotiaAirline {
                     System.out.println(Reference.TextPaint.GREEN + "===========================" + Reference.TextPaint.RESET);
                 }
                 UIConsole uic = new UIConsole(scotiaAirline);
-                uic.loadConsoleInterface();
+                uic.loadInterface();
             }
         } else {
             if (Reference.DARK_MODE) {

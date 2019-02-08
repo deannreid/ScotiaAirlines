@@ -942,7 +942,7 @@ public class UI {
             //splits by space
             //use to get the flight number from flight info
             String[] parsedFlightInfo = FlightInfo.split("\\s+");
-            System.out.println("test1");
+            
             Flight chosenFlight = scotiaAirline.getFlights().get(parsedFlightInfo[1]);
             System.out.println(Arrays.toString(parsedFlightInfo));
 
@@ -950,9 +950,9 @@ public class UI {
             boolean boarding = chosenFlight.isBoarding();
             boolean closed = chosenFlight.isClosed();
             boolean full = chosenFlight.isFull();
-            System.out.println("test3");
+            
             if (boarding == true || closed == true || full == true) {
-                System.out.println("test4");
+                
                 try {
                     NotificationHandler.Notify("Flight Error", "Bookings not available "+ chosenFlight.getStatusMessage());
                 } catch (AWTException | MalformedURLException ex) {
@@ -962,7 +962,7 @@ public class UI {
                 return;
                 
             }
-            System.out.println("test5");
+            
             
             getSeatno(parsedFlightInfo[1], 3);
             saFrame.dispose(); 

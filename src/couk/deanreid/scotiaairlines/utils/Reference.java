@@ -29,7 +29,7 @@ public class Reference {
     /**
      * Force the CLI - for Testing purposes
      */
-    public static final boolean FORCE_CLI = false;
+    public static final boolean FORCE_CLI = true;
     
     /**
      * Set Configuration Filename.
@@ -90,6 +90,7 @@ public class Reference {
      * List of Colours to Choose
      */
     public enum TextPaint {
+        BOLD("\033[0;1m"),
         BLACK("\u00A70"),
         DARK_BLUE("\u00A71"),
         DARK_GREEN("\u00A72"),
