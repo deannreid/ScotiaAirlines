@@ -28,7 +28,7 @@ public class UIPreLoad extends Preloader {
         bar = new ProgressBar();
         BorderPane p = new BorderPane();
         p.setCenter(bar);
-        return new Scene(p, 300, 150);
+        return new Scene(p, 100, 20);
     }
 
     @Override

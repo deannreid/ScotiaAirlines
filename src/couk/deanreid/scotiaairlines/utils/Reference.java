@@ -1,6 +1,6 @@
 /*
  Scotia Airlines - HND Computer Science
- Program Version: 2.6
+ Program Version: 2.7
  Code Version: 1.2
  @Author: Dean D. Reid
  */
@@ -15,7 +15,6 @@ import javax.swing.Icon;
  */
 public class Reference {
 
-
     /**
      * Enable Debug Mode All The Lines...
      */
@@ -27,6 +26,11 @@ public class Reference {
      */
     public static final boolean DARK_MODE = true;
 
+    /**
+     * Force the CLI - for Testing purposes
+     */
+    public static final boolean FORCE_CLI = false;
+    
     /**
      * Set Configuration Filename.
      *
@@ -49,7 +53,7 @@ public class Reference {
     /**
      * Program Version and Build Number
      */
-    public static final String VERSION_NUMBER = "2.7 (build 12)";
+    public static final String VERSION_NUMBER = "2.7 (build 23)";
 
     /**
      * Not a very secret Secret...

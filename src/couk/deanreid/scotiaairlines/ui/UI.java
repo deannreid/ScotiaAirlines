@@ -1,6 +1,6 @@
 /*
  Scotia Airlines - HND Computer Science
- Program Version: 2.6
+ Program Version: 2.7
  Code Version: 2.8
  @Author: Dean D. Reid
  */
@@ -32,6 +32,7 @@ import static java.time.Clock.system;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -397,7 +398,7 @@ public class UI {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             txtDatePick.setFormats(dateFormat);
                 DateFormat sysDate = new SimpleDateFormat("yyyy-MM-dd");
-            String date_to_store = sysDate.format(txtDatePick.getDate()).toString();
+            String date_to_store = sysDate.format(txtDatePick.getDate());
             System.out.println(date_to_store);
  
             
@@ -405,8 +406,9 @@ public class UI {
             Flight newFlight = new Flight(flightNo, departure1, arrival1, rows1, columns1, date_to_store);
             try {
                 newFlight.addFlightToDB();
-            } catch (AWTException | MalformedURLException | ParseException ex) {
+            } catch (AWTException | MalformedURLException | ParseException | NumberFormatException ex) {
                 Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Number Format");
             }
             scotiaAirline.addFlight(newFlight);
             saFrame.setVisible(false);
@@ -418,7 +420,7 @@ public class UI {
             } catch (AWTException | MalformedURLException ex) {
                 try {
                     NotificationHandler.Notify("FLIGHT ERROR", "Flight Failed to add, See Log");
-                } catch (AWTException | MalformedURLException ex1) {
+                } catch (AWTException | MalformedURLException | NumberFormatException ex1) {
                     Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex1);
                 }
                 Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
@@ -538,22 +540,20 @@ public class UI {
         JLabel title = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/assets/tbselectflight.png")));
             title.setBounds(150, -10, 259, 100);
                 saFrame.add(title);
-                
+       
         JPanel saPanel = new JPanel();
             saPanel.setBounds(10, 90, 560, 500);   
         //displaying all flights in hashmap
         scotiaAirline.getFlights().entrySet().stream().map((currentFlight) -> {
             JButton tempButton = new JButton(
-                "<html>"
-                + "<b>Flight No:</b> "
+                 "FlightNo: "
                 + currentFlight.getValue().getFlightNumber()
-                + "<b> Depature:</b> "
+                + "  Depature: "
                 + currentFlight.getValue().getDeparture()
-                + "<b> Arrival:</b> "
+                + "  Arrival: "
                 + currentFlight.getValue().getArrival()
-                + "<b> Date:</b> "
+                + "  Date: "
                 + currentFlight.getValue().getDate()
-                +"</html>"
             );
             
             tempButton.addActionListener((ActionEvent e) -> {
@@ -942,14 +942,17 @@ public class UI {
             //splits by space
             //use to get the flight number from flight info
             String[] parsedFlightInfo = FlightInfo.split("\\s+");
-            
+            System.out.println("test1");
             Flight chosenFlight = scotiaAirline.getFlights().get(parsedFlightInfo[1]);
-            
+            System.out.println(Arrays.toString(parsedFlightInfo));
+
+            System.out.println(chosenFlight);
             boolean boarding = chosenFlight.isBoarding();
             boolean closed = chosenFlight.isClosed();
             boolean full = chosenFlight.isFull();
-            
+            System.out.println("test3");
             if (boarding == true || closed == true || full == true) {
+                System.out.println("test4");
                 try {
                     NotificationHandler.Notify("Flight Error", "Bookings not available "+ chosenFlight.getStatusMessage());
                 } catch (AWTException | MalformedURLException ex) {
@@ -957,7 +960,9 @@ public class UI {
                     Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return;
+                
             }
+            System.out.println("test5");
             
             getSeatno(parsedFlightInfo[1], 3);
             saFrame.dispose(); 
