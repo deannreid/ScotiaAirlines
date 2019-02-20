@@ -8,6 +8,7 @@ package couk.deanreid.scotiaairlines;
 
 //Local Imports
 import couk.deanreid.scotiaairlines.core.Airline;
+import couk.deanreid.scotiaairlines.handler.ConfigurationHandler;
 import couk.deanreid.scotiaairlines.handler.NotificationHandler;
 import couk.deanreid.scotiaairlines.ui.UI;
 import couk.deanreid.scotiaairlines.ui.UIConsole;
@@ -46,7 +47,7 @@ public class ScotiaAirline {
             System.out.println(TextPaint.GREEN + "Debug Mode is Disabled. Only major errors will show" + TextPaint.RESET);
         }
 
-        //ConfigurationHandler.load(Reference.class, Reference.CONFIG_FILE_LOCATION + "/" + Reference.CONFIG_FILE_NAME);
+        ConfigurationHandler.load(Reference.class, Reference.CONFIG_FILE_LOCATION + "/" + Reference.CONFIG_FILE_NAME);
         Airline scotiaAirline = new Airline();
         scotiaAirline.loadFlightsFromDB();
         scotiaAirline.loadSeatsFromDB();

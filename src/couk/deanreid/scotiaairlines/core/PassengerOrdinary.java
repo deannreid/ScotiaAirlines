@@ -40,7 +40,6 @@ public class PassengerOrdinary extends Passenger {
      * @param passengerNameIn
      * @param currentPromotionIn
      */
-    @SuppressWarnings("OverridableMethodCallInConstructor")
     public PassengerOrdinary(String passengerNameIn, char currentPromotionIn) {
         super(passengerNameIn);
 

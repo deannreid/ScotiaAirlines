@@ -479,14 +479,14 @@ public class Flight {
             if (Reference.DEBUG_MODE) {
                 System.out.println(Reference.TextPaint.BLUE + "FLIGHT DEBUG:" + "Flight '" + flightNumber + "' added to database" + Reference.TextPaint.RESET);
             }
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
             NotificationHandler.Notify("Failed to add Flight", "Failed to add Flight, Please make sure you have correctly inserted all fields");
               System.out.println(Reference.TextPaint.RED + "FLIGHT ERROR:" + "Failed to add Flight, Please make sure you have correctly inserted all fields" + Reference.TextPaint.RESET);
-              ex.printStackTrace();
-        } catch (NumberFormatException ex) {
+              e.printStackTrace();
+        } catch (NumberFormatException e) {
             NotificationHandler.Notify("Failed to add Flight", "Failed to add Flight, You can only use numbers for Rows and Columns");
-            System.out.println(Reference.TextPaint.RED + "FLIGHT ERROR:" + Reference.TextPaint.RESET + ex);
-
+            System.out.println(Reference.TextPaint.RED + "FLIGHT ERROR:" + Reference.TextPaint.RESET + e);
+            e.printStackTrace();    
         }
     }
 
@@ -495,6 +495,7 @@ public class Flight {
      * @throws java.awt.AWTException
      * @throws java.net.MalformedURLException
      */
+    @SuppressWarnings("CallToPrintStackTrace")
     public void deleteFlightFromDB() throws AWTException, MalformedURLException {
         try {
             Connection connection = DBProxy.getConnection();
@@ -506,9 +507,10 @@ public class Flight {
             if (Reference.DEBUG_MODE) {
                 System.out.println(Reference.TextPaint.BLUE + "FLIGHT DEBUG:" + "Flight '" + flightNumber + "' deleted from database" + Reference.TextPaint.RESET);
             }
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
             NotificationHandler.Notify("Failed to delete Flight", "Failed to delete Flight");
               System.out.println(Reference.TextPaint.RED + "FLIGHT ERROR:" + "Failed to delete Flight" + Reference.TextPaint.RESET);
+                e.printStackTrace();
         } 
     }    
     

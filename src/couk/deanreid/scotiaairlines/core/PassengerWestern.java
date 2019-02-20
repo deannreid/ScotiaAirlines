@@ -56,7 +56,7 @@ public class PassengerWestern extends Passenger {
 
         islandOfResidence = islandOfResidenceIn;
 
-        discountAmountIn = 0.9f;
+        //discountAmountIn = 0.9f;
 
     }
 

@@ -67,6 +67,7 @@ public class Airline {
 
      @throws SQLException
      */
+    @SuppressWarnings("CallToPrintStackTrace")
     public void loadFlightsFromDB() throws SQLException {
         try {
             Connection connection = DBProxy.getConnection();
@@ -94,7 +95,7 @@ public class Airline {
             }
         } catch (SQLException e) {
             System.out.println(Reference.TextPaint.RED + "Flights Failed to Load from Database" + Reference.TextPaint.RESET);
-            //e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -132,7 +133,7 @@ public class Airline {
 
         } catch (SQLException e) {
             System.out.println(Reference.TextPaint.RED + "Seats Failed to Load from database" + Reference.TextPaint.RESET);
-            //e.printStackTrace();
+            e.printStackTrace();
         }
     }
 

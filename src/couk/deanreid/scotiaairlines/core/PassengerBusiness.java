@@ -40,12 +40,12 @@ public class PassengerBusiness extends Passenger {
      * @param discountAmountIn
      * @param passengerNameIn
      */
-    @SuppressWarnings("UnusedAssignment")
+
     public PassengerBusiness(String companyNameIn, float discountAmountIn, String passengerNameIn) {
         super(discountAmountIn, passengerNameIn);
 
         companyName = companyNameIn;
-        discountAmountIn = 0.75f;
+        //discountAmountIn = 0.75f;
 
     }
 

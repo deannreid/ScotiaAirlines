@@ -111,7 +111,7 @@ public class Seat {
 
     //Method to display details for specific seat
     public String DisplaySeatDetails() {
-        String output = "";
+        String output;
         String seatStatus = "";
 
         switch (currentStatus) {

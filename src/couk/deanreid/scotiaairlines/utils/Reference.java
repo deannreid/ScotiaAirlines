@@ -34,16 +34,14 @@ public class Reference {
     /**
      * Set Configuration Filename.
      *
-     * @deprecated - Since Version 2.6
      */
     public static final String CONFIG_FILE_NAME = "scotia.properties";
 
     /**
      * Set Configuration Location.
      *
-     * @deprecated - Since Version 2.6 - Never used this.
      */
-    public static final String CONFIG_FILE_LOCATION = "D:/Documents/Development/HND Computer Science/OOPS/";
+    public static final String CONFIG_FILE_LOCATION = "~/       ";
 
     /**
      * Program Name

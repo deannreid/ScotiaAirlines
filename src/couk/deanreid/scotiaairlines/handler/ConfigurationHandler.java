@@ -21,6 +21,7 @@ public final class ConfigurationHandler {
     /**
      * Private constructor
      */
+    @SuppressWarnings("CallToPrintStackTrace")
     private ConfigurationHandler() {
         this.properties = new Properties();
         try {
