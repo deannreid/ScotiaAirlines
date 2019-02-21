@@ -397,7 +397,7 @@ public class Flight {
         totalFlightTakings = 0.0f;
 
     }
-
+    
     /**
      Updates the seats for the flight based on booking choice
 
@@ -607,4 +607,5 @@ public class Flight {
         }
 
     }// end of isValid
+
 }

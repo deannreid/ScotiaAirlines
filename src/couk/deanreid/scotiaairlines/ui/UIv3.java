@@ -23,7 +23,7 @@ public class UIv3 extends Application {
     public void start(Stage primaryStage) throws Exception {
      //   new JMetro(JMetro.Style.LIGHT).applyTheme(root);
         Parent root = FXMLLoader.load(getClass().getResource("UIv3.fxml"));
-            primaryStage.setTitle("Scotia Airlines Version: 3.0 (Build 06219-SNAPSHOT)");
+            primaryStage.setTitle("Scotia Airlines Version: 3.0 (Build 210219-SNAPSHOT)");
             primaryStage.setScene(new Scene(root, 425,400));
             primaryStage.show();
     }

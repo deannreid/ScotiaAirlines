@@ -47,7 +47,7 @@ public class ScotiaAirline {
             System.out.println(TextPaint.GREEN + "Debug Mode is Disabled. Only major errors will show" + TextPaint.RESET);
         }
 
-        ConfigurationHandler.load(Reference.class, Reference.CONFIG_FILE_LOCATION + "/" + Reference.CONFIG_FILE_NAME);
+     //   ConfigurationHandler.load(Reference.class, Reference.CONFIG_FILE_LOCATION + "/" + Reference.CONFIG_FILE_NAME);
         Airline scotiaAirline = new Airline();
         scotiaAirline.loadFlightsFromDB();
         scotiaAirline.loadSeatsFromDB();

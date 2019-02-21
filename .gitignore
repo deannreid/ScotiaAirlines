@@ -58,3 +58,5 @@ release.properties
 manifest.mf
 pom.xml.releaseBackup
 pom.xml.tag
+nbproject/genfiles.properties
+nbproject/project.xml

@@ -7,6 +7,7 @@
 package couk.deanreid.scotiaairlines.ui;
 
 import couk.deanreid.scotiaairlines.core.Airline;
+import couk.deanreid.scotiaairlines.core.Flight;
 import couk.deanreid.scotiaairlines.utils.Reference;
 import java.util.Scanner;
 
@@ -30,15 +31,15 @@ public class UIConsole {
     }
 
     public void genericPopup(String inputMessage) {
-        System.out.println(Reference.TextPaint.GREEN + "ScotiaAirline Information System:: " + Reference.TextPaint.BLUE + inputMessage);
+        System.out.println(Reference.TextPaint.GREEN + "ScotiaAirline Information System ");
+        System.out.println("==================================" + Reference.TextPaint.RESET);
+        System.out.println(Reference.TextPaint.BLUE + inputMessage + Reference.TextPaint.RESET);
     }
 
     public void loadInterface() {
 /*
         do {
-
             mainMenu();
-
             menuChoice = reader.next();
             do {
             } while (1 == 2);
@@ -52,132 +53,102 @@ public class UIConsole {
                         switch (menuChoice) {
                             //start of 1.Add flight details
                             case "1":
-                                String flightNo = "";
-                                String departure = "";
-                                String arrival = "";
-                                int rows = 0;
-                                int columns = 0;
-                                String date = "";
-
-                                Flight flight = new Flight(flightNo, departure, arrival, rows, columns, date);
-
+                                String flightNo = txtFlightID;
+                                String departure1 = txtDeparture.getText();
+                                String arrival1 = txtArrival.getText();
+                                int rows1 = Integer.parseInt(txtRows.getText());
+                                int columns1 = Integer.parseInt(txtColumns.getText());
                                 System.out.println("Enter flight number: ");
-                                flight.setFlightNumber(reader.next());
-
+                                flight.txtFlightID(reader.next());
                                 System.out.println("Enter flight departure: ");
-                                flight.setDeparture(reader.next());
-
+                                flight.txtDeparture(reader.next());
                                 System.out.println("Enter flight arrival: ");
-                                flight.setArrival(reader.next());
-
+                                flight.txtArrival(reader.next());
                                 System.out.println("Enter flight date: ");
-                                flight.setDate(reader.next());
-                                
-                                flight.setStatus(reader.next());
-
-                                System.out.println("Enter seat price: ");
-                                flight.setSeatPrice(Double.parseDouble(reader.next()));
-
+                                flight.txtDate(reader.next());
+                                Flight newFlight = new Flight(flightNo, departure1, arrival1, rows1, columns1, date_to_store);
+                                try {
+                                    newFlight.addFlightToDB();
+                                } catch (AWTException | MalformedURLException | ParseException | NumberFormatException ex) {
+                                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                                    System.out.println("Number Format");
+                                }
+                                scotiaAirlineC.addFlight(newFlight);
                                 break;
                             //2.Update flight status
                             case "2":
-
                                 selectFlight();
-
                                 System.out.println("Enter flight number: ");
-
                                 String flightNumber = reader.next();
-
                                 Flight flightToEdit = aFlight.getFlightFromFile(flightNumber);
-
                                 String newStatus = "";
-
                                 boolean terminate = false;
-
                                 do {
                                     System.out.println("0. Available for bookings");
                                     System.out.println("1. Checking in");
                                     System.out.println("2. Boarding");
                                     System.out.println("3. Flight closed");
                                     System.out.println("Enter new flight status: ");
-
                                     newStatus = reader.next();
-
                                     if (newStatus.equals("0") || newStatus.equals("1") || newStatus.equals("2") || newStatus.equals("3")) {
                                         terminate = true;
                                     }
-
                                 } while (!terminate);
-
                                 flightToEdit.updateStatus(flightNumber, newStatus);
-
                                 break;
-
                             case "3":
                                 selectFlight();
-
                                 break;
-
                             default:
                             case "R":
                             case "r":
                                 stopSubMenu = true;
                         }
                     } while (!stopSubMenu); // end do while
-
-                    //end of 1.Flight Administration	
+                    //end of 1.Flight Administration
                     break;
-
                 case "2":
                     do {
-
                         displayBookingMenu();
-
                         menuChoice = reader.next();
-
                         switch (menuChoice) {
                             //1. Cancel seat reservation
                             case "1":
                                 selectFlight();
                                 System.out.println("Please enter flight number: ");
                                 Flight flight = new Flight(reader.next());
-
-                        switch (flight.getStatus()) {
-                            case "2":
-                                System.out.println("Error Message - Cancellation too late");
+                                switch (flight.getStatus()) {
+                                    case "2":
+                                        System.out.println("Error Message - Cancellation too late");
+                                        break;
+                                    case "3":
+                                        System.out.println("Error Message - Cancellation too late");
+                                        break;
+                                    default:
+                                        //airline.retrieveFromFile();
+                                        int seatnosToCancel;
+                                        System.out.println("Please enter seat number (1-" + flight.getNosSeats() + ")");
+                                        seatnosToCancel = reader.nextInt();
+                                        flight.updateSeat(seatnosToCancel);
+                                         {
+                                        }
+                                        break;
+                                }
                                 break;
-                            case "3":
-                                System.out.println("Error Message - Cancellation too late");
-                                break;
-                            default:
-                                //carriage.retrieveFromFile();
-                                int seatnosToCancel;
-                                System.out.println("Please enter seat number (1-" + flight.getNosSeats() + ")");
-                                seatnosToCancel = reader.nextInt();
-                                flight.updateSeat(seatnosToCancel);
-                        {
-                        }
-                                break;
-                        }
-
-                                break;
-                            //2. Reserve a seat.	
+                            //2. Reserve a seat.
                             case "2":
                                 selectFlight();
                                 System.out.println("Please enter flight number: ");
                                 Flight flight2 = new Flight(reader.next());
-
                                 if (flight2.getStatus().equals("1")) {
                                     System.out.println("Error Message - Reservations not available");
                                 } else {
                                     int seatnosToReserve;
-                                    System.out.println("Please enter seat number (1-" + flight.getFreeSeats()+ ")");
+                                    System.out.println("Please enter seat number (1-" + flight.getFreeSeats() + ")");
                                     seatnosToReserve = reader.nextInt();
                                     flight.updateSeat(seatnosToReserve);
                                 }
-
                                 break;
-
                             //3. Book a seat
                             case "3":
                                 selectFlight();
@@ -193,9 +164,7 @@ public class UIConsole {
                                     seatnosToBook = reader.nextInt();
                                     flight.updateSeat(seatnosToBook);
                                 }
-
                                 break;
-
                             default:
                             case "R":
                             case "r":
@@ -203,31 +172,30 @@ public class UIConsole {
                         } // end switch comind5
                     } while (!stopSubSubMenu); // end do while
                     break;
-
                 case "3":
                     selectFlight();
                     System.out.println("Please enter flight number: ");
                     Flight flight4 = new Flight(reader.next());
-
                     flight4.getSeats();
                     break;
-
                 case "4":
                     selectFlight();
                     System.out.println("Please enter flight number: ");
                     Flight flight5 = new Flight(reader.next());
-                        flight5.DisplayFlightInfo();
+                    flight5.DisplayFlightInfo();
                     break;
-
-//				default:
+                //				default:
                 case "Q":
                 case "q":
                     stopMainMenu = true;
-            } // end switch comind1				
+            } // end switch comind1
         } while (!stopMainMenu);// end do while
 */
     }
 
+    /**
+     * Main Menu for Console Interface
+     */
     public void mainMenu() {
         System.out.println("Scotia Airlines - Main Menu");
         System.out.println("===========================");
@@ -239,6 +207,9 @@ public class UIConsole {
         System.out.println("Make your selection >");
     }
 
+    /**
+     * Admin Menu for Console Interface
+     */
     public void adminMenu() {
         System.out.println("Scotia Airlines - Flight Admin");
         System.out.println("==============================");
@@ -249,6 +220,11 @@ public class UIConsole {
         System.out.println("Make your selection >");
     }
 
+    /**
+     * Select Flight Console Interface
+     * 
+     * - Input Hashmap to show list of flights and Flight Numbers
+     */
     public void selectFlight() {
         System.out.println("Scotia Airlines - Flights");
         System.out.println("=========================");
@@ -262,6 +238,9 @@ public class UIConsole {
         System.out.println("Make your selection >");
     }
 
+    /**
+     * Change Status Menu for Console Interface
+     */
     public void displayChangeStatusMenu() {
         System.out.println("Scotia Airlines - Flight Status");
         System.out.println("===============================");
@@ -272,6 +251,9 @@ public class UIConsole {
         System.out.println("Make your selection >");
     }
 
+    /**
+     * Display Booking Menu for Console Interface
+     */
     public void displayBookingMenu() {
         System.out.println("Scotia Airlines - Bookings");
         System.out.println("==========================");
@@ -282,6 +264,9 @@ public class UIConsole {
         System.out.println("Make your selection >");
     }
 
+    /**
+     * Book Passenger Interface for Console
+     */
     public void bookPassenger() {
         /* 
          insert booking code here 

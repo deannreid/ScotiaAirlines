@@ -9,9 +9,9 @@ package couk.deanreid.scotiaairlines.utils;
 import javax.swing.Icon;
 
 /**
- * Easy References - Save Typing and Makes life easier to change Global
- * Variables. Some entries will soon be ported to the config file to allow user
- * to modify settings. -- Nevermind.
+ * Easy References -
+ * Some entries will soon be ported to the config file to allow user
+ * to modify settings.
  */
 public class Reference {
 
@@ -41,7 +41,7 @@ public class Reference {
      * Set Configuration Location.
      *
      */
-    public static final String CONFIG_FILE_LOCATION = "~/       ";
+    public static final String CONFIG_FILE_LOCATION = "~/";
 
     /**
      * Program Name
