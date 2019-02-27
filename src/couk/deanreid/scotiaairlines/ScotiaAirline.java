@@ -1,6 +1,6 @@
 /*
  Scotia Airlines - HND Computer Science
- Program Version: 2.7
+ Program Version: 2.9
  Code Version: 2.5
  @Author: Dean D. Reid
  */
@@ -8,14 +8,11 @@ package couk.deanreid.scotiaairlines;
 
 //Local Imports
 import couk.deanreid.scotiaairlines.core.Airline;
-import couk.deanreid.scotiaairlines.handler.ConfigurationHandler;
 import couk.deanreid.scotiaairlines.handler.NotificationHandler;
 import couk.deanreid.scotiaairlines.ui.UI;
 import couk.deanreid.scotiaairlines.ui.UIConsole;
+import couk.deanreid.scotiaairlines.utils.LogHelper;
 import couk.deanreid.scotiaairlines.utils.Reference;
-import couk.deanreid.scotiaairlines.utils.Reference.TextPaint;
-
-//Java Imports
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -23,13 +20,11 @@ import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-
-//JavaX Imports
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
+
 
 public class ScotiaAirline {
 
@@ -41,13 +36,13 @@ public class ScotiaAirline {
      * @throws IOException
      */
     public static void main(String[] args) throws SQLException, IOException, Exception {
-        if (Reference.DEBUG_MODE) {
-            System.out.println(TextPaint.RED + "Debug Mode is Enabled. Everything will show here." + TextPaint.RESET);
-        } else {
-            System.out.println(TextPaint.GREEN + "Debug Mode is Disabled. Only major errors will show" + TextPaint.RESET);
-        }
+        System.out.println("Logic executed successfully....");
 
-     //   ConfigurationHandler.load(Reference.class, Reference.CONFIG_FILE_LOCATION + "/" + Reference.CONFIG_FILE_NAME);
+        if (Reference.DEBUG_MODE) {
+            LogHelper.info("Debug Mode is Enabled. Everything will show here.");
+        } else {
+            LogHelper.info("Debug Mode is Disabled. Only major errors will show");
+        }
         Airline scotiaAirline = new Airline();
         scotiaAirline.loadFlightsFromDB();
         scotiaAirline.loadSeatsFromDB();

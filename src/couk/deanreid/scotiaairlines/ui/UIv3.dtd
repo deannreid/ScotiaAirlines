@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+    TODO define vocabulary identification
+    PUBLIC ID: -//vendor//vocabulary//EN
+    SYSTEM ID: http://server/path/UIv3.dtd
+
+-->
+
+<!--
+    An example how to use this DTD from your XML document:
+
+    <?xml version="1.0"?>
+
+    <!DOCTYPE Pane SYSTEM "UIv3.dtd">
+
+    <Pane>
+    ...
+    </Pane>
+-->
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Pane (children)*>
+<!ATTLIST Pane
+    id CDATA #IMPLIED
+    maxHeight CDATA #IMPLIED
+    maxWidth CDATA #IMPLIED
+    prefHeight CDATA #IMPLIED
+    prefWidth CDATA #IMPLIED
+    styleClass CDATA #IMPLIED
+    stylesheets CDATA #IMPLIED
+    xmlns CDATA #IMPLIED
+    xmlns:fx CDATA #IMPLIED
+    fx:id CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT children (Button|ImageView)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Button (font)*>
+<!ATTLIST Button
+    text CDATA #IMPLIED
+    defaultButton CDATA #IMPLIED
+    layoutX CDATA #IMPLIED
+    layoutY CDATA #IMPLIED
+    mnemonicParsing CDATA #IMPLIED
+    prefHeight CDATA #IMPLIED
+    prefWidth CDATA #IMPLIED
+    textFill CDATA #IMPLIED
+    wrapText CDATA #IMPLIED
+    textAlignment CDATA #IMPLIED
+    style CDATA #IMPLIED
+    fx:id CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT font (Font)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Font EMPTY>
+<!ATTLIST Font
+    name CDATA #IMPLIED
+    size CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT ImageView (image)*>
+<!ATTLIST ImageView
+    blendMode CDATA #IMPLIED
+    fitHeight CDATA #IMPLIED
+    fitWidth CDATA #IMPLIED
+    layoutX CDATA #IMPLIED
+    pickOnBounds CDATA #IMPLIED
+    preserveRatio CDATA #IMPLIED
+    styleClass CDATA #IMPLIED
+    fx:id CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT image (Image)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Image EMPTY>
+<!ATTLIST Image
+    url CDATA #IMPLIED
+  >

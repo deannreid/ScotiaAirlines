@@ -1,6 +1,6 @@
 /*
  Scotia Airlines - HND Computer Science
- Program Version: 2.7
+ Program Version: 2.9
  Code Version: 2.8
  @Author: Dean D. Reid
  */
@@ -36,10 +36,6 @@ import org.jdesktop.swingx.JXDatePicker;
 
 public class UI {
 
-    /**
-     *   TODO: Add Error Messages for when Seat is already booked.
-     */
-    
     private int buttonCounter = 2;
     private final Airline scotiaAirline;
 
@@ -56,32 +52,30 @@ public class UI {
      * @param inputMessage
      */
     public void genericPopup(String inputMessage) {
-        JLabel saTitle = new javax.swing.JLabel();
         final JFrame saFrame = new JFrame();
+            saFrame.setSize(350, 200);
+                saFrame.setLocationRelativeTo(null);
+                    saFrame.setType(java.awt.Window.Type.UTILITY);
+                        saFrame.setTitle(Reference.PROG_NAME);
+                    
+        JLabel saTitle = new javax.swing.JLabel();              
+            saTitle.setFont(new java.awt.Font("Arial", 1, 18)); 
+                saTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icon.png"))); 
+                    saTitle.setText(Reference.PROG_NAME + " Booking System");
         
-        saFrame.setSize(350, 200);
-            saFrame.setLocationRelativeTo(null);
-                saFrame.setType(java.awt.Window.Type.UTILITY);
-                    saFrame.setTitle(Reference.PROG_NAME);
-                      
-        saTitle.setFont(new java.awt.Font("Arial", 1, 18)); 
-            saTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icon.png"))); 
-                saTitle.setText(Reference.PROG_NAME + " Booking System");
-
         JPanel saPanel = new JPanel();
-            Container c1 = new Container();
-            Container c2 = new Container();
-                c1.setLayout(new GridLayout(1, 0));
-                c2.setLayout(new GridLayout(1, 0));
-
         JLabel message = new JLabel(inputMessage);
         JButton backBtn = new JButton("Main Menu");
-
-        c1.add(message);
-        c2.add(backBtn);
-
-        saPanel.add(c1);
-        saPanel.add(c2);
+        
+            Container con1 = new Container();
+                con1.setLayout(new GridLayout(1, 0));
+                    con1.add(message);
+                        saPanel.add(con1);
+                        
+            Container con2 = new Container();
+                con2.setLayout(new GridLayout(1, 0));
+                    con2.add(backBtn);
+                        saPanel.add(con2);
 
         saFrame.add(saPanel);
         saFrame.setVisible(true);
@@ -206,11 +200,11 @@ public class UI {
                         saFrame.setTitle(Reference.PROG_NAME + " - Admin Menu | Version: " + Reference.VERSION_NUMBER);
                             saFrame.setLayout(null);
                                 saFrame.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                ScotiaAirline.WindowClosing(evt);
-            }
-        });                 
+                                    @Override
+                                    public void windowClosing(java.awt.event.WindowEvent evt) {
+                                        ScotiaAirline.WindowClosing(evt);
+                                    }
+                                });                 
 
         JLabel saTitle = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/assets/adminmenu.png")), SwingConstants.CENTER);
             saTitle.setBounds(0, 0, 278, 85);
@@ -290,11 +284,11 @@ public class UI {
                         saFrame.setTitle(Reference.PROG_NAME + " - Create Flight | Version: " + Reference.VERSION_NUMBER);
                             saFrame.setLayout(null);
                                 saFrame.addWindowListener(new java.awt.event.WindowAdapter() {
-                                            @Override
-                                            public void windowClosing(java.awt.event.WindowEvent evt) {
-                                                ScotiaAirline.WindowClosing(evt);
-                                            }
-                                        });                                                
+                                    @Override
+                                    public void windowClosing(java.awt.event.WindowEvent evt) {
+                                        ScotiaAirline.WindowClosing(evt);
+                                    }
+                                });                                                
         //Set image title                  
         JLabel saTitle = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/assets/adminmenu.png")), SwingConstants.CENTER);
             saTitle.setBounds(0, 0, 278, 85);
@@ -323,10 +317,10 @@ public class UI {
             txtFlightID.setBounds(100, 110, 60, 30);
                 saFrame.getContentPane().add(txtFlightID);
 
-        JLabel date = new JLabel("Date");
-            date.setBounds(165, 110, 90, 30);
-                date.setFont(new java.awt.Font("Tahoma", 0, 14));
-                    saFrame.getContentPane().add(date);
+        JLabel dateLabel = new JLabel("Date");
+            dateLabel.setBounds(165, 110, 90, 30);
+                dateLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
+                    saFrame.getContentPane().add(dateLabel);
                     
         final JXDatePicker txtDatePick = new JXDatePicker();            
             txtDatePick.setBounds(200, 110, 105, 30);
@@ -338,22 +332,25 @@ public class UI {
             departure.setBounds(10, 150, 90, 30);
                 departure.setFont(new java.awt.Font("Tahoma", 0, 14));
                     saFrame.getContentPane().add(departure); 
-            final JTextField txtDeparture = new JTextField(10);
-            txtDeparture.setBounds(80, 150, 60, 30);
-                saFrame.getContentPane().add(txtDeparture);
+        
+        final JTextField txtDeparture = new JTextField(10);
+        txtDeparture.setBounds(80, 150, 60, 30);
+            saFrame.getContentPane().add(txtDeparture);
                     
         JLabel arrival = new JLabel("Arrival: ");
             arrival.setBounds(150, 150, 90, 30);
                 arrival.setFont(new java.awt.Font("Tahoma", 0, 14));
                     saFrame.getContentPane().add(arrival); 
-            final JTextField txtArrival = new JTextField(10);
-            txtArrival.setBounds(200, 150, 60, 30);
-                saFrame.getContentPane().add(txtArrival);
+        
+        final JTextField txtArrival = new JTextField(10);
+        txtArrival.setBounds(200, 150, 60, 30);
+            saFrame.getContentPane().add(txtArrival);
                 
         JLabel rows = new JLabel("Rows: ");
             rows.setBounds(150, 190, 90, 30);
                 rows.setFont(new java.awt.Font("Tahoma", 0, 14));
-                    saFrame.getContentPane().add(rows);         
+                    saFrame.getContentPane().add(rows);
+                    
         final JTextField txtRows = new JTextField(10);
             txtRows.setBounds(200, 190, 60, 30);
                 saFrame.getContentPane().add(txtRows); 
@@ -361,7 +358,8 @@ public class UI {
         JLabel columns = new JLabel("Columns: ");
             columns.setBounds(10, 190, 90, 30);
                 columns.setFont(new java.awt.Font("Tahoma", 0, 14));
-                    saFrame.getContentPane().add(columns);            
+                    saFrame.getContentPane().add(columns);  
+                    
         final JTextField txtColumns = new JTextField(10);
             txtColumns.setBounds(80, 190, 60, 30);
                 saFrame.getContentPane().add(txtColumns);
@@ -390,18 +388,16 @@ public class UI {
             int columns1 = Integer.parseInt(txtColumns.getText());
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             txtDatePick.setFormats(dateFormat);
-                DateFormat sysDate = new SimpleDateFormat("yyyy-MM-dd");
+            DateFormat sysDate = new SimpleDateFormat("yyyy-MM-dd");
             String date_to_store = sysDate.format(txtDatePick.getDate());
             System.out.println(date_to_store);
  
-            
-            
             Flight newFlight = new Flight(flightNo, departure1, arrival1, rows1, columns1, date_to_store);
             try {
                 newFlight.addFlightToDB();
-            } catch (AWTException | MalformedURLException | ParseException | NumberFormatException ex) {
-                Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Number Format");
+                } catch (AWTException | MalformedURLException | ParseException | NumberFormatException ex) {
+                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Number Format");
             }
             scotiaAirline.addFlight(newFlight);
             saFrame.setVisible(false);
@@ -956,7 +952,6 @@ public class UI {
                 
             }
             
-            
             getSeatno(parsedFlightInfo[1], 3);
             saFrame.dispose(); 
         });
@@ -1058,7 +1053,6 @@ public class UI {
                 //determine status of seat after receiving passenger choice
                 switch (choice) {
                     case 1: {
-                            @SuppressWarnings("UnusedAssignment")
                             int updateCounters = -1;
                             Seat tempSeat = scotiaAirline.getSeat(flightNo, seatNo);
                             switch (tempSeat.getCurrentStatus()) {

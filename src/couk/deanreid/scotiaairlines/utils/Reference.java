@@ -1,6 +1,6 @@
 /*
  Scotia Airlines - HND Computer Science
- Program Version: 2.7
+ Program Version: 2.9
  Code Version: 1.2
  @Author: Dean D. Reid
  */
@@ -28,6 +28,7 @@ public class Reference {
 
     /**
      * Force the CLI - for Testing purposes
+     * CLI is Broken.
      */
     public static final boolean FORCE_CLI = false;
     
@@ -35,13 +36,7 @@ public class Reference {
      * Set Configuration Filename.
      *
      */
-    public static final String CONFIG_FILE_NAME = "scotia.properties";
-
-    /**
-     * Set Configuration Location.
-     *
-     */
-    public static final String CONFIG_FILE_LOCATION = "~/";
+    public static final String CONFIG_FILE_NAME = "scotiaairlines";
 
     /**
      * Program Name
@@ -51,7 +46,8 @@ public class Reference {
     /**
      * Program Version and Build Number
      */
-    public static final String VERSION_NUMBER = "2.7 (build 23)";
+    public final String version = this.getClass().getPackage().getImplementationVersion();
+    public static final String VERSION_NUMBER = "2.9 FINAL (build 12)";
 
     /**
      * Not a very secret Secret...
