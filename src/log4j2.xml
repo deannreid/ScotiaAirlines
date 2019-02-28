@@ -4,7 +4,7 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} | %msg%n" />
         </Console>
-        <File name="ScotiaAirlines" fileName="scotia-error.log" append="false">
+        <File name="ScotiaAirlines" fileName="scotia.log" append="false">
             <PatternLayout pattern="%d{dd-MM-yyyy HH:mm:ss.SSS} | %msg%n"/>
         </File>
     </Appenders>

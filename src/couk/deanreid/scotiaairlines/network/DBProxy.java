@@ -8,41 +8,44 @@ package couk.deanreid.scotiaairlines.network;
 
 import couk.deanreid.scotiaairlines.utils.LogHelper;
 import couk.deanreid.scotiaairlines.utils.Reference;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DBProxy {
-
+    
     static String getConnection;
-
+    
     private static final DBProxy SQLI = new DBProxy();
 
     //Load Driver
     public static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
-
+    
     private DBProxy() {
         try {
             LogHelper.debug("=======================");
             LogHelper.debug("Connecting to SQL database: " + Reference.DB_FULLURL);
-
+            
             Class.forName(DRIVER_CLASS);
         } catch (final ClassNotFoundException e) {
             LogHelper.fatal(e);
         }
     }
-
-    private Connection createConnection() throws SQLException {
+    
+    private Connection createConnection() throws SQLException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
         Connection connection = null;
         Statement stmt = null;
         try {
-            Class.forName(DRIVER_CLASS).newInstance();
+            Class.forName(DRIVER_CLASS).getConstructor().newInstance();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
             LogHelper.fatal("Check classpath. Cannot load db driver: " + DRIVER_CLASS);
             LogHelper.fatal(ex);
         }
-
+        
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + Reference.DB_FULLURL, Reference.DB_USER, Reference.DB_PASSWORD);
         } catch (SQLException e) {
@@ -51,8 +54,13 @@ public class DBProxy {
         }
         return connection;
     }
-
+    
     public static Connection getConnection() throws SQLException {
-        return SQLI.createConnection();
+        try {
+            return SQLI.createConnection();
+        } catch (NoSuchMethodException | IllegalArgumentException | InvocationTargetException ex) {
+            LogHelper.fatal(ex);
+        }
+        return null;
     }
 }
