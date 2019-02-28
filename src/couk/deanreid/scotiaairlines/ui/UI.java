@@ -102,7 +102,7 @@ public class UI {
                             saFrame.addWindowListener(new java.awt.event.WindowAdapter() {
                                 @Override
                                 public void windowClosing(java.awt.event.WindowEvent evt) {
-                                    ScotiaAirline.WindowClosing(evt);
+                                    ScotiaAirline.windowClosing(evt);
                                 }
                             });
         //need atleast one panel on a window, default will be full size of frame
@@ -201,7 +201,7 @@ public class UI {
                                 saFrame.addWindowListener(new java.awt.event.WindowAdapter() {
                                     @Override
                                     public void windowClosing(java.awt.event.WindowEvent evt) {
-                                        ScotiaAirline.WindowClosing(evt);
+                                        ScotiaAirline.windowClosing(evt);
                                     }
                                 });                 
 
@@ -285,7 +285,7 @@ public class UI {
                                 saFrame.addWindowListener(new java.awt.event.WindowAdapter() {
                                     @Override
                                     public void windowClosing(java.awt.event.WindowEvent evt) {
-                                        ScotiaAirline.WindowClosing(evt);
+                                        ScotiaAirline.windowClosing(evt);
                                     }
                                 });                                                
         //Set image title                  
@@ -432,7 +432,7 @@ public class UI {
                             saFrame.addWindowListener(new java.awt.event.WindowAdapter() {
                                 @Override
                                 public void windowClosing(java.awt.event.WindowEvent evt) {
-                                    ScotiaAirline.WindowClosing(evt);
+                                    ScotiaAirline.windowClosing(evt);
                                 }
                             });
 
@@ -511,7 +511,7 @@ public class UI {
                             saFrame.addWindowListener(new java.awt.event.WindowAdapter() {
                                 @Override
                                 public void windowClosing(java.awt.event.WindowEvent evt) {
-                                    ScotiaAirline.WindowClosing(evt);
+                                    ScotiaAirline.windowClosing(evt);
                                 }
                             });
 
@@ -838,7 +838,7 @@ public class UI {
                             saFrame.addWindowListener(new java.awt.event.WindowAdapter() {
                                 @Override
                                 public void windowClosing(java.awt.event.WindowEvent evt) {
-                                    ScotiaAirline.WindowClosing(evt);
+                                    ScotiaAirline.windowClosing(evt);
                                 }
                             });
 
@@ -968,7 +968,7 @@ public class UI {
                             saFrame.addWindowListener(new java.awt.event.WindowAdapter() {
                                 @Override
                                 public void windowClosing(java.awt.event.WindowEvent evt) {
-                                    ScotiaAirline.WindowClosing(evt);
+                                    ScotiaAirline.windowClosing(evt);
                                 }
                             });
 
@@ -1117,7 +1117,7 @@ public class UI {
         saFrame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
-                ScotiaAirline.WindowClosing(evt);
+                ScotiaAirline.windowClosing(evt);
             }
         });    
     //Set Frame
@@ -1316,7 +1316,7 @@ public class UI {
                             saFrame.addWindowListener(new java.awt.event.WindowAdapter() {
                                 @Override
                                 public void windowClosing(java.awt.event.WindowEvent evt) {
-                                    ScotiaAirline.WindowClosing(evt);
+                                    ScotiaAirline.windowClosing(evt);
                                 }
                             });   
                                 saFrame.getContentPane().setLayout(null);

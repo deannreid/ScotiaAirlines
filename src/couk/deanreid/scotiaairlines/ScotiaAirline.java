@@ -96,7 +96,7 @@ public class ScotiaAirline {
 
      @param evt
      */
-    public static void WindowClosing(WindowEvent evt) {
+    public static void windowClosing(WindowEvent evt) {
         try {
             Airline scotiaAirline = new Airline();
             scotiaAirline.SaveSeatsToDB();

@@ -225,7 +225,7 @@ public class Airline {
                     int rs = stmt.executeUpdate("INSERT INTO Seat (SeatNo, Status, Takings, FlightID) VALUES('" + seatNo + "','" + seatStatus + "','" + seatTakings + "','" + flightNo + "')");
 
                     if (rs > 0) {
-                        LogHelper.info("SEAT DEBUG:" + Reference.TextPaint.BLUE + "Seat: " + seatNo + " booked on flight: " + flightNo + " by passenger: " + currentSeat.getValue().getaPassenger().getPassengerName() + Reference.TextPaint.RESET);
+//                        LogHelper.info("SEAT DEBUG:" + Reference.TextPaint.BLUE + "Seat: " + seatNo + " booked on flight: " + flightNo + " by passenger: " + currentSeat.getValue().getaPassenger().getPassengerName() + Reference.TextPaint.RESET);
                         LogHelper.debug(rs);
                     }
                 }
