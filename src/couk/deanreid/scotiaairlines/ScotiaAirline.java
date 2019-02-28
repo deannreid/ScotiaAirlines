@@ -99,10 +99,10 @@ public class ScotiaAirline {
     public static void windowClosing(WindowEvent evt) {
         try {
             Airline scotiaAirline = new Airline();
-            scotiaAirline.SaveSeatsToDB();
-            scotiaAirline.SavePassengersToDB();
+            scotiaAirline.saveSeatsToDB();
+            scotiaAirline.savePassengersToDB();
             if (SystemTray.isSupported()) {
-                NotificationHandler.Notify("Program Exit", "Adding changes to the database!");
+                NotificationHandler.notify("Program Exit", "Adding changes to the database!");
             } else {
                 JOptionPane.showMessageDialog(null, "Please Wait while changes are saved!");
             }

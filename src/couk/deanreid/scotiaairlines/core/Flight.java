@@ -38,7 +38,7 @@ public class Flight {
     private float totalFlightTakings;
     private HashMap<String, Seat> seats;
     private String status; //0.no status, 1.checking in, 2.boarding, 3.closed
-    private double seatprice;
+    double seatprice;
 
     /**
      Return the Departure information for the selected flight
@@ -332,6 +332,7 @@ public class Flight {
 
                 closed = true;
                 statusMessage = "Flight Closed";
+                break;
             case 4:
 
                 isFull = true;
@@ -439,7 +440,7 @@ public class Flight {
                 reservedSeats -= 1;
                 break;
             // default
-            case -1:
+            default:
                 break;
 
         }// end switch
@@ -477,16 +478,16 @@ public class Flight {
                         + "','"
                         + date
                         + "')");
-                NotificationHandler.Notify("Flight Added", "Flight '" + flightNumber + "' added to database");
+                NotificationHandler.notify("Flight Added", "Flight '" + flightNumber + "' added to database");
                 LogHelper.debug(Reference.TextPaint.BLUE + "FLIGHT DEBUG:" + "Flight '" + flightNumber + "' added to database" + Reference.TextPaint.RESET);
             } catch (SQLException e) {
                 shouldLeaveLoop = true;
-                NotificationHandler.Notify("Failed to add Flight", "Failed to add Flight, Please make sure you have correctly inserted all fields");
+                NotificationHandler.notify("Failed to add Flight", "Failed to add Flight, Please make sure you have correctly inserted all fields");
                 LogHelper.error(Reference.TextPaint.RED + "FLIGHT ERROR:" + "Failed to add Flight, Please make sure you have correctly inserted all fields" + Reference.TextPaint.RESET);
                 LogHelper.error(e);
             } catch (NumberFormatException e) {
                 shouldLeaveLoop = true;
-                NotificationHandler.Notify("Failed to add Flight", "Failed to add Flight, You can only use numbers for Rows and Columns");
+                NotificationHandler.notify("Failed to add Flight", "Failed to add Flight, You can only use numbers for Rows and Columns");
                 LogHelper.error(Reference.TextPaint.RED + "FLIGHT ERROR:" + Reference.TextPaint.RESET + e);
                 LogHelper.error(e);
             }
@@ -507,12 +508,12 @@ public class Flight {
             stmt.executeUpdate("DELETE FROM Flight WHERE FlightID('"
                     + flightNumber
                     + "','");
-            NotificationHandler.Notify("Flight Deleted", "Flight '" + flightNumber + "' deleted from database");
+            NotificationHandler.notify("Flight Deleted", "Flight '" + flightNumber + "' deleted from database");
 
             LogHelper.debug(Reference.TextPaint.BLUE + "FLIGHT DEBUG:" + "Flight '" + flightNumber + "' deleted from database" + Reference.TextPaint.RESET);
 
         } catch (SQLException e) {
-            NotificationHandler.Notify("Failed to delete Flight", "Failed to delete Flight");
+            NotificationHandler.notify("Failed to delete Flight", "Failed to delete Flight");
             LogHelper.error(Reference.TextPaint.RED + "FLIGHT ERROR:" + "Failed to delete Flight" + Reference.TextPaint.RESET);
             LogHelper.error(e);
         }
@@ -523,7 +524,7 @@ public class Flight {
 
      @return
      */
-    public float CalculateTotalFlightTakings() {
+    public float calculateTotalFlightTakings() {
         totalFlightTakings = 0.0f;
         seats.entrySet().forEach((tempSeat) -> {
             totalFlightTakings += tempSeat.getValue().getSeatTakings();
@@ -536,7 +537,7 @@ public class Flight {
 
      @return
      */
-    public String DisplayFlightInfo() {
+    public String displayFlightInfo() {
         String output;
 
         output = "<html> Flight No: " + flightNumber + "<br /> Arrival Airport: " + arrival
@@ -556,7 +557,7 @@ public class Flight {
 
      @return
      */
-    public boolean IsValidSeatNumber(String seatNo) {
+    public boolean isValidSeatNumber(String seatNo) {
         String number = "";
         String letter;
         int checkIfNum;
@@ -564,7 +565,7 @@ public class Flight {
         boolean shouldLeaveLoop = false;
 
         for (char c : seatNo.toCharArray()) {
-            if (shouldLeaveLoop == false) {
+            if (!shouldLeaveLoop) {
                 try {
                     // checks if first value is numeric, if not set should leave
                     // loop to true

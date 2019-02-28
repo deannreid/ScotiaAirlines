@@ -23,7 +23,7 @@ public class NotificationHandler {
      @throws AWTException
      @throws MalformedURLException
      */
-    public static void Notify(String inputHeader, String inputMessage) throws AWTException, MalformedURLException {
+    public static void notify(String inputHeader, String inputMessage) throws AWTException, MalformedURLException {
         if (SystemTray.isSupported()) {
             NotificationHandler Notify = new NotificationHandler();
             Notify.displayTray(inputHeader, inputMessage);

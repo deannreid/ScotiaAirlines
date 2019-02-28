@@ -161,7 +161,7 @@ public class Seat {
 
      @return
      */
-    public String DisplaySeatDetails() {
+    public String displaySeatDetails() {
         String output;
         String seatStatus = "";
 
@@ -171,14 +171,12 @@ public class Seat {
                 break;
 
             case 2:
-
                 seatStatus = "Reserved";
                 break;
 
             case 3:
-
                 seatStatus = "Booked";
-
+                break;
         }
 
         output = "<html> Seat No: " + seatNumber + "<br /> Current Status: "
@@ -321,7 +319,7 @@ public class Seat {
                         seatTakings += (seatPrice * newPassenger.getDiscountAmount());
                          {
                             try {
-                                NotificationHandler.Notify("Seat Booked", "Seat Number: '" + seatNumber + "' Has Now Been Booked By '" + newPassenger.getPassengerName() + "'");
+                                NotificationHandler.notify("Seat Booked", "Seat Number: '" + seatNumber + "' Has Now Been Booked By '" + newPassenger.getPassengerName() + "'");
                                 LogHelper.debug("Seat Number: '" + seatNumber + "' Has Now Been Booked By '" + newPassenger.getPassengerName() + "'");
                             } catch (AWTException | MalformedURLException ex) {
 
@@ -336,14 +334,14 @@ public class Seat {
                             completeSeatStatus = 5;
                             seatTakings += (seatPrice * newPassenger.getDiscountAmount());
                             try {
-                                NotificationHandler.Notify("Seat Booked", "Seat Number: '" + seatNumber + "' Has Now Been Booked By '" + newPassenger.getPassengerName() + "'");
+                                NotificationHandler.notify("Seat Booked", "Seat Number: '" + seatNumber + "' Has Now Been Booked By '" + newPassenger.getPassengerName() + "'");
                                 LogHelper.debug("Seat Number: '" + seatNumber + "' Has Now Been Booked By '" + newPassenger.getPassengerName() + "'");
                             } catch (AWTException | MalformedURLException ex) {
                                 LogHelper.fatal(ex);
                             }
                         } else {
                             try {
-                                NotificationHandler.Notify("Seat Already Reserved", "Seat Number: '" + seatNumber + "' Is Already Reserved By '" + aPassenger.getPassengerName() + "'");
+                                NotificationHandler.notify("Seat Already Reserved", "Seat Number: '" + seatNumber + "' Is Already Reserved By '" + aPassenger.getPassengerName() + "'");
                                 LogHelper.debug("Seat Number: '" + seatNumber + "' Is Already Reserved By '" + aPassenger.getPassengerName() + "'");
                             } catch (AWTException | MalformedURLException ex) {
                                 LogHelper.fatal(ex);
@@ -353,7 +351,7 @@ public class Seat {
                         break;
                     case 3: {
                         try {
-                            NotificationHandler.Notify("Seat Already Booked", "Seat Number: '" + seatNumber + "' Is Already Booked By '" + aPassenger.getPassengerName() + "'");
+                            NotificationHandler.notify("Seat Already Booked", "Seat Number: '" + seatNumber + "' Is Already Booked By '" + aPassenger.getPassengerName() + "'");
                             LogHelper.debug("Seat Number: '" + seatNumber + "' Is Already Booked By '" + aPassenger.getPassengerName() + "'");
                         } catch (AWTException | MalformedURLException ex) {
                             LogHelper.fatal(ex);

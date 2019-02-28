@@ -154,7 +154,7 @@ public class Airline {
                     Flight passengersFlight = flights.get(flightNumber);
                     int choice = passengerSeat.changeSeatStatus(status, takings, passengerName, passengerType, passengerInfo);
                     passengersFlight.updateSeat(choice);
-                    passengersFlight.CalculateTotalFlightTakings();
+                    passengersFlight.calculateTotalFlightTakings();
                     LogHelper.debug(Reference.TextPaint.BLUE + "Passenger: '" + passengerName + "' on flight: '" + flightNumber + "' Loaded from database" + Reference.TextPaint.RESET);
                 }
             }
@@ -169,7 +169,7 @@ public class Airline {
      Empties the Database of all entities
      so that new values can be written
      */
-    public void EmptyDB() {
+    public void emptyDB() {
         UI ui = new UI(this);
         PreparedStatement preparedStatement;// = null;
         String deleteSeat = "DELETE FROM Seat";
@@ -203,7 +203,7 @@ public class Airline {
     /**
      Saves Seat information to Database
      */
-    public void SaveSeatsToDB() {
+    public void saveSeatsToDB() {
         try {
             //for each flight
             for (Map.Entry<String, Flight> currentFlight : flights.entrySet()) {
@@ -239,8 +239,7 @@ public class Airline {
     /**
      Saves Passenger information to Database
      */
-    public void SavePassengersToDB() {
-        UI ui = new UI(this);
+    public void savePassengersToDB() {
         try {
             char type = ' ';
             String info = "";

@@ -9,7 +9,6 @@ package couk.deanreid.scotiaairlines.ui;
 import couk.deanreid.scotiaairlines.ScotiaAirline;
 import couk.deanreid.scotiaairlines.core.*;
 import couk.deanreid.scotiaairlines.handler.NotificationHandler;
-import couk.deanreid.scotiaairlines.network.DBProxy;
 import couk.deanreid.scotiaairlines.utils.LogHelper;
 import couk.deanreid.scotiaairlines.utils.Reference;
 import java.awt.AWTException;
@@ -22,9 +21,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -57,9 +53,9 @@ public class UI {
                     saFrame.setType(java.awt.Window.Type.UTILITY);
                         saFrame.setTitle(Reference.PROG_NAME);
                     
-        JLabel saTitle = new javax.swing.JLabel();              
+        JLabel saTitle = new JLabel();              
             saTitle.setFont(new java.awt.Font("Arial", 1, 18)); 
-                saTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icon.png"))); 
+                saTitle.setIcon(new ImageIcon(getClass().getResource("/resources/icon.png"))); 
                     saTitle.setText(Reference.PROG_NAME + " Booking System");
         
         JPanel saPanel = new JPanel();
@@ -108,12 +104,12 @@ public class UI {
         //need atleast one panel on a window, default will be full size of frame
         JPanel saPanel = new JPanel();
 
-        JLabel saLabel = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/resources/mainmenu.png")), SwingConstants.CENTER);
+        JLabel saLabel = new JLabel(new ImageIcon(getClass().getResource("/resources/mainmenu.png")), SwingConstants.CENTER);
             saFrame.getContentPane().add(saLabel);
                 saLabel.setBounds(0, 0, 378, 100);
 
 //setBounds(X,Y,Width,Height
-        JButton testMenuBtn = new javax.swing.JButton();
+        JButton testMenuBtn = new JButton();
             testMenuBtn.setText("Test Menu");
                 saFrame.getContentPane().add(testMenuBtn);
                     testMenuBtn.setBounds(10, 10, 100, 30);
@@ -180,9 +176,9 @@ public class UI {
         exitBtn.addActionListener((ActionEvent e) -> {
             JOptionPane.showMessageDialog(exitBtn, "Please Wait while changes are saved!");
             saFrame.dispose();
-            scotiaAirline.EmptyDB();
-            scotiaAirline.SaveSeatsToDB();
-            scotiaAirline.SavePassengersToDB();
+            scotiaAirline.emptyDB();
+            scotiaAirline.saveSeatsToDB();
+            scotiaAirline.savePassengersToDB();
             System.exit(0); 
         });
     }
@@ -205,7 +201,7 @@ public class UI {
                                     }
                                 });                 
 
-        JLabel saTitle = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/resources/adminmenu.png")), SwingConstants.CENTER);
+        JLabel saTitle = new JLabel(new ImageIcon(getClass().getResource("/resources/adminmenu.png")), SwingConstants.CENTER);
             saTitle.setBounds(0, 0, 278, 85);
                 saFrame.add(saTitle);       
    
@@ -289,7 +285,7 @@ public class UI {
                                     }
                                 });                                                
         //Set image title                  
-        JLabel saTitle = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/resources/adminmenu.png")), SwingConstants.CENTER);
+        JLabel saTitle = new JLabel(new ImageIcon(getClass().getResource("/resources/adminmenu.png")), SwingConstants.CENTER);
             saTitle.setBounds(0, 0, 278, 85);
                 saFrame.add(saTitle);       
 
@@ -403,10 +399,10 @@ public class UI {
             mainMenu();
             try {
                 //display added flight
-                NotificationHandler.Notify("Flight Added", "Flight: '" + flightNo + "' Added Successfully");
+                NotificationHandler.notify("Flight Added", "Flight: '" + flightNo + "' Added Successfully");
             } catch (AWTException | MalformedURLException ex) {
                 try {
-                    NotificationHandler.Notify("FLIGHT ERROR", "Flight Failed to add, See Log");
+                    NotificationHandler.notify("FLIGHT ERROR", "Flight Failed to add, See Log");
                 } catch (AWTException | MalformedURLException | NumberFormatException ex1) {
                     LogHelper.fatal(ex);
                 }
@@ -436,7 +432,7 @@ public class UI {
                                 }
                             });
 
-        JLabel title = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/resources/adminmenu.png")));
+        JLabel title = new JLabel(new ImageIcon(getClass().getResource("/resources/adminmenu.png")));
             title.setBounds(80, -10, 259, 100);
                 saFrame.add(title);
                 
@@ -450,7 +446,8 @@ public class UI {
             tempButton.addActionListener((ActionEvent e) -> {
                 
                 if (status.equalsIgnoreCase("DeleteFlight")) {
-                    try {
+                    LogHelper.info("This is really broken, Kinda breaks things.. best not to use it");
+                    /*try {
                         String deleteFlight = "DELETE FROM Flight WHERE FlightID ='" + currentFlight.getValue().getFlightNumber()+"'";
                         String deleteSeat = "DELETE FROM Seat WHERE FlightID ='" + currentFlight.getValue().getFlightNumber()+"'";
                         String deletePassenger = "DELETE FROM Passenger WHERE FlightID ='" + currentFlight.getValue().getFlightNumber()+"'";
@@ -466,7 +463,8 @@ public class UI {
                         mainMenu(); 
                     } catch (SQLException ex) {
                         LogHelper.fatal(ex);
-                    }
+                    }*/
+                    mainMenu();
                 } 
             });
             return tempButton;
@@ -515,7 +513,7 @@ public class UI {
                                 }
                             });
 
-        JLabel title = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/resources/tbselectflight.png")));
+        JLabel title = new JLabel(new ImageIcon(getClass().getResource("/resources/tbselectflight.png")));
             title.setBounds(150, -10, 259, 100);
                 saFrame.add(title);
        
@@ -541,7 +539,7 @@ public class UI {
                 } else if (status.equalsIgnoreCase("DisplayFlightDetails")) {
                     saFrame.dispose();
                     Flight tempFlight = currentFlight.getValue();
-                    genericPopup(tempFlight.DisplayFlightInfo());
+                    genericPopup(tempFlight.displayFlightInfo());
                 } else if (status.equalsIgnoreCase("TestMenu")) {
                     saFrame.dispose();
                     BookPassenger(e.getActionCommand(), e.getID(), e.paramString() );
@@ -593,36 +591,36 @@ public class UI {
                         saFrame.getContentPane().setLayout(null);
                             saFrame.setTitle(Reference.PROG_NAME + " Developer Menu | Version: " + Reference.VERSION_NUMBER);
         
-        JLabel saLabel = new javax.swing.JLabel();
-            saLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/testmenu.png"))); 
+        JLabel saLabel = new JLabel();
+            saLabel.setIcon(new ImageIcon(getClass().getResource("/resources/testmenu.png"))); 
                 saLabel.setBounds(50, 0, 278, 85);
                     saFrame.getContentPane().add(saLabel);
 
-        JButton btnPassenger = new javax.swing.JButton();
+        JButton btnPassenger = new JButton();
             btnPassenger.setText("View Flight Map");
                 btnPassenger.setBounds(90, 110, 220, 60);
                     saFrame.getContentPane().add(btnPassenger);
                     
-        JButton btnWipe = new javax.swing.JButton();                    
+        JButton btnWipe = new JButton();                    
             btnWipe.setText("Force Clear Database");
                 btnWipe.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
                     btnWipe.setForeground(new java.awt.Color(255, 0, 51));
                         btnWipe.setBounds(90, 175, 220, 60);        
                             saFrame.getContentPane().add(btnWipe);
                             
-        JButton btnBook = new javax.swing.JButton();                    
+        JButton btnBook = new JButton();                    
             btnBook.setText("New Booking Menu");
                 btnBook.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
                     btnBook.setForeground(new java.awt.Color(255, 100, 210));
                         saFrame.getContentPane().add(btnBook);
                             btnBook.setBounds(90, 240, 220, 60);              
         
-        JButton btnBack = new javax.swing.JButton();
+        JButton btnBack = new JButton();
             btnBack.setText("Back");
                 btnBack.setBounds(30, 300, 100, 60);
                     saFrame.getContentPane().add(btnBack);
         
-        JButton btnExit = new javax.swing.JButton();
+        JButton btnExit = new JButton();
             btnExit.setText("Exit");
                 btnExit.setBounds(260, 300, 100, 60);
                     saFrame.getContentPane().add(btnExit);
@@ -640,7 +638,7 @@ public class UI {
             if (SystemTray.isSupported()) {
                 try {
                     JOptionPane.showMessageDialog(null, "<html>Cleaning the Database You cant undo this! <br>  The Program will now Exit!</html>");
-                    NotificationHandler.Notify(Reference.PROG_NAME + " Alert", "Clearing Database - Irreversible Action.");
+                    NotificationHandler.notify(Reference.PROG_NAME + " Alert", "Clearing Database - Irreversible Action.");
                 } catch (AWTException | MalformedURLException ex) {
                     LogHelper.fatal(ex);
                 }
@@ -649,7 +647,7 @@ public class UI {
             }    
             saFrame.setVisible(false);
             saFrame.dispose();
-            scotiaAirline.EmptyDB();
+            scotiaAirline.emptyDB();
                         System.exit(0);
         });              
         
@@ -666,9 +664,9 @@ public class UI {
         });
         btnExit.addActionListener((ActionEvent e) -> {
             saFrame.dispose();
-            scotiaAirline.EmptyDB();
-            scotiaAirline.SaveSeatsToDB();
-            scotiaAirline.SavePassengersToDB();
+            scotiaAirline.emptyDB();
+            scotiaAirline.saveSeatsToDB();
+            scotiaAirline.savePassengersToDB();
             System.exit(0);
         });
     }
@@ -725,13 +723,13 @@ public class UI {
                     chosenFlight.setClosed(checkingIn);
                     chosenFlight.setStatusMessage(parsedFlightInfo[1] + " Seats Available");
                 try {
-                    NotificationHandler.Notify("Flight Information", "Seats now available on flight " +parsedFlightInfo[1]);
+                    NotificationHandler.notify("Flight Information", "Seats now available on flight " +parsedFlightInfo[1]);
                 } catch (AWTException | MalformedURLException ex) {
                     genericPopup("Seats now available on flight " + parsedFlightInfo[1]);
                 }
                 } else {
                     try {
-                        NotificationHandler.Notify("Flight Information", "Sorry, The flight: '" + parsedFlightInfo[1] + " is now full. ");
+                        NotificationHandler.notify("Flight Information", "Sorry, The flight: '" + parsedFlightInfo[1] + " is now full. ");
                     } catch (AWTException | MalformedURLException ex) {
                         genericPopup("Error, flight " + parsedFlightInfo[1] + " is full");
                     }
@@ -759,7 +757,7 @@ public class UI {
                 chosenFlight.setClosed(closed);
                 chosenFlight.setStatusMessage("Flight: " + parsedFlightInfo[1] + " is Checking In");
                 try {
-                    NotificationHandler.Notify("Flight Information", parsedFlightInfo[1] + " is now checking in");
+                    NotificationHandler.notify("Flight Information", parsedFlightInfo[1] + " is now checking in");
                 } catch (AWTException | MalformedURLException ex) {
                     genericPopup(parsedFlightInfo[1] + " is now checking in");
                 }
@@ -786,7 +784,7 @@ public class UI {
             chosenFlight.setClosed(closed);
             chosenFlight.setStatusMessage("Flight: " + parsedFlightInfo[1] + " is Closed");
             try {
-                NotificationHandler.Notify("Flight Information", parsedFlightInfo[1] + " is now closed");
+                NotificationHandler.notify("Flight Information", parsedFlightInfo[1] + " is now closed");
             } catch (AWTException | MalformedURLException ex) {
                 genericPopup(parsedFlightInfo[1] + " is now closed");
             }
@@ -812,7 +810,7 @@ public class UI {
             chosenFlight.setClosed(closed);
             chosenFlight.setStatusMessage("Flight: " + parsedFlightInfo[1] + " Flight is Boarding"); 
             try {
-                NotificationHandler.Notify("Flight Information", parsedFlightInfo[1] + " is now boarding");
+                NotificationHandler.notify("Flight Information", parsedFlightInfo[1] + " is now boarding");
             } catch (AWTException | MalformedURLException ex) {
                 genericPopup(parsedFlightInfo[1] + " is now boarding");
             }
@@ -876,7 +874,7 @@ public class UI {
             
             if (boarding == true || closed == true) {
                 try {
-                    NotificationHandler.Notify("Flight Error", "Cancellations not available "+ chosenFlight.getStatusMessage());
+                    NotificationHandler.notify("Flight Error", "Cancellations not available "+ chosenFlight.getStatusMessage());
                 } catch (AWTException | MalformedURLException ex) {
                     genericPopup("Cancellations not available. " + chosenFlight.getStatusMessage());
                 }
@@ -899,7 +897,7 @@ public class UI {
             
             if (boarding == true || closed == true || full == true || checkingIn == true) {
                 try {
-                    NotificationHandler.Notify("Flight Error", "Reservations not available "+ chosenFlight.getStatusMessage());
+                    NotificationHandler.notify("Flight Error", "Reservations not available "+ chosenFlight.getStatusMessage());
                 } catch (AWTException | MalformedURLException ex) {
                     genericPopup("Reservations not available. " + chosenFlight.getStatusMessage());
                 }
@@ -924,7 +922,7 @@ public class UI {
             if (boarding == true || closed == true || full == true) {
                 
                 try {
-                    NotificationHandler.Notify("Flight Error", "Bookings not available "+ chosenFlight.getStatusMessage());
+                    NotificationHandler.notify("Flight Error", "Bookings not available "+ chosenFlight.getStatusMessage());
                 } catch (AWTException | MalformedURLException ex) {
                     genericPopup("Bookings not available. " + chosenFlight.getStatusMessage());
                 }
@@ -997,7 +995,7 @@ public class UI {
                 buttonDisplay = " ";
                 break;
 
-            case -1:
+            default:
                 break;
 
         }
@@ -1022,9 +1020,9 @@ public class UI {
             String seatNo = inputText.getText();
             Flight currentFlight = scotiaAirline.getFlights(flightNo);
             
-            if (currentFlight.IsValidSeatNumber(seatNo) == false) {
+            if (currentFlight.isValidSeatNumber(seatNo) == false) {
                 try {
-                    NotificationHandler.Notify("Seat: '" + seatNo + "' Invalid", "Please type a valid number (EG. 1A)");
+                    NotificationHandler.notify("Seat: '" + seatNo + "' Invalid", "Please type a valid number (EG. 1A)");
                 } catch (AWTException | MalformedURLException ex) {
                     genericPopup("<html>" + Reference.TextPaint.RED + seatNo + Reference.TextPaint.RESET + " <br>is not a valid seat number Correct Format is Number:Letter");
                 }
@@ -1039,9 +1037,9 @@ public class UI {
                                     updateCounters = -1; //update seat counters
                                     tempSeat.setCurrentStatus(1);
                                     currentFlight.updateSeat(updateCounters);
-                                    currentFlight.CalculateTotalFlightTakings(); //recalculate total flight takings
+                                    currentFlight.calculateTotalFlightTakings(); //recalculate total flight takings
                                     try {
-                                            NotificationHandler.Notify("Booking Error", "Error " + tempSeat.getSeatNumber() + "Seat Is Already Free");
+                                            NotificationHandler.notify("Booking Error", "Error " + tempSeat.getSeatNumber() + "Seat Is Already Free");
                                         }   catch (AWTException | MalformedURLException ex) {
                                                 genericPopup("Error " + tempSeat.getSeatNumber() + "Seat Is Already Free");
                                             }
@@ -1051,10 +1049,10 @@ public class UI {
                                     tempSeat.setCurrentStatus(1);
                                     currentFlight.updateSeat(updateCounters);
                                     tempSeat.setaPassenger(null);
-                                    currentFlight.CalculateTotalFlightTakings();
+                                    currentFlight.calculateTotalFlightTakings();
 
                                     try {
-                                            NotificationHandler.Notify("Booking Cancelled", tempSeat.getSeatNumber() + " Has Been Cancelled");
+                                            NotificationHandler.notify("Booking Cancelled", tempSeat.getSeatNumber() + " Has Been Cancelled");
                                         }   catch (AWTException | MalformedURLException ex) {
                                                 genericPopup(tempSeat.getSeatNumber() + " Has Been Cancelled");
                                             }
@@ -1065,9 +1063,9 @@ public class UI {
                                     tempSeat.setCurrentStatus(1);
                                     currentFlight.updateSeat(updateCounters);
                                     tempSeat.setaPassenger(null);
-                                    currentFlight.CalculateTotalFlightTakings();
+                                    currentFlight.calculateTotalFlightTakings();
                                     try {
-                                            NotificationHandler.Notify("Booking Cancelled", tempSeat.getSeatNumber() + " Has Been Cancelled - No Refund");
+                                            NotificationHandler.notify("Booking Cancelled", tempSeat.getSeatNumber() + " Has Been Cancelled - No Refund");
                                         }   catch (AWTException | MalformedURLException ex) {
                                                 genericPopup(tempSeat.getSeatNumber() + " Has Been Cancelled - No Refund");
                                             }
@@ -1084,7 +1082,7 @@ public class UI {
                         break;
                     case 4: {
                         Seat tempSeat = scotiaAirline.getSeat(flightNo, seatNo);
-                        genericPopup(tempSeat.DisplaySeatDetails());
+                        genericPopup(tempSeat.displaySeatDetails());
                         break;
                     }
                     default:
@@ -1129,7 +1127,7 @@ public class UI {
                             saFrame.setLayout(null);
     
     //Set image title                  
-        JLabel saTitle = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/resources/testmenu.png")), SwingConstants.CENTER);
+        JLabel saTitle = new JLabel(new ImageIcon(getClass().getResource("/resources/testmenu.png")), SwingConstants.CENTER);
             saTitle.setBounds(70, 10, 278, 85);
                 saFrame.add(saTitle);       
  
@@ -1138,11 +1136,11 @@ public class UI {
                     saFrame.add(saPassengerNameLabel);
                         saPassengerNameLabel.setBounds(10, 100, 110, 30);
                
-        JTextField txtPassengerName = new javax.swing.JTextField();
+        JTextField txtPassengerName = new JTextField();
                 saFrame.add(txtPassengerName);
                     txtPassengerName.setBounds(120, 100, 180, 30);
               
-        javax.swing.ButtonGroup saPassengerBGroup = new javax.swing.ButtonGroup();
+        ButtonGroup saPassengerBGroup = new ButtonGroup();
 
         JRadioButton btnBusinessPassenger = new JRadioButton();
             saPassengerBGroup.add(btnBusinessPassenger);
@@ -1169,14 +1167,14 @@ public class UI {
                 saIslandNameLabel.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
                     saIslandNameLabel.setBounds(10, 180, 79, 30);
                
-        JTextField txtIslandName = new javax.swing.JTextField();
+        JTextField txtIslandName = new JTextField();
                 txtIslandName.setBounds(90, 180, 200, 30);                     
                         
         JLabel saBusinessNameLabel = new JLabel("Business Name");
                 saBusinessNameLabel.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
                         saBusinessNameLabel.setBounds(10, 180, 79, 30);
                
-        JTextField txtBusinessName = new javax.swing.JTextField();
+        JTextField txtBusinessName = new JTextField();
                     txtBusinessName.setBounds(90, 180, 200, 30);      
 
         btnBusinessPassenger.addActionListener((ActionEvent e) -> {
@@ -1255,7 +1253,7 @@ public class UI {
                 passengerSeat = scotiaAirline.getSeat(flightNumber, seatNo);
                 int fullSeatStatus = passengerSeat.changeSeatStatus(scotiaAirline, bookingChoice, newPassenger, currentFlight);
                 currentFlight.updateSeat(fullSeatStatus);
-                currentFlight.CalculateTotalFlightTakings();
+                currentFlight.calculateTotalFlightTakings();
                 
             } else if (btnIslandPassenger.isEnabled()) {
                 saFrame.dispose();
@@ -1267,13 +1265,13 @@ public class UI {
                 passengerSeat = scotiaAirline.getSeat(flightNumber, seatNo);
                 int fullSeatStatus = passengerSeat.changeSeatStatus(scotiaAirline, bookingChoice, newPassenger, currentFlight);
                 currentFlight.updateSeat(fullSeatStatus);
-                currentFlight.CalculateTotalFlightTakings();
+                currentFlight.calculateTotalFlightTakings();
             } else if (btnOrdinaryPassenger.isEnabled()) { 
                 saFrame.dispose();
                 saFrame.setVisible(false); 
                 boolean yes = true;
                 boolean no = false;
-                String y = String.valueOf(true);
+                
                 String n = String.valueOf(false);
                 
             String promo = btnOrdinaryPromotion.toString();
@@ -1283,14 +1281,14 @@ public class UI {
             passengerSeat = scotiaAirline.getSeat(flightNumber, seatNo);
             int fullSeatStatus = passengerSeat.changeSeatStatus(scotiaAirline, bookingChoice, newPassenger, currentFlight);
             currentFlight.updateSeat(fullSeatStatus);
-            currentFlight.CalculateTotalFlightTakings();                
+            currentFlight.calculateTotalFlightTakings();                
                 
-                scotiaAirline.SaveSeatsToDB();
-                scotiaAirline.SavePassengersToDB();
+                scotiaAirline.saveSeatsToDB();
+                scotiaAirline.savePassengersToDB();
             } else {
                 genericPopup("You haven't completed the form, make sure you've selected your passenger Type.");
                 try {
-                    NotificationHandler.Notify(" WARNING", "You haven't completed the form.");
+                    NotificationHandler.notify(" WARNING", "You haven't completed the form.");
                 } catch (AWTException | MalformedURLException ex) {
                    genericPopup("You haven't completed the form."); 
                 }
@@ -1321,24 +1319,24 @@ public class UI {
                             });   
                                 saFrame.getContentPane().setLayout(null);
         JLabel sfTitle = new JLabel();
-            sfTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/mainmenu.png")));
+            sfTitle.setIcon(new ImageIcon(getClass().getResource("/resources/mainmenu.png")));
                 saFrame.add(sfTitle);
                     sfTitle.setBounds(180, 0, 370, 100);                            
                                             
         JLabel imgFree = new JLabel();
-            imgFree.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/seatFree.png")));
+            imgFree.setIcon(new ImageIcon(getClass().getResource("/resources/seatFree.png")));
                 imgFree.setText("Free");
                     saFrame.add(imgFree);
                         imgFree.setBounds(180, 630, 76, 50);
     
         JLabel imgReserved = new JLabel();
-            imgReserved.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/seatReserved.png")));
+            imgReserved.setIcon(new ImageIcon(getClass().getResource("/resources/seatReserved.png")));
                 imgReserved.setText("Reserved");
                     saFrame.add(imgReserved);
                         imgReserved.setBounds(280, 630, 96, 50);    
 
         JLabel imgBooked = new JLabel();
-            imgBooked.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/seatBooked.png")));
+            imgBooked.setIcon(new ImageIcon(getClass().getResource("/resources/seatBooked.png")));
                 imgBooked.setText("Booked");
                     saFrame.add(imgBooked);
                         imgBooked.setBounds(400, 630, 76, 50);                          
@@ -1346,7 +1344,7 @@ public class UI {
         JLabel flightNumber = new JLabel();
            // flightNumber.setFont();
             flightNumber.setText("<html><b>Flight Number:<br>"+flightNo+"</b></html>");     
-                flightNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                flightNumber.setHorizontalAlignment(SwingConstants.CENTER);
                     flightNumber.setFont(new java.awt.Font("Tahoma", 1, 14));
                         saFrame.add(flightNumber);
                              flightNumber.setBounds(580, 40, 170, 50);
@@ -1516,7 +1514,7 @@ public class UI {
             passengerSeat = scotiaAirline.getSeat(flightNumber, seatNo);
             int fullSeatStatus = passengerSeat.changeSeatStatus(scotiaAirline, bookingChoice, newPassenger, currentFlight);
             currentFlight.updateSeat(fullSeatStatus);
-            currentFlight.CalculateTotalFlightTakings(); 
+            currentFlight.calculateTotalFlightTakings(); 
         });
 
     }
@@ -1574,7 +1572,7 @@ public class UI {
             passengerSeat = scotiaAirline.getSeat(flightNumber, seatNo);
             int fullSeatStatus = passengerSeat.changeSeatStatus(scotiaAirline, bookingChoice, newPassenger, currentFlight);
             currentFlight.updateSeat(fullSeatStatus);
-            currentFlight.CalculateTotalFlightTakings(); 
+            currentFlight.calculateTotalFlightTakings(); 
         });
     }
 
@@ -1632,7 +1630,7 @@ public class UI {
             passengerSeat = scotiaAirline.getSeat(flightNumber, seatNo);
             int fullSeatStatus = passengerSeat.changeSeatStatus(scotiaAirline, bookingChoice, newPassenger, currentFlight);
             currentFlight.updateSeat(fullSeatStatus);
-            currentFlight.CalculateTotalFlightTakings(); 
+            currentFlight.calculateTotalFlightTakings(); 
         });
     }
 }
