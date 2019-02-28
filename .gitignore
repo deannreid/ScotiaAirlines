@@ -38,12 +38,11 @@ target/
 
 # NetBeans specific
 nbproject/private/
-build/
 bin/
+build/
 nbbuild/
 test/
 nbproject/
-dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
