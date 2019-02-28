@@ -8,6 +8,7 @@ package couk.deanreid.scotiaairlines.core;
 
 import couk.deanreid.scotiaairlines.network.DBProxy;
 import couk.deanreid.scotiaairlines.ui.UI;
+import couk.deanreid.scotiaairlines.utils.LogHelper;
 import couk.deanreid.scotiaairlines.utils.Reference;
 import java.sql.*;
 import java.util.HashMap;
@@ -73,11 +74,9 @@ public class Airline {
             Connection connection = DBProxy.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Flight");
-            if (Reference.DEBUG_MODE) {
-                System.out.println(Reference.TextPaint.GREEN + "=======================");
-                System.out.println("Loading Flight Database");
-                System.out.println("=======================" + Reference.TextPaint.RESET);
-            }
+            LogHelper.debug(Reference.TextPaint.GREEN + "=======================" + Reference.TextPaint.RESET);
+            LogHelper.debug("Loading Flight Database");
+            LogHelper.debug(Reference.TextPaint.GREEN + "=======================" + Reference.TextPaint.RESET);
             while (rs.next()) {
                 String flightNo = rs.getString(1);
                 String departure = rs.getString(2);
@@ -89,13 +88,13 @@ public class Airline {
                 Flight aNewFlight = new Flight(flightNo, departure, arrival, rows, columns, date);
                 addFlight(aNewFlight);
                 Flight Flight = aNewFlight;
-                if (Reference.DEBUG_MODE) {
-                    System.out.println(Reference.TextPaint.BLUE + "Flight: '" + flightNo + "' Loaded from Database" + Reference.TextPaint.RESET);
-                }
+                LogHelper.debug(Reference.TextPaint.BLUE + "Flight: '" + flightNo + "' Loaded from Database" + Reference.TextPaint.RESET);
+
             }
+            LogHelper.info("Flights Imported");
         } catch (SQLException e) {
-            System.out.println(Reference.TextPaint.RED + "Flights Failed to Load from Database" + Reference.TextPaint.RESET);
-            e.printStackTrace();
+            LogHelper.error(Reference.TextPaint.RED + "Flights Failed to Load from Database" + Reference.TextPaint.RESET);
+            LogHelper.error(e);
         }
     }
 
@@ -106,17 +105,13 @@ public class Airline {
      */
     public void loadSeatsFromDB() throws SQLException {
         try {
-            if (Reference.DEBUG_MODE) {
-                    System.out.println("");
-                    System.out.println(Reference.TextPaint.GREEN + "===================================");
-                    System.out.println("Loading Seat and Passenger Database");
-                    System.out.println("===================================" + Reference.TextPaint.RESET);
-                
-            }
+            System.out.println("");
+            LogHelper.debug(Reference.TextPaint.GREEN + "===================================" + Reference.TextPaint.RESET);
+            LogHelper.debug("Loading Seat and Passenger Database");
+            LogHelper.debug(Reference.TextPaint.GREEN + "===================================" + Reference.TextPaint.RESET);
             Connection connection = DBProxy.getConnection();
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Seat");
-
             while (rs.next()) {
                 String SeatNo = rs.getString(1);
                 int status = rs.getInt(2);
@@ -126,14 +121,13 @@ public class Airline {
                 Seat passengerSeat = getSeat(FlightNo, SeatNo);
                 passengerSeat.setSeatTakings(takings);
                 loadPassengersFromDB(FlightNo, passengerSeat, status, takings);
-                if (Reference.DEBUG_MODE) {
-                    System.out.println(Reference.TextPaint.BLUE + "Seat " + SeatNo + "' on flight: '" + FlightNo + "' Loaded from Database" + Reference.TextPaint.RESET);
-                }
-            }
+                LogHelper.debug(Reference.TextPaint.BLUE + "Seat " + SeatNo + "' on flight: '" + FlightNo + "' Loaded from Database" + Reference.TextPaint.RESET);
 
+            }
+            LogHelper.info("Seats Imported");
         } catch (SQLException e) {
-            System.out.println(Reference.TextPaint.RED + "Seats Failed to Load from database" + Reference.TextPaint.RESET);
-            e.printStackTrace();
+            LogHelper.error(Reference.TextPaint.RED + "Seats Failed to Load from database" + Reference.TextPaint.RESET);
+            LogHelper.error(e);
         }
     }
 
@@ -161,14 +155,13 @@ public class Airline {
                     int choice = passengerSeat.changeSeatStatus(status, takings, passengerName, passengerType, passengerInfo);
                     passengersFlight.updateSeat(choice);
                     passengersFlight.CalculateTotalFlightTakings();
-                    if (Reference.DEBUG_MODE) {
-                        System.out.println(Reference.TextPaint.BLUE + "Passenger: '" + passengerName + "' on flight: '" + flightNumber + "' Loaded from database" + Reference.TextPaint.RESET);
-                    }
+                    LogHelper.debug(Reference.TextPaint.BLUE + "Passenger: '" + passengerName + "' on flight: '" + flightNumber + "' Loaded from database" + Reference.TextPaint.RESET);
                 }
-
             }
+            LogHelper.info("Passengers Imported");
         } catch (SQLException e) {
-            System.out.println(Reference.TextPaint.RED + "Passengers Failed to Load from database" + Reference.TextPaint.RESET);
+            LogHelper.error(Reference.TextPaint.RED + "Passengers Failed to Load from database" + Reference.TextPaint.RESET);
+            LogHelper.error(e);
         }
     }
 
@@ -182,42 +175,28 @@ public class Airline {
         String deleteSeat = "DELETE FROM Seat";
         String deletePassenger = "DELETE FROM Passenger";
         try {
-            if (Reference.DEBUG_MODE) {
-                System.out.println("DATABASE DEBUG: Cleaning DB");
-            }
+            LogHelper.warn(Reference.TextPaint.BLUE + "DATABASE DEBUG: Cleaning DB" + Reference.TextPaint.RESET);
             Connection connection = DBProxy.getConnection();
-            //Statement stmt = connection.createStatement();
-            //int rs = stmt.executeUpdate("DELETE * FROM Seat");
             preparedStatement = connection.prepareStatement(deleteSeat);
-            //preparedStatement.setInt(1, 1001);
             int rs = preparedStatement.executeUpdate();
 
             if (rs > 0) {
-                if (Reference.DEBUG_MODE) {
-                    System.out.println(Reference.TextPaint.BLUE + "SEAT DEBUG: Seat Tables Emptied" + Reference.TextPaint.RESET);
-                }
+                LogHelper.warn(Reference.TextPaint.BLUE + "SEAT DEBUG: Seat Tables Emptied" + Reference.TextPaint.RESET);
             }
         } catch (SQLException e) {
-            System.out.println(Reference.TextPaint.RED + "SEAT ERROR: Seat table cannot be emptied" + Reference.TextPaint.RESET);
-            //e.printStackTrace();
+            LogHelper.error(Reference.TextPaint.RED + "SEAT ERROR: Seat table cannot be emptied" + Reference.TextPaint.RESET);
+            LogHelper.error(e);
         }
         try {
             Connection connection = DBProxy.getConnection();
-            //Statement stmt = connection.createStatement();
-            //int rs = stmt.executeUpdate("DELETE * FROM Passenger");
             preparedStatement = connection.prepareStatement(deletePassenger);
-            //preparedStatement.setInt(1, 1001);
             int rs = preparedStatement.executeUpdate();
-
             if (rs > 0) {
-                if (Reference.DEBUG_MODE) {
-                    System.out.println(Reference.TextPaint.BLUE + "PASSENGER DEBUG: Passengers Emptied" + Reference.TextPaint.RESET);
-                }
-
+                LogHelper.warn(Reference.TextPaint.BLUE + "PASSENGER DEBUG: Passengers Emptied" + Reference.TextPaint.RESET);
             }
         } catch (SQLException e) {
-            System.out.println(Reference.TextPaint.RED + "PASSENGER ERROR: Passenger table cannot be emptied" + Reference.TextPaint.RESET);
-            //e.printStackTrace();
+            LogHelper.error(Reference.TextPaint.RED + "PASSENGER ERROR: Passenger table cannot be emptied" + Reference.TextPaint.RESET);
+            LogHelper.error(e);
         }
     }
 
@@ -235,26 +214,25 @@ public class Airline {
                     String seatTakings = String.valueOf(currentSeat.getValue().getSeatTakings());
                     String seatStatus = String.valueOf(currentSeat.getValue().getCurrentStatus());
                     String flightNo = currentFlight.getValue().getFlightNumber();
-                    if (Reference.DEBUG_MODE) {
-                        System.out.println("SEAT DEBUG: Connecting and Preparing Statement");
-                    }
+
+                    LogHelper.debug("SEAT DEBUG: Connecting and Preparing Statement");
+
                     Connection connection = DBProxy.getConnection();
                     Statement stmt = connection.createStatement();
-                    if (Reference.DEBUG_MODE) {
-                        System.out.println("SEAT DEBUG: Execute Statement: " + stmt);
-                    }
+
+                    LogHelper.debug("SEAT DEBUG: Execute Statement: " + stmt);
+
                     int rs = stmt.executeUpdate("INSERT INTO Seat (SeatNo, Status, Takings, FlightID) VALUES('" + seatNo + "','" + seatStatus + "','" + seatTakings + "','" + flightNo + "')");
 
                     if (rs > 0) {
-                        if (Reference.DEBUG_MODE) {
-                            //System.out.println("SEAT DEBUG:" + Reference.TextPaint.BLUE + "Seat: " + seatNo + " booked on flight: " + flightNo + " by passenger: " + currentSeat.getValue().getaPassenger().getPassengerName() + Reference.TextPaint.RESET);
-                                System.out.println(rs);
-                        }                        
+                        LogHelper.info("SEAT DEBUG:" + Reference.TextPaint.BLUE + "Seat: " + seatNo + " booked on flight: " + flightNo + " by passenger: " + currentSeat.getValue().getaPassenger().getPassengerName() + Reference.TextPaint.RESET);
+                        LogHelper.debug(rs);
                     }
                 }
             }
         } catch (SQLException e) {
-            System.out.println(Reference.TextPaint.RED + "SEAT ERROR: Seats failed to save to DB" + Reference.TextPaint.RESET);
+            LogHelper.error(Reference.TextPaint.RED + "SEAT ERROR: Seats failed to save to DB" + Reference.TextPaint.RESET);
+            LogHelper.error(e);
         }
     }
 
@@ -289,30 +267,31 @@ public class Airline {
                         String passengerType = String.valueOf(type);
                         String passengerInfo = info;
                         String flightNo = currentFlight.getValue().getFlightNumber();
-                        if (Reference.DEBUG_MODE) {
-                            System.out.println("SEAT DEBUG: Connecting and Preparing Statement");
-                        }
+
+                        LogHelper.debug("SEAT DEBUG: Connecting and Preparing Statement");
+
                         Connection connection = DBProxy.getConnection();
                         Statement stmt = connection.createStatement();
-                        if (Reference.DEBUG_MODE) {
-                            System.out.println("PASSENGER DEBUG: Execute Statement: " + stmt);
-                        }
+
+                        LogHelper.debug("PASSENGER DEBUG: Execute Statement: " + stmt);
+
                         int rs = stmt.executeUpdate("INSERT INTO Passenger(SeatNo, PassengerName, Type, Information, FlightID) VALUES('" + currentSeat.getValue().getSeatNumber() + "','" + currentSeat.getValue().getaPassenger().getPassengerName() + "','" + passengerType + "','" + passengerInfo + "','" + flightNo + "')");
-                        
+
                         for (int i = 0; i < rs; i++) {
-                            if (Reference.DEBUG_MODE) {
-                                System.out.println("PASSENGER DEBUG:" + Reference.TextPaint.BLUE + "Passenger Saved: " + currentSeat.getValue().getaPassenger().getPassengerName() + Reference.TextPaint.RESET);
-                            }
-                            // System.out.println(Reference.TextPaint.BLUE + "Passenger Saved: " + currentSeat.getValue().getaPassenger().getPassengerName() + Reference.TextPaint.RESET);
+
+                            LogHelper.debug("PASSENGER DEBUG:" + Reference.TextPaint.BLUE + "Passenger Saved: " + currentSeat.getValue().getaPassenger().getPassengerName() + Reference.TextPaint.RESET);
+
+                            LogHelper.info(Reference.TextPaint.BLUE + "Passenger Saved: " + currentSeat.getValue().getaPassenger().getPassengerName() + Reference.TextPaint.RESET);
                         }
                     }
                 }
             }
         } catch (SQLException e) {
-            System.out.println(Reference.TextPaint.RED + "PASSENGER ERROR: Passenger failed to save to DB" + Reference.TextPaint.RESET);
+            LogHelper.error(Reference.TextPaint.RED + "PASSENGER ERROR: Passenger failed to save to DB" + Reference.TextPaint.RESET);
+            LogHelper.error(e);
         }
     }
-    
+
     /**
      Gets seat and adds them to the specific Flight Number
 
@@ -329,9 +308,7 @@ public class Airline {
             //if seat exists within flight return seat found
             if (currentFlight.getSeats().containsKey(SeatNo)) {
                 Seat foundSeat = currentFlight.getSeats().get(SeatNo);
-                if (Reference.DEBUG_MODE) {
-                    System.out.println("SEAT DEBUG:" + Reference.TextPaint.BLUE + "Seat Found: " + foundSeat + Reference.TextPaint.RESET);
-                }
+                LogHelper.debug("SEAT DEBUG:" + Reference.TextPaint.BLUE + "Seat Found: " + foundSeat + Reference.TextPaint.RESET);
                 return foundSeat;
             } else {
                 Seat tempSeat = new Seat(SeatNo);

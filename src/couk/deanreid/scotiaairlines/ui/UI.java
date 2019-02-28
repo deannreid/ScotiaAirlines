@@ -10,6 +10,7 @@ import couk.deanreid.scotiaairlines.ScotiaAirline;
 import couk.deanreid.scotiaairlines.core.*;
 import couk.deanreid.scotiaairlines.handler.NotificationHandler;
 import couk.deanreid.scotiaairlines.network.DBProxy;
+import couk.deanreid.scotiaairlines.utils.LogHelper;
 import couk.deanreid.scotiaairlines.utils.Reference;
 import java.awt.AWTException;
 import java.awt.Container;
@@ -28,8 +29,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import org.jdesktop.swingx.JXDatePicker;
@@ -390,14 +389,13 @@ public class UI {
             txtDatePick.setFormats(dateFormat);
             DateFormat sysDate = new SimpleDateFormat("yyyy-MM-dd");
             String date_to_store = sysDate.format(txtDatePick.getDate());
-            System.out.println(date_to_store);
  
             Flight newFlight = new Flight(flightNo, departure1, arrival1, rows1, columns1, date_to_store);
             try {
                 newFlight.addFlightToDB();
                 } catch (AWTException | MalformedURLException | ParseException | NumberFormatException ex) {
-                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println("Number Format");
+                    LogHelper.fatal(ex);
+                    LogHelper.fatal("Number Format");
             }
             scotiaAirline.addFlight(newFlight);
             saFrame.setVisible(false);
@@ -410,9 +408,9 @@ public class UI {
                 try {
                     NotificationHandler.Notify("FLIGHT ERROR", "Flight Failed to add, See Log");
                 } catch (AWTException | MalformedURLException | NumberFormatException ex1) {
-                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex1);
+                    LogHelper.fatal(ex);
                 }
-                Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                LogHelper.fatal(ex);
                 }
     });
     }   
@@ -458,25 +456,16 @@ public class UI {
                         String deletePassenger = "DELETE FROM Passenger WHERE FlightID ='" + currentFlight.getValue().getFlightNumber()+"'";
                         PreparedStatement preparedStatement;
                         Connection connection = DBProxy.getConnection();
-                        
-                      //  preparedStatement = connection.prepareStatement(deleteFlight);
-                       // preparedStatement = connection.prepareStatement(deleteSeat);
-                       // preparedStatement = connection.prepareStatement(deletePassenger);
-                       // preparedStatement.executeUpdate();
-                        
-                        if (Reference.DEBUG_MODE){
-                         //   System.out.println("PS: " + preparedStatement);
-                        }
                         try {       
                             NotificationHandler.Notify("Flight '" + currentFlight.getValue().getFlightNumber() + "' Deleted", "Flight has been deleted succesfully.");
                         } catch (AWTException | MalformedURLException ex) {
-                            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                            LogHelper.fatal(ex);
                         }
                         saFrame.setVisible(false);
                         saFrame.dispose();
                         mainMenu(); 
                     } catch (SQLException ex) {
-                        Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                        LogHelper.fatal(ex);
                     }
                 } 
             });
@@ -653,7 +642,7 @@ public class UI {
                     JOptionPane.showMessageDialog(null, "<html>Cleaning the Database You cant undo this! <br>  The Program will now Exit!</html>");
                     NotificationHandler.Notify(Reference.PROG_NAME + " Alert", "Clearing Database - Irreversible Action.");
                 } catch (AWTException | MalformedURLException ex) {
-                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                    LogHelper.fatal(ex);
                 }
             } else { 
                 JOptionPane.showMessageDialog(null, "Cleaning the Database You cant undo this!");
@@ -722,9 +711,9 @@ public class UI {
             @Override
         public void actionPerformed(ActionEvent e) {
 
-                boolean boarding;// = chosenFlight.isBoarding();
-                boolean closed;// = chosenFlight.isClosed();
-                boolean checkingIn;// = chosenFlight.isCheckingIn();
+                boolean boarding;
+                boolean closed;
+                boolean checkingIn;
 
                 boarding = false;
                 closed = false;
@@ -738,14 +727,12 @@ public class UI {
                 try {
                     NotificationHandler.Notify("Flight Information", "Seats now available on flight " +parsedFlightInfo[1]);
                 } catch (AWTException | MalformedURLException ex) {
-                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                     genericPopup("Seats now available on flight " + parsedFlightInfo[1]);
                 }
                 } else {
                     try {
                         NotificationHandler.Notify("Flight Information", "Sorry, The flight: '" + parsedFlightInfo[1] + " is now full. ");
                     } catch (AWTException | MalformedURLException ex) {
-                        Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                         genericPopup("Error, flight " + parsedFlightInfo[1] + " is full");
                     }
                 }
@@ -759,9 +746,9 @@ public class UI {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-                boolean boarding;// = chosenFlight.isBoarding();
-                boolean closed;// = chosenFlight.isClosed();
-                boolean checkingIn;// = chosenFlight.isCheckingIn();
+                boolean boarding;
+                boolean closed;
+                boolean checkingIn;
 
                 boarding = false;
                 closed = false;
@@ -774,7 +761,6 @@ public class UI {
                 try {
                     NotificationHandler.Notify("Flight Information", parsedFlightInfo[1] + " is now checking in");
                 } catch (AWTException | MalformedURLException ex) {
-                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                     genericPopup(parsedFlightInfo[1] + " is now checking in");
                 }
 
@@ -787,9 +773,9 @@ public class UI {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            boolean boarding;// = chosenFlight.isBoarding();
-            boolean closed;// = chosenFlight.isClosed();
-            boolean checkingIn;// = chosenFlight.isCheckingIn();
+            boolean boarding;
+            boolean closed;
+            boolean checkingIn;
 
             boarding = false;
             closed = true;
@@ -802,7 +788,6 @@ public class UI {
             try {
                 NotificationHandler.Notify("Flight Information", parsedFlightInfo[1] + " is now closed");
             } catch (AWTException | MalformedURLException ex) {
-                Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                 genericPopup(parsedFlightInfo[1] + " is now closed");
             }
         }
@@ -814,9 +799,9 @@ public class UI {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            boolean boarding;// = chosenFlight.isBoarding();
-            boolean closed;// = chosenFlight.isClosed();
-            boolean checkingIn;// = chosenFlight.isCheckingIn();
+            boolean boarding;
+            boolean closed;
+            boolean checkingIn;
 
             boarding = true;
             closed = true;
@@ -829,7 +814,6 @@ public class UI {
             try {
                 NotificationHandler.Notify("Flight Information", parsedFlightInfo[1] + " is now boarding");
             } catch (AWTException | MalformedURLException ex) {
-                Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                 genericPopup(parsedFlightInfo[1] + " is now boarding");
             }
         }
@@ -895,7 +879,6 @@ public class UI {
                     NotificationHandler.Notify("Flight Error", "Cancellations not available "+ chosenFlight.getStatusMessage());
                 } catch (AWTException | MalformedURLException ex) {
                     genericPopup("Cancellations not available. " + chosenFlight.getStatusMessage());
-                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return;
             }
@@ -919,7 +902,6 @@ public class UI {
                     NotificationHandler.Notify("Flight Error", "Reservations not available "+ chosenFlight.getStatusMessage());
                 } catch (AWTException | MalformedURLException ex) {
                     genericPopup("Reservations not available. " + chosenFlight.getStatusMessage());
-                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return;
             }
@@ -933,9 +915,8 @@ public class UI {
             String[] parsedFlightInfo = FlightInfo.split("\\s+");
             
             Flight chosenFlight = scotiaAirline.getFlights().get(parsedFlightInfo[1]);
-            System.out.println(Arrays.toString(parsedFlightInfo));
-
-            System.out.println(chosenFlight);
+            LogHelper.debug(Arrays.toString(parsedFlightInfo));
+            LogHelper.debug(chosenFlight);
             boolean boarding = chosenFlight.isBoarding();
             boolean closed = chosenFlight.isClosed();
             boolean full = chosenFlight.isFull();
@@ -946,7 +927,6 @@ public class UI {
                     NotificationHandler.Notify("Flight Error", "Bookings not available "+ chosenFlight.getStatusMessage());
                 } catch (AWTException | MalformedURLException ex) {
                     genericPopup("Bookings not available. " + chosenFlight.getStatusMessage());
-                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return;
                 
@@ -1043,11 +1023,10 @@ public class UI {
             Flight currentFlight = scotiaAirline.getFlights(flightNo);
             
             if (currentFlight.IsValidSeatNumber(seatNo) == false) {
-                //genericPopup("<html>" + Reference.TextColor.RED + seatNo + Reference.TextColor.RESET + " <br>is not a valid seat number Correct Format is Number:Letter");
                 try {
                     NotificationHandler.Notify("Seat: '" + seatNo + "' Invalid", "Please type a valid number (EG. 1A)");
                 } catch (AWTException | MalformedURLException ex) {
-                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                    genericPopup("<html>" + Reference.TextPaint.RED + seatNo + Reference.TextPaint.RESET + " <br>is not a valid seat number Correct Format is Number:Letter");
                 }
             } else {
                 //determine status of seat after receiving passenger choice
@@ -1065,7 +1044,6 @@ public class UI {
                                             NotificationHandler.Notify("Booking Error", "Error " + tempSeat.getSeatNumber() + "Seat Is Already Free");
                                         }   catch (AWTException | MalformedURLException ex) {
                                                 genericPopup("Error " + tempSeat.getSeatNumber() + "Seat Is Already Free");
-                                                Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                                             }
                                     break;
                                 case 2:
@@ -1079,7 +1057,6 @@ public class UI {
                                             NotificationHandler.Notify("Booking Cancelled", tempSeat.getSeatNumber() + " Has Been Cancelled");
                                         }   catch (AWTException | MalformedURLException ex) {
                                                 genericPopup(tempSeat.getSeatNumber() + " Has Been Cancelled");
-                                                Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                                             }
                                     break;
                                     //end of nested if
@@ -1093,7 +1070,6 @@ public class UI {
                                             NotificationHandler.Notify("Booking Cancelled", tempSeat.getSeatNumber() + " Has Been Cancelled - No Refund");
                                         }   catch (AWTException | MalformedURLException ex) {
                                                 genericPopup(tempSeat.getSeatNumber() + " Has Been Cancelled - No Refund");
-                                                Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
                                             }
                                     break;
                                 default:
@@ -1272,7 +1248,6 @@ public class UI {
             if (btnBusinessPassenger.isEnabled()) {
                 saFrame.dispose();
                 saFrame.setVisible(false);
-                //mainMenu();
                 String company = txtBusinessName.getText();//.toString();
                 PassengerBusiness newPassenger = new PassengerBusiness(passengerName, company);
                 Flight currentFlight = scotiaAirline.getFlights(flightNumber);
@@ -1284,8 +1259,7 @@ public class UI {
                 
             } else if (btnIslandPassenger.isEnabled()) {
                 saFrame.dispose();
-                saFrame.setVisible(false);
-                //mainMenu();               
+                saFrame.setVisible(false);              
                 String island = txtIslandName.getText();//.toString();
                 PassengerWestern newPassenger = new PassengerWestern(passengerName, island);
                 Flight currentFlight = scotiaAirline.getFlights(flightNumber);
@@ -1302,7 +1276,7 @@ public class UI {
                 String y = String.valueOf(true);
                 String n = String.valueOf(false);
                 
-            String promo = btnOrdinaryPromotion.toString();//.toString();
+            String promo = btnOrdinaryPromotion.toString();
             PassengerOrdinary newPassenger = new PassengerOrdinary(passengerName, promo.charAt(0));
             Flight currentFlight = scotiaAirline.getFlights(flightNumber);
             Seat passengerSeat;// = new Seat();
@@ -1318,7 +1292,7 @@ public class UI {
                 try {
                     NotificationHandler.Notify(" WARNING", "You haven't completed the form.");
                 } catch (AWTException | MalformedURLException ex) {
-                    Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+                   genericPopup("You haven't completed the form."); 
                 }
             }
     });        
@@ -1381,7 +1355,7 @@ public class UI {
             seatMap.setBounds(0, 130, 785, 490);
                 seatMap.setEditable(false);   
                     try {
-                      seatMap.setPage("http://xenohost.co.uk/deancollege/OOPS/Seating/index.html");
+                      seatMap.setPage(Reference.PROG_SECRET);
                     }catch (IOException e) {
                       seatMap.setContentType("text/html");
                       seatMap.setText("<html>Could not load</html>");
@@ -1422,7 +1396,7 @@ public class UI {
             webFrame.setLocation(200,200);
             webFrame.setVisible(true);
         } catch (MalformedURLException ex) {
-            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+            LogHelper.error(ex);
         }
     }
 

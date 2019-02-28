@@ -8,6 +8,7 @@ package couk.deanreid.scotiaairlines.core;
 
 import couk.deanreid.scotiaairlines.handler.NotificationHandler;
 import couk.deanreid.scotiaairlines.network.DBProxy;
+import couk.deanreid.scotiaairlines.utils.LogHelper;
 import couk.deanreid.scotiaairlines.utils.Reference;
 import java.awt.AWTException;
 import java.net.MalformedURLException;
@@ -23,7 +24,7 @@ public class Flight {
     private String flightNumber;
     private String departure;
     private String arrival;
-    private String date; 
+    private String date;
     private int freeSeats;
     private int bookedSeats;
     private int reservedSeats;
@@ -59,6 +60,7 @@ public class Flight {
 
     /**
      Return the Date information for the selected flight
+
      @return date
      */
     public String getDate() {
@@ -161,7 +163,7 @@ public class Flight {
     public String getStatusMessage() {
         return statusMessage;
     }
-    
+
     /**
      Return isFull value of the selected flight if there are no free seats
 
@@ -206,7 +208,7 @@ public class Flight {
     public HashMap<String, Seat> getSeats() {
         return seats;
     }
-    
+
     /**
 
      @param seats
@@ -252,7 +254,7 @@ public class Flight {
      @param flightNumberIn
      @param departureIn
      @param arrivalIn
-     * @param dateIn
+     @param dateIn
      */
     public void setFlightDetails(String flightNumberIn, String departureIn, String arrivalIn, String dateIn) {
 
@@ -279,7 +281,7 @@ public class Flight {
     public void setBoarding(boolean boardingIn) {
         boarding = boardingIn;
     }
-    
+
     public void setDate(String dateIn) {
         date = dateIn;
     }
@@ -316,7 +318,6 @@ public class Flight {
 
      @param statusCode
      */
-
     public void setFlightStatus(int statusCode) {
         switch (statusCode) {
             case 1:
@@ -363,7 +364,6 @@ public class Flight {
         boarding = false;
         statusMessage = "Seats Available";
         seats = new HashMap<>();
-//        seats = new HashMap<String, Seat>(); 
         totalFlightTakings = 0.0f;
 
     }
@@ -376,7 +376,7 @@ public class Flight {
      @param arrivalIn
      @param rowsIn
      @param columnsIn
-     * @param dateIn
+     @param dateIn
      */
     public Flight(String flightNoIn, String departureIn, String arrivalIn, int rowsIn, int columnsIn, String dateIn) {
 
@@ -393,11 +393,10 @@ public class Flight {
         boarding = false;
         statusMessage = "Seats Available";
         seats = new HashMap<>();
-//        seats = new HashMap<String, Seat>();        
         totalFlightTakings = 0.0f;
 
     }
-    
+
     /**
      Updates the seats for the flight based on booking choice
 
@@ -453,67 +452,72 @@ public class Flight {
 
     /**
      Add flights to database
-     * @throws java.awt.AWTException
-     * @throws java.net.MalformedURLException
-     * @throws java.text.ParseException
+
+     @throws java.awt.AWTException
+     @throws java.net.MalformedURLException
+     @throws java.text.ParseException
      */
     @SuppressWarnings("CallToPrintStackTrace")
     public void addFlightToDB() throws AWTException, MalformedURLException, ParseException {
-        try {
-            Connection connection = DBProxy.getConnection();
-            Statement stmt = connection.createStatement();
-            stmt.executeUpdate("INSERT INTO Flight(FlightID, Departure, Arrival, Rows, Columns, Date) VALUES('" 
-                    + flightNumber
-                    + "','" 
-                    + departure 
-                    + "','" 
-                    + arrival 
-                    + "','" 
-                    + rows 
-                    + "','" 
-                    + columns
-                    + "','" 
-                    + date 
-                    + "')");
-            NotificationHandler.Notify("Flight Added", "Flight '" + flightNumber + "' added to database");
-            if (Reference.DEBUG_MODE) {
-                System.out.println(Reference.TextPaint.BLUE + "FLIGHT DEBUG:" + "Flight '" + flightNumber + "' added to database" + Reference.TextPaint.RESET);
+        boolean shouldLeaveLoop = false;
+        if (shouldLeaveLoop == false) {
+            try {
+                Connection connection = DBProxy.getConnection();
+                Statement stmt = connection.createStatement();
+                stmt.executeUpdate("INSERT INTO Flight(FlightID, Departure, Arrival, Rows, Columns, Date) VALUES('"
+                        + flightNumber
+                        + "','"
+                        + departure
+                        + "','"
+                        + arrival
+                        + "','"
+                        + rows
+                        + "','"
+                        + columns
+                        + "','"
+                        + date
+                        + "')");
+                NotificationHandler.Notify("Flight Added", "Flight '" + flightNumber + "' added to database");
+                LogHelper.debug(Reference.TextPaint.BLUE + "FLIGHT DEBUG:" + "Flight '" + flightNumber + "' added to database" + Reference.TextPaint.RESET);
+            } catch (SQLException e) {
+                shouldLeaveLoop = true;
+                NotificationHandler.Notify("Failed to add Flight", "Failed to add Flight, Please make sure you have correctly inserted all fields");
+                LogHelper.error(Reference.TextPaint.RED + "FLIGHT ERROR:" + "Failed to add Flight, Please make sure you have correctly inserted all fields" + Reference.TextPaint.RESET);
+                LogHelper.error(e);
+            } catch (NumberFormatException e) {
+                shouldLeaveLoop = true;
+                NotificationHandler.Notify("Failed to add Flight", "Failed to add Flight, You can only use numbers for Rows and Columns");
+                LogHelper.error(Reference.TextPaint.RED + "FLIGHT ERROR:" + Reference.TextPaint.RESET + e);
+                LogHelper.error(e);
             }
-        } catch (SQLException e) {
-            NotificationHandler.Notify("Failed to add Flight", "Failed to add Flight, Please make sure you have correctly inserted all fields");
-              System.out.println(Reference.TextPaint.RED + "FLIGHT ERROR:" + "Failed to add Flight, Please make sure you have correctly inserted all fields" + Reference.TextPaint.RESET);
-              e.printStackTrace();
-        } catch (NumberFormatException e) {
-            NotificationHandler.Notify("Failed to add Flight", "Failed to add Flight, You can only use numbers for Rows and Columns");
-            System.out.println(Reference.TextPaint.RED + "FLIGHT ERROR:" + Reference.TextPaint.RESET + e);
-            e.printStackTrace();    
         }
     }
 
     /**
      Add flights to database
-     * @throws java.awt.AWTException
-     * @throws java.net.MalformedURLException
+
+     @throws java.awt.AWTException
+     @throws java.net.MalformedURLException
      */
     @SuppressWarnings("CallToPrintStackTrace")
     public void deleteFlightFromDB() throws AWTException, MalformedURLException {
         try {
             Connection connection = DBProxy.getConnection();
             Statement stmt = connection.createStatement();
-            stmt.executeUpdate("DELETE FROM Flight WHERE FlightID('" 
+            stmt.executeUpdate("DELETE FROM Flight WHERE FlightID('"
                     + flightNumber
                     + "','");
             NotificationHandler.Notify("Flight Deleted", "Flight '" + flightNumber + "' deleted from database");
-            if (Reference.DEBUG_MODE) {
-                System.out.println(Reference.TextPaint.BLUE + "FLIGHT DEBUG:" + "Flight '" + flightNumber + "' deleted from database" + Reference.TextPaint.RESET);
-            }
+
+            LogHelper.debug(Reference.TextPaint.BLUE + "FLIGHT DEBUG:" + "Flight '" + flightNumber + "' deleted from database" + Reference.TextPaint.RESET);
+
         } catch (SQLException e) {
             NotificationHandler.Notify("Failed to delete Flight", "Failed to delete Flight");
-              System.out.println(Reference.TextPaint.RED + "FLIGHT ERROR:" + "Failed to delete Flight" + Reference.TextPaint.RESET);
-                e.printStackTrace();
-        } 
-    }    
-    
+            LogHelper.error(Reference.TextPaint.RED + "FLIGHT ERROR:" + "Failed to delete Flight" + Reference.TextPaint.RESET);
+            LogHelper.error(e);
+        }
+    }
+
     /**
      Calculates the total flight takings for the flights
 
@@ -521,13 +525,7 @@ public class Flight {
      */
     public float CalculateTotalFlightTakings() {
         totalFlightTakings = 0.0f;
-
-        // goes through all map entries in courses hash map in the courses map
-        // .entrySet lets complier know courses is iterative
         seats.entrySet().forEach((tempSeat) -> {
-            // current course is just a reference to location of particular
-            // course
-            // in map. Need to use getValue() to access contents
             totalFlightTakings += tempSeat.getValue().getSeatTakings();
         });
         return totalFlightTakings;
@@ -539,7 +537,7 @@ public class Flight {
      @return
      */
     public String DisplayFlightInfo() {
-        String output;// = "";
+        String output;
 
         output = "<html> Flight No: " + flightNumber + "<br /> Arrival Airport: " + arrival
                 + "<br /> Departure Airport: " + departure + "<br /> Date: " + date + "<br /> Number Of Free Seats: " + freeSeats
@@ -560,7 +558,7 @@ public class Flight {
      */
     public boolean IsValidSeatNumber(String seatNo) {
         String number = "";
-        String letter;// = "";
+        String letter;
         int checkIfNum;
         int element = -1;
         boolean shouldLeaveLoop = false;
@@ -570,7 +568,7 @@ public class Flight {
                 try {
                     // checks if first value is numeric, if not set should leave
                     // loop to true
-                    String character;// = "";
+                    String character;
                     character = String.valueOf(c);
                     checkIfNum = Integer.parseInt(character);
                     number = number + c;
@@ -605,7 +603,5 @@ public class Flight {
         } catch (NumberFormatException e) {
             return false;
         }
-
-    }// end of isValid
-
+    }
 }

@@ -9,79 +9,79 @@ package couk.deanreid.scotiaairlines.utils;
 import javax.swing.Icon;
 
 /**
- * Easy References -
- * Some entries will soon be ported to the config file to allow user
- * to modify settings.
+ Easy References -
+ Some entries will soon be ported to the config file to allow user
+ to modify settings.
  */
 public class Reference {
 
     /**
-     * Enable Debug Mode All The Lines...
+     Enable Debug Mode All The Lines...
      */
     public static final boolean DEBUG_MODE = true;
 
     /**
-     * Enable Dark Mode - Everyone has one of these nowadays - I Like it. The
-     * Dark Side of the Force.
+     Enable Dark Mode - Everyone has one of these nowadays - I Like it. The
+     Dark Side of the Force.
      */
     public static final boolean DARK_MODE = true;
 
     /**
-     * Force the CLI - for Testing purposes
-     * CLI is Broken.
+     Force the CLI - for Testing purposes
+     CLI is Broken.
      */
     public static final boolean FORCE_CLI = false;
-    
+
     /**
-     * Set Configuration Filename.
-     *
+     Set Configuration Filename.
+
      */
     public static final String CONFIG_FILE_NAME = "scotiaairlines";
 
     /**
-     * Program Name
+     Program Name
      */
     public static final String PROG_NAME = "Scotia Airlines";
 
     /**
-     * Program Version and Build Number
+     Program Version and Build Number
      */
     public final String version = this.getClass().getPackage().getImplementationVersion();
-    public static final String VERSION_NUMBER = "2.9 FINAL (build 12)";
+    public static final String VERSION_NUMBER = "3.0 FINAL (build 12)";
 
     /**
-     * Not a very secret Secret...
+     Not a very secret Secret...
      */
     public static final String PROG_SECRET = "http://xenohost.co.uk/deancollege/images/img/15.jpg";
 
 //Database Related Constants    
     /**
-     * Database URL
+     Database URL
      */
     public static final String DB_URL = "comp-hons.uhi.ac.uk";
 
     /**
-     * Table Name for Data
+     Table Name for Data
      */
     public static final String DB_TABLE = "pe10004084";
 
     /**
-     * This just combines the Host and Table for college database
+     This just combines the Host and Table for college database
      */
     public static final String DB_FULLURL = DB_URL + "/" + DB_TABLE;
 
     /**
-     * Database User
+     Database User
      */
     public static final String DB_USER = "pe10004084";
 
     /**
-     * Database Password
+     Database Password
      */
     public static final String DB_PASSWORD = "deanreid";
 
     /**
-     * List of Colours to Choose
+     List of Colours to Choose
      */
     public enum TextPaint {
         BOLD("\033[0;1m"),
@@ -123,58 +123,58 @@ public class Reference {
 
 //Images and Icons   
     /**
-     * Main Menu Image
-     *
-     * @deprecated - As of Version 1.7 - decided not to work it this way as it
-     * means more code.
+     Main Menu Image
+
+     @deprecated - As of Version 1.7 - decided not to work it this way as it
+     means more code.
      */
     public Icon MAIN_MENU = (new javax.swing.ImageIcon(getClass().getResource("/assets/mainmenu.png")));
 
     /**
-     * Admin Menu Image
-     *
-     * @deprecated - As of Version 1.7 - decided not to work it this way as it
-     * means more code.
+     Admin Menu Image
+
+     @deprecated - As of Version 1.7 - decided not to work it this way as it
+     means more code.
      */
     public Icon ADMIN_MENU = (new javax.swing.ImageIcon(getClass().getResource("/assets/adminmenu.png")));
 
     /**
-     * Flight Menu Image
-     *
-     * @deprecated - As of Version 1.7 - decided not to work it this way as it
-     * means more code.
+     Flight Menu Image
+
+     @deprecated - As of Version 1.7 - decided not to work it this way as it
+     means more code.
      */
     public Icon FLIGHT_MENU = (new javax.swing.ImageIcon(getClass().getResource("/assets/tbselectflight.png")));
 
     /**
-     * Test Menu Image
-     *
-     * @deprecated - As of Version 1.7 - decided not to work it this way as it
-     * means more code.
+     Test Menu Image
+
+     @deprecated - As of Version 1.7 - decided not to work it this way as it
+     means more code.
      */
     public Icon TEST_MENU = (new javax.swing.ImageIcon(getClass().getResource("/assets/testmenu.png")));
 
     /**
-     * Free Seat Icon
-     *
-     * @deprecated - As of Version 1.7 - decided not to work it this way as it
-     * means more code.
+     Free Seat Icon
+
+     @deprecated - As of Version 1.7 - decided not to work it this way as it
+     means more code.
      */
     public Icon SEAT_FREE = (new javax.swing.ImageIcon(getClass().getResource("/assets/seatFree.png")));
 
     /**
-     * Reserved Seat Icon
-     *
-     * @deprecated - As of Version 1.7 - decided not to work it this way as it
-     * means more code.
+     Reserved Seat Icon
+
+     @deprecated - As of Version 1.7 - decided not to work it this way as it
+     means more code.
      */
     public Icon SEAT_RESERVED = (new javax.swing.ImageIcon(getClass().getResource("/assets/seatReserved.png")));
 
     /**
-     * Booked Seat Icon
-     *
-     * @deprecated - As of Version 1.7 - decided not to work it this way as it
-     * means more code.
+     Booked Seat Icon
+
+     @deprecated - As of Version 1.7 - decided not to work it this way as it
+     means more code.
      */
     public Icon SEAT_BOOKED = (new javax.swing.ImageIcon(getClass().getResource("/assets/seatBooked.png")));
 

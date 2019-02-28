@@ -18,31 +18,24 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
-
 public class ScotiaAirline {
 
     /**
-     * Main Class Startup
-     *
-     * @param args
-     * @throws SQLException
-     * @throws IOException
+     Main Class Startup
+
+     @param args
+
+     @throws SQLException
+     @throws IOException
      */
     public static void main(String[] args) throws SQLException, IOException, Exception {
-        System.out.println("Logic executed successfully....");
-
-        if (Reference.DEBUG_MODE) {
-            LogHelper.info("Debug Mode is Enabled. Everything will show here.");
-        } else {
+            LogHelper.debug("Debug Mode is Enabled. Everything will show here.");
             LogHelper.info("Debug Mode is Disabled. Only major errors will show");
-        }
         Airline scotiaAirline = new Airline();
         scotiaAirline.loadFlightsFromDB();
         scotiaAirline.loadSeatsFromDB();
@@ -51,22 +44,18 @@ public class ScotiaAirline {
         //Allow forcing cli and to check if GUI is possible
         if (Reference.FORCE_CLI) {
             System.out.println(Reference.TextPaint.GREEN + "===========================" + Reference.TextPaint.RESET);
-            System.out.println(Reference.TextPaint.ORANGE + "UI DEBUG: CLI Forced On" + Reference.TextPaint.RESET);
+            LogHelper.warn(Reference.TextPaint.ORANGE + "UI DEBUG: CLI Forced On" + Reference.TextPaint.RESET);
             //Check if GUI is possible
             if (!GraphicsEnvironment.isHeadless()) {
-                if (Reference.DEBUG_MODE) {
-                    System.out.println(Reference.TextPaint.ORANGE + "UI DEBUG: GUI Disabled - No Display Detected. Running CLI" + Reference.TextPaint.RESET);
-                    System.out.println(Reference.TextPaint.RED + "UI DEBUG: CLI Code is Incomplete. Please run in a GUI Enviironment" + Reference.TextPaint.RESET);
-                    System.out.println(Reference.TextPaint.GREEN + "===========================" + Reference.TextPaint.RESET);
-                }
+                LogHelper.info(Reference.TextPaint.ORANGE + "UI DEBUG: GUI Disabled - No Display Detected. Running CLI" + Reference.TextPaint.RESET);
+                LogHelper.error(Reference.TextPaint.RED + "UI DEBUG: CLI Code is Incomplete. Please run in a GUI Enviironment" + Reference.TextPaint.RESET);
+                System.out.println(Reference.TextPaint.GREEN + "===========================" + Reference.TextPaint.RESET);
                 UIConsole uic = new UIConsole(scotiaAirline);
                 uic.mainMenu();
             }
         } else {
             if (Reference.DARK_MODE) {
-                if (Reference.DEBUG_MODE) {
-                    System.out.println("UI DEBUG:" + Reference.TextPaint.GREEN + " Dark Mode Enabled!" + Reference.TextPaint.RESET);
-                }
+                LogHelper.debug("UI DEBUG:" + Reference.TextPaint.GREEN + " Dark Mode Enabled!" + Reference.TextPaint.RESET);
                 UIManager.put("control", new Color(128, 128, 128));
                 UIManager.put("info", new Color(128, 128, 128));
                 UIManager.put("nimbusBase", new Color(29, 29, 29));
@@ -82,9 +71,7 @@ public class ScotiaAirline {
                 UIManager.put("nimbusSelectionBackground", new Color(104, 93, 156));
                 UIManager.put("text", new Color(230, 230, 230));
             } else {
-                if (Reference.DEBUG_MODE) {
-                    System.out.println("UI DEBUG:" + Reference.TextPaint.BLUE + " Dark Mode Disabled!" + Reference.TextPaint.RESET);
-                }
+                LogHelper.debug("UI DEBUG:" + Reference.TextPaint.BLUE + " Dark Mode Disabled!" + Reference.TextPaint.RESET);
             }
             try {
                 for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -97,15 +84,14 @@ public class ScotiaAirline {
             }
             UI uig = new UI(scotiaAirline);
             uig.mainMenu();
-            if (Reference.DEBUG_MODE) {
-                System.out.println("UI DEBUG:" + Reference.TextPaint.GREEN + " GUI Loaded" + Reference.TextPaint.RESET);
-            }
+            LogHelper.debug("UI DEBUG:" + Reference.TextPaint.GREEN + " GUI Loaded" + Reference.TextPaint.RESET);
         }
     }
 
     /**
-     * If user closes program via X then this will ensure current data is saved.
-     * @param evt
+     If user closes program via X then this will ensure current data is saved.
+
+     @param evt
      */
     public static void WindowClosing(WindowEvent evt) {
         try {
@@ -119,8 +105,9 @@ public class ScotiaAirline {
             }
         } catch (HeadlessException q) {
             JOptionPane.showMessageDialog(null, q);
+            LogHelper.warn(q);
         } catch (AWTException | MalformedURLException ex) {
-            Logger.getLogger(ScotiaAirline.class.getName()).log(Level.SEVERE, null, ex);
+            LogHelper.fatal(ex);
         }
         System.exit(0);
     }

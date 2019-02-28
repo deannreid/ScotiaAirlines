@@ -6,6 +6,7 @@
  */
 package couk.deanreid.scotiaairlines.handler;
 
+import couk.deanreid.scotiaairlines.utils.LogHelper;
 import couk.deanreid.scotiaairlines.utils.Reference;
 import java.awt.*;
 import java.awt.TrayIcon.MessageType;
@@ -27,7 +28,7 @@ public class NotificationHandler {
             NotificationHandler Notify = new NotificationHandler();
             Notify.displayTray(inputHeader, inputMessage);
         } else {
-            System.err.println("System tray not supported!");
+            LogHelper.error("System tray not supported!");
         }
     }
 
@@ -47,5 +48,6 @@ public class NotificationHandler {
         trayIcon.setToolTip(Reference.PROG_NAME + " Information System");
         Notify.add(trayIcon);
         trayIcon.displayMessage(Reference.PROG_NAME + " " + inputHeader, inputMessage, MessageType.NONE);
+        LogHelper.debug("POPUP DEBUG: " + " | Header: " + inputHeader + " | Message: " + inputMessage );
     }
 }

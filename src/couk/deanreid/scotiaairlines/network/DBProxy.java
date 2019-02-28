@@ -6,6 +6,7 @@
  */
 package couk.deanreid.scotiaairlines.network;
 
+import couk.deanreid.scotiaairlines.utils.LogHelper;
 import couk.deanreid.scotiaairlines.utils.Reference;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,14 +24,12 @@ public class DBProxy {
 
     private DBProxy() {
         try {
-            if (Reference.DEBUG_MODE) {
-                System.out.println("=======================");
-                System.out.println("Connecting to SQL database: " + Reference.DB_FULLURL);
-            }
-            // Load MySQL driver
+            LogHelper.debug("=======================");
+            LogHelper.debug("Connecting to SQL database: " + Reference.DB_FULLURL);
+
             Class.forName(DRIVER_CLASS);
         } catch (final ClassNotFoundException e) {
-            //e.printStackTrace();
+            LogHelper.fatal(e);
         }
     }
 
@@ -40,21 +39,17 @@ public class DBProxy {
         try {
             Class.forName(DRIVER_CLASS).newInstance();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
-            log("Check classpath. Cannot load db driver: " + DRIVER_CLASS);
+            LogHelper.fatal("Check classpath. Cannot load db driver: " + DRIVER_CLASS);
+            LogHelper.fatal(ex);
         }
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + Reference.DB_FULLURL, Reference.DB_USER, Reference.DB_PASSWORD);
         } catch (SQLException e) {
-
-            log("Driver loaded, but cannot connect to db: " + Reference.DB_FULLURL);
-            //e.printStackTrace();
+            LogHelper.warn(e);
+            LogHelper.warn("Driver loaded, but cannot connect to db: " + Reference.DB_FULLURL);
         }
         return connection;
-    }
-
-    private static void log(Object aObject) {
-        System.out.println(aObject);
     }
 
     public static Connection getConnection() throws SQLException {

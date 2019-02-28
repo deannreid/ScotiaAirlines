@@ -11,34 +11,36 @@ import org.apache.logging.log4j.Logger;
  @Author: Dean D. Reid
  */
 public class LogHelper {
- private static final Logger log = LogManager.getLogger(LogHelper.class);
 
-   public static void log(Level logLevel, Object object) {
-        //Logger.log(logLevel, String.valueOf(object), new Object[0]);
+    final static Logger logHelper = LogManager.getLogger();
+
+    public static void log(Level logLevel, Object object) {
+        logHelper.log(logLevel, String.valueOf(object));
     }
 
     public static void error(Object object) {
-        log(Level.ERROR,"[ERROR:] " + object);
+        log(Level.ERROR, "[ERROR:] " + object);
     }
 
     public static void warn(Object object) {
-        log(Level.WARN,"[WARN:] " + object);
+        log(Level.WARN, "[WARN:] " + object);
     }
 
     public static void trace(Object object) {
-        log(Level.TRACE,"[TRACE:] " + object);
+        log(Level.TRACE, "[TRACE:] " + object);
     }
-    
+
     public static void fatal(Object object) {
-        log(Level.FATAL,"[FATAL:] " + object);
+        log(Level.FATAL, "[FATAL:] " + object);
     }
-    
+
     public static void info(Object object) {
-        log(Level.INFO,"[INFO:] " + object);
+            log(Level.INFO, "[INFO:] " + object);
     }
+
     public static void debug(Object object) {
         if (Reference.DEBUG_MODE) {
-            log(Level.INFO, "[DEBUG:] " + object);
-        }
+            log(Level.DEBUG, "[DEBUG:] " + object);
+        } else {}
     }
 }

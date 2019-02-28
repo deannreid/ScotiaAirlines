@@ -45,7 +45,6 @@ public class PassengerBusiness extends Passenger {
         super(discountAmountIn, passengerNameIn);
 
         companyName = companyNameIn;
-        //discountAmountIn = 0.75f;
 
     }
 

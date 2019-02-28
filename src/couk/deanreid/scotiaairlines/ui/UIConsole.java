@@ -7,7 +7,7 @@
 package couk.deanreid.scotiaairlines.ui;
 
 import couk.deanreid.scotiaairlines.core.Airline;
-import couk.deanreid.scotiaairlines.core.Flight;
+import couk.deanreid.scotiaairlines.utils.LogHelper;
 import couk.deanreid.scotiaairlines.utils.Reference;
 import java.util.Scanner;
 
@@ -31,9 +31,9 @@ public class UIConsole {
     }
 
     public void genericPopup(String inputMessage) {
-        System.out.println(Reference.TextPaint.GREEN + "ScotiaAirline Information System ");
-        System.out.println("==================================" + Reference.TextPaint.RESET);
-        System.out.println(Reference.TextPaint.BLUE + inputMessage + Reference.TextPaint.RESET);
+        LogHelper.info(Reference.TextPaint.GREEN + "ScotiaAirline Information System ");
+        LogHelper.info("==================================" + Reference.TextPaint.RESET);
+        LogHelper.info(Reference.TextPaint.BLUE + inputMessage + Reference.TextPaint.RESET);
     }
 
     public void loadInterface() {

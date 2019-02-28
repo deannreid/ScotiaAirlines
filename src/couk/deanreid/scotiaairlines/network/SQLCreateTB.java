@@ -6,16 +6,20 @@
  */
 package couk.deanreid.scotiaairlines.network;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /*
  @Not Implemented
  */
 public class SQLCreateTB {
 
-    public SQLCreateTB() {
+    public SQLCreateTB() throws SQLException {
 
-        /**
          System.out.println("Creating table in given database...");
-         stmt = connection.createStatement();
+         Connection connection = DBProxy.getConnection();
+         Statement stmt = connection.createStatement();
 
          String flight = "CREATE TABLE IF NOT EXISTS FLIGHT "
          + "(FlightID VARCHAR(255) not NULL, "
@@ -42,6 +46,6 @@ public class SQLCreateTB {
 
          stmt.executeUpdate(flight + passenger + seat);
          System.out.println("Created table in given database...");
-         */
+         
     }
 }

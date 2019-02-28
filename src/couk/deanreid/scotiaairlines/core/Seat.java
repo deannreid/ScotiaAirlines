@@ -8,11 +8,14 @@ package couk.deanreid.scotiaairlines.core;
 
 import couk.deanreid.scotiaairlines.handler.NotificationHandler;
 import couk.deanreid.scotiaairlines.ui.UI;
+import couk.deanreid.scotiaairlines.utils.LogHelper;
 import java.awt.AWTException;
 import java.net.MalformedURLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+
+ @author Deann
+ */
 public class Seat {
 
     /**
@@ -26,54 +29,98 @@ public class Seat {
     private int completeSeatStatus;
     private Passenger aPassenger;
 
-    //Getters
+    /**
+
+     @param completeSeatStatusIn
+     */
     public void setCompleteSeatStatus(int completeSeatStatusIn) {
         completeSeatStatus = completeSeatStatusIn;
     }
 
+    /**
+
+     @return
+     */
     public String getSeatNumber() {
 
         return seatNumber;
     }
 
+    /**
+
+     @param seatNumberIn
+     */
     public void setSeatNumber(String seatNumberIn) {
         seatNumber = seatNumberIn;
     }
 
+    /**
+
+     @return
+     */
     public float getSeatPrice() {
         return seatPrice;
     }
 
+    /**
+
+     @return
+     */
     public int getCurrentStatus() {
         return currentStatus;
     }
 
+    /**
+
+     @return
+     */
     public Passenger getaPassenger() {
         return aPassenger;
     }
 
-    //Setters
+    /**
+
+     @param seatPriceIn
+     */
     public void setSeatPrice(float seatPriceIn) {
         seatPrice = seatPriceIn;
     }
 
+    /**
+
+     @return
+     */
     public float getSeatTakings() {
         return seatTakings;
     }
 
+    /**
+
+     @param seatTakingsIn
+     */
     public void setSeatTakings(float seatTakingsIn) {
         seatTakings = seatTakingsIn;
     }
 
+    /**
+
+     @param currentStatusIn
+     */
     public void setCurrentStatus(int currentStatusIn) {
         currentStatus = currentStatusIn;
     }
 
+    /**
+
+     @param aPassengerIn
+     */
     public void setaPassenger(Passenger aPassengerIn) {
         aPassenger = aPassengerIn;
     }
 
-    //Default Constructor
+    /**
+     Default Class Constructor
+     */
     public Seat() {
         seatNumber = "";
         seatPrice = 100;
@@ -109,7 +156,11 @@ public class Seat {
         aPassenger = null;
     }
 
-    //Method to display details for specific seat
+    /**
+     Method to display details for specific seat
+
+     @return
+     */
     public String DisplaySeatDetails() {
         String output;
         String seatStatus = "";
@@ -145,7 +196,17 @@ public class Seat {
 
     }
 
-    //Method which changes status of particular seat based on passenger type
+    /**
+     Method which changes status of particular seat based on passenger type
+
+     @param seatStatus
+     @param currentTakings
+     @param passengerName
+     @param passengerType
+     @param passengerInfo
+
+     @return
+     */
     public int changeSeatStatus(int seatStatus, float currentTakings, String passengerName, char passengerType, String passengerInfo) {
         completeSeatStatus = -1;
         seatTakings = currentTakings;
@@ -194,7 +255,16 @@ public class Seat {
         return completeSeatStatus;
     }
 
-    //Method which changes status of particular seat depending on booking choice made by passenger
+    /**
+     Method which changes status of particular seat depending on booking choice made by passenger
+
+     @param scotiaAirline
+     @param newStatus
+     @param newPassenger
+     @param newFlight
+
+     @return
+     */
     public int changeSeatStatus(Airline scotiaAirline, int newStatus, Passenger newPassenger, Flight newFlight) {
         UI UI = new UI(scotiaAirline);
 
@@ -252,8 +322,10 @@ public class Seat {
                          {
                             try {
                                 NotificationHandler.Notify("Seat Booked", "Seat Number: '" + seatNumber + "' Has Now Been Booked By '" + newPassenger.getPassengerName() + "'");
+                                LogHelper.debug("Seat Number: '" + seatNumber + "' Has Now Been Booked By '" + newPassenger.getPassengerName() + "'");
                             } catch (AWTException | MalformedURLException ex) {
-                                Logger.getLogger(Seat.class.getName()).log(Level.SEVERE, null, ex);
+
+                                LogHelper.fatal(ex);
                             }
                         }
                         break;
@@ -265,14 +337,16 @@ public class Seat {
                             seatTakings += (seatPrice * newPassenger.getDiscountAmount());
                             try {
                                 NotificationHandler.Notify("Seat Booked", "Seat Number: '" + seatNumber + "' Has Now Been Booked By '" + newPassenger.getPassengerName() + "'");
+                                LogHelper.debug("Seat Number: '" + seatNumber + "' Has Now Been Booked By '" + newPassenger.getPassengerName() + "'");
                             } catch (AWTException | MalformedURLException ex) {
-                                Logger.getLogger(Seat.class.getName()).log(Level.SEVERE, null, ex);
+                                LogHelper.fatal(ex);
                             }
                         } else {
                             try {
                                 NotificationHandler.Notify("Seat Already Reserved", "Seat Number: '" + seatNumber + "' Is Already Reserved By '" + aPassenger.getPassengerName() + "'");
+                                LogHelper.debug("Seat Number: '" + seatNumber + "' Is Already Reserved By '" + aPassenger.getPassengerName() + "'");
                             } catch (AWTException | MalformedURLException ex) {
-                                Logger.getLogger(Seat.class.getName()).log(Level.SEVERE, null, ex);
+                                LogHelper.fatal(ex);
                             }
                             return -1;
                         }
@@ -280,8 +354,9 @@ public class Seat {
                     case 3: {
                         try {
                             NotificationHandler.Notify("Seat Already Booked", "Seat Number: '" + seatNumber + "' Is Already Booked By '" + aPassenger.getPassengerName() + "'");
+                            LogHelper.debug("Seat Number: '" + seatNumber + "' Is Already Booked By '" + aPassenger.getPassengerName() + "'");
                         } catch (AWTException | MalformedURLException ex) {
-                            Logger.getLogger(Seat.class.getName()).log(Level.SEVERE, null, ex);
+                            LogHelper.fatal(ex);
                         }
                     }
                     return -1;
