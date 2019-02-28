@@ -128,7 +128,7 @@ public class Reference {
      @deprecated - As of Version 1.7 - decided not to work it this way as it
      means more code.
      */
-    public Icon MAIN_MENU = (new javax.swing.ImageIcon(getClass().getResource("/assets/mainmenu.png")));
+    public Icon MAIN_MENU = (new javax.swing.ImageIcon(getClass().getResource("/resources/mainmenu.png")));
 
     /**
      Admin Menu Image
@@ -136,7 +136,7 @@ public class Reference {
      @deprecated - As of Version 1.7 - decided not to work it this way as it
      means more code.
      */
-    public Icon ADMIN_MENU = (new javax.swing.ImageIcon(getClass().getResource("/assets/adminmenu.png")));
+    public Icon ADMIN_MENU = (new javax.swing.ImageIcon(getClass().getResource("/resources/adminmenu.png")));
 
     /**
      Flight Menu Image
@@ -144,7 +144,7 @@ public class Reference {
      @deprecated - As of Version 1.7 - decided not to work it this way as it
      means more code.
      */
-    public Icon FLIGHT_MENU = (new javax.swing.ImageIcon(getClass().getResource("/assets/tbselectflight.png")));
+    public Icon FLIGHT_MENU = (new javax.swing.ImageIcon(getClass().getResource("/resources/tbselectflight.png")));
 
     /**
      Test Menu Image
@@ -152,7 +152,7 @@ public class Reference {
      @deprecated - As of Version 1.7 - decided not to work it this way as it
      means more code.
      */
-    public Icon TEST_MENU = (new javax.swing.ImageIcon(getClass().getResource("/assets/testmenu.png")));
+    public Icon TEST_MENU = (new javax.swing.ImageIcon(getClass().getResource("/resources/testmenu.png")));
 
     /**
      Free Seat Icon
@@ -160,7 +160,7 @@ public class Reference {
      @deprecated - As of Version 1.7 - decided not to work it this way as it
      means more code.
      */
-    public Icon SEAT_FREE = (new javax.swing.ImageIcon(getClass().getResource("/assets/seatFree.png")));
+    public Icon SEAT_FREE = (new javax.swing.ImageIcon(getClass().getResource("/resources/seatFree.png")));
 
     /**
      Reserved Seat Icon
@@ -168,7 +168,7 @@ public class Reference {
      @deprecated - As of Version 1.7 - decided not to work it this way as it
      means more code.
      */
-    public Icon SEAT_RESERVED = (new javax.swing.ImageIcon(getClass().getResource("/assets/seatReserved.png")));
+    public Icon SEAT_RESERVED = (new javax.swing.ImageIcon(getClass().getResource("/resources/seatReserved.png")));
 
     /**
      Booked Seat Icon
@@ -176,6 +176,6 @@ public class Reference {
      @deprecated - As of Version 1.7 - decided not to work it this way as it
      means more code.
      */
-    public Icon SEAT_BOOKED = (new javax.swing.ImageIcon(getClass().getResource("/assets/seatBooked.png")));
+    public Icon SEAT_BOOKED = (new javax.swing.ImageIcon(getClass().getResource("/resources/seatBooked.png")));
 
 }

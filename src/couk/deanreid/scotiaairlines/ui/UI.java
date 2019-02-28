@@ -59,7 +59,7 @@ public class UI {
                     
         JLabel saTitle = new javax.swing.JLabel();              
             saTitle.setFont(new java.awt.Font("Arial", 1, 18)); 
-                saTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icon.png"))); 
+                saTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icon.png"))); 
                     saTitle.setText(Reference.PROG_NAME + " Booking System");
         
         JPanel saPanel = new JPanel();
@@ -108,7 +108,7 @@ public class UI {
         //need atleast one panel on a window, default will be full size of frame
         JPanel saPanel = new JPanel();
 
-        JLabel saLabel = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/assets/mainmenu.png")), SwingConstants.CENTER);
+        JLabel saLabel = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/resources/mainmenu.png")), SwingConstants.CENTER);
             saFrame.getContentPane().add(saLabel);
                 saLabel.setBounds(0, 0, 378, 100);
 
@@ -205,7 +205,7 @@ public class UI {
                                     }
                                 });                 
 
-        JLabel saTitle = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/assets/adminmenu.png")), SwingConstants.CENTER);
+        JLabel saTitle = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/resources/adminmenu.png")), SwingConstants.CENTER);
             saTitle.setBounds(0, 0, 278, 85);
                 saFrame.add(saTitle);       
    
@@ -289,7 +289,7 @@ public class UI {
                                     }
                                 });                                                
         //Set image title                  
-        JLabel saTitle = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/assets/adminmenu.png")), SwingConstants.CENTER);
+        JLabel saTitle = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/resources/adminmenu.png")), SwingConstants.CENTER);
             saTitle.setBounds(0, 0, 278, 85);
                 saFrame.add(saTitle);       
 
@@ -436,7 +436,7 @@ public class UI {
                                 }
                             });
 
-        JLabel title = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/assets/adminmenu.png")));
+        JLabel title = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/resources/adminmenu.png")));
             title.setBounds(80, -10, 259, 100);
                 saFrame.add(title);
                 
@@ -515,7 +515,7 @@ public class UI {
                                 }
                             });
 
-        JLabel title = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/assets/tbselectflight.png")));
+        JLabel title = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/resources/tbselectflight.png")));
             title.setBounds(150, -10, 259, 100);
                 saFrame.add(title);
        
@@ -594,7 +594,7 @@ public class UI {
                             saFrame.setTitle(Reference.PROG_NAME + " Developer Menu | Version: " + Reference.VERSION_NUMBER);
         
         JLabel saLabel = new javax.swing.JLabel();
-            saLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/testmenu.png"))); 
+            saLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/testmenu.png"))); 
                 saLabel.setBounds(50, 0, 278, 85);
                     saFrame.getContentPane().add(saLabel);
 
@@ -1129,7 +1129,7 @@ public class UI {
                             saFrame.setLayout(null);
     
     //Set image title                  
-        JLabel saTitle = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/assets/testmenu.png")), SwingConstants.CENTER);
+        JLabel saTitle = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/resources/testmenu.png")), SwingConstants.CENTER);
             saTitle.setBounds(70, 10, 278, 85);
                 saFrame.add(saTitle);       
  
@@ -1321,24 +1321,24 @@ public class UI {
                             });   
                                 saFrame.getContentPane().setLayout(null);
         JLabel sfTitle = new JLabel();
-            sfTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/mainmenu.png")));
+            sfTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/mainmenu.png")));
                 saFrame.add(sfTitle);
                     sfTitle.setBounds(180, 0, 370, 100);                            
                                             
         JLabel imgFree = new JLabel();
-            imgFree.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/seatFree.png")));
+            imgFree.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/seatFree.png")));
                 imgFree.setText("Free");
                     saFrame.add(imgFree);
                         imgFree.setBounds(180, 630, 76, 50);
     
         JLabel imgReserved = new JLabel();
-            imgReserved.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/seatReserved.png")));
+            imgReserved.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/seatReserved.png")));
                 imgReserved.setText("Reserved");
                     saFrame.add(imgReserved);
                         imgReserved.setBounds(280, 630, 96, 50);    
 
         JLabel imgBooked = new JLabel();
-            imgBooked.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/seatBooked.png")));
+            imgBooked.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/seatBooked.png")));
                 imgBooked.setText("Booked");
                     saFrame.add(imgBooked);
                         imgBooked.setBounds(400, 630, 76, 50);                          

@@ -10,7 +10,6 @@ package couk.deanreid.scotiaairlines;
 import couk.deanreid.scotiaairlines.core.Airline;
 import couk.deanreid.scotiaairlines.handler.NotificationHandler;
 import couk.deanreid.scotiaairlines.ui.UI;
-import couk.deanreid.scotiaairlines.ui.UIConsole;
 import couk.deanreid.scotiaairlines.utils.LogHelper;
 import couk.deanreid.scotiaairlines.utils.Reference;
 import java.awt.*;
@@ -53,8 +52,9 @@ public class ScotiaAirline {
                 LogHelper.info(Reference.TextPaint.ORANGE + "UI DEBUG: GUI Disabled - No Display Detected. Running CLI" + Reference.TextPaint.RESET);
                 LogHelper.error(Reference.TextPaint.RED + "UI DEBUG: CLI Code is Incomplete. Please run in a GUI Enviironment" + Reference.TextPaint.RESET);
                 System.out.println(Reference.TextPaint.GREEN + "===========================" + Reference.TextPaint.RESET);
-                UIConsole uic = new UIConsole(scotiaAirline);
-                uic.mainMenu();
+                System.exit(0);
+//UIConsole uic = new UIConsole(scotiaAirline);
+                //uic.mainMenu();
             }
         } else {
             if (Reference.DARK_MODE) {
