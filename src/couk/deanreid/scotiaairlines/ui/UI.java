@@ -146,7 +146,7 @@ public class UI {
         testMenuBtn.addActionListener((ActionEvent e) -> {
             saFrame.setVisible(false);
             saFrame.dispose();
-            DisplayTestMenu(); 
+            displayTestMenu(); 
         });
 
         flightAdminBtn.addActionListener((ActionEvent e) -> {
@@ -535,23 +535,23 @@ public class UI {
             tempButton.addActionListener((ActionEvent e) -> {
                 if (status.equalsIgnoreCase("Booking")) {
                     saFrame.dispose();
-                    DisplayBookingMenu(e.getActionCommand());
+                    displayBookingMenu(e.getActionCommand());
                 } else if (status.equalsIgnoreCase("DisplayFlightDetails")) {
                     saFrame.dispose();
                     Flight tempFlight = currentFlight.getValue();
                     genericPopup(tempFlight.displayFlightInfo());
                 } else if (status.equalsIgnoreCase("TestMenu")) {
                     saFrame.dispose();
-                    BookPassenger(e.getActionCommand(), e.getID(), e.paramString() );
+                    bookPassenger(e.getActionCommand(), e.getID(), e.paramString() );
                 } else if (status.equalsIgnoreCase("DisplaySeatDetails")) {
                     saFrame.dispose();
                     getSeatno(currentFlight.getValue().getFlightNumber(), 4);
                 } else if (status.equalsIgnoreCase("DisplaySeatMap")) {
                     saFrame.dispose();
-                     DisplaySeatMap(currentFlight.getValue().getFlightNumber());
+                     displaySeatMap(currentFlight.getValue().getFlightNumber());
                 } else if (status.equalsIgnoreCase("ChangeFlightStatus")) {
                     saFrame.dispose();
-                    DisplayChangeStatusMenu(e.getActionCommand());
+                    displayChangeStatusMenu(e.getActionCommand());
                 }
             });
             return tempButton;
@@ -583,7 +583,7 @@ public class UI {
     /**
      * Volatile Menu.
      */
-    public void DisplayTestMenu() {
+    public void displayTestMenu() {
         final JFrame saFrame = new JFrame();
             saFrame.setType(java.awt.Window.Type.UTILITY);
                 saFrame.setSize(390, 420);
@@ -675,7 +675,7 @@ public class UI {
      * Displays Menu for Changing Flight Status
      * @param FlightInfo
      */ 
-    public void DisplayChangeStatusMenu(final String FlightInfo) {
+    public void displayChangeStatusMenu(final String FlightInfo) {
         
         final JFrame saFrame = new JFrame();
             saFrame.setSize(300, 350);
@@ -827,7 +827,7 @@ public class UI {
      * Displays Booking Menu
      * @param FlightInfo
      */
-    public void DisplayBookingMenu(final String FlightInfo) {
+    public void displayBookingMenu(final String FlightInfo) {
         final JFrame saFrame = new JFrame();
             saFrame.setSize(300, 350);
                 saFrame.setType(java.awt.Window.Type.UTILITY);
@@ -1109,7 +1109,7 @@ public class UI {
      * @see selectFlight
      * @param flightNumber - Takes Flight number from selectFlight Panel
      */
-    public void BookPassenger(final String flightNumber, final int bookingChoice, final String seatNo){
+    public void bookPassenger(final String flightNumber, final int bookingChoice, final String seatNo){
     final JFrame saFrame = new JFrame();
     
         saFrame.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -1301,7 +1301,7 @@ public class UI {
      * Displays the seating plan for the selected flight
      * @param flightNo
      */
-    public void DisplaySeatMap(final String flightNo) {
+    public void displaySeatMap(final String flightNo) {
         String labelDisplay = "";
         String buttonDisplay = "";
         Flight currentFlight = scotiaAirline.getFlights(flightNo);
@@ -1381,7 +1381,7 @@ public class UI {
      * TODO: ADD PHP Support possible API Extension.
      * @throws IOException
      */
-    public void WGet() throws IOException {
+    public void webGet() throws IOException {
         try {
             String path = Reference.PROG_SECRET;
             URL url = new URL(path);
