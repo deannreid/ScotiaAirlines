@@ -13,7 +13,6 @@ tomcat
 *.dmg
 *.gz
 *.iso
-*.jar
 *.rar
 *.tar
 *.zip
@@ -38,8 +37,8 @@ target/
 
 # NetBeans specific
 nbproject/private/
-bin/
 build/
+bin/
 nbbuild/
 test/
 nbproject/
