@@ -34,8 +34,11 @@ public class ScotiaAirline {
      @throws IOException
      */
     public static void main(String[] args) throws SQLException, IOException, Exception {
+        if (Reference.DEBUG_MODE) {
             LogHelper.debug("Debug Mode is Enabled. Everything will show here.");
+        } else {
             LogHelper.info("Debug Mode is Disabled. Only major errors will show");
+        }
         Airline scotiaAirline = new Airline();
         scotiaAirline.loadFlightsFromDB();
         scotiaAirline.loadSeatsFromDB();

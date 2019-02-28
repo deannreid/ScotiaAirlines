@@ -1,0 +1,34 @@
+28-02-2019 01:17:48.054 | [DEBUG:] Debug Mode is Enabled. Everything will show here.
+28-02-2019 01:17:48.059 | [DEBUG:] =======================
+28-02-2019 01:17:48.059 | [DEBUG:] Connecting to SQL database: comp-hons.uhi.ac.uk/pe10004084
+28-02-2019 01:17:48.673 | [DEBUG:] [32m=======================[0m
+28-02-2019 01:17:48.673 | [DEBUG:] Loading Flight Database
+28-02-2019 01:17:48.673 | [DEBUG:] [32m=======================[0m
+28-02-2019 01:17:48.675 | [DEBUG:] [34mFlight: 'fe3' Loaded from Database[0m
+28-02-2019 01:17:48.676 | [DEBUG:] [34mFlight: 'RYR290' Loaded from Database[0m
+28-02-2019 01:17:48.676 | [DEBUG:] [34mFlight: 'RYR291' Loaded from Database[0m
+28-02-2019 01:17:48.676 | [DEBUG:] [34mFlight: 'EZY143' Loaded from Database[0m
+28-02-2019 01:17:48.676 | [DEBUG:] [34mFlight: 'BA1921' Loaded from Database[0m
+28-02-2019 01:17:48.676 | [DEBUG:] [34mFlight: 'BA1923' Loaded from Database[0m
+28-02-2019 01:17:48.677 | [DEBUG:] [34mFlight: 'efsf' Loaded from Database[0m
+28-02-2019 01:17:48.677 | [DEBUG:] [34mFlight: 'EZY142' Loaded from Database[0m
+28-02-2019 01:17:48.677 | [INFO:] Flights Imported
+28-02-2019 01:17:48.677 | [DEBUG:] [32m===================================[0m
+28-02-2019 01:17:48.677 | [DEBUG:] Loading Seat and Passenger Database
+28-02-2019 01:17:48.677 | [DEBUG:] [32m===================================[0m
+28-02-2019 01:17:49.494 | [DEBUG:] [34mPassenger: 'dean1' on flight: 'RYR291' Loaded from database[0m
+28-02-2019 01:17:49.494 | [INFO:] Passengers Imported
+28-02-2019 01:17:49.494 | [DEBUG:] [34mSeat 1b' on flight: 'RYR291' Loaded from Database[0m
+28-02-2019 01:17:49.884 | [DEBUG:] [34mPassenger: 'dwadwd' on flight: 'RYR290' Loaded from database[0m
+28-02-2019 01:17:49.884 | [INFO:] Passengers Imported
+28-02-2019 01:17:49.884 | [DEBUG:] [34mSeat 1H' on flight: 'RYR290' Loaded from Database[0m
+28-02-2019 01:17:49.885 | [INFO:] Seats Imported
+28-02-2019 01:17:49.885 | [DEBUG:] UI DEBUG:[32m Dark Mode Enabled![0m
+28-02-2019 01:17:50.269 | [DEBUG:] UI DEBUG:[32m GUI Loaded[0m
+28-02-2019 01:17:53.995 | [DEBUG:] [FlightNo:, EZY143, Depature:, LGW, Arrival:, GLA, Date:, 2019-03-01]
+28-02-2019 01:17:53.995 | [DEBUG:] couk.deanreid.scotiaairlines.core.Flight@35361a9f
+28-02-2019 01:18:10.355 | [DEBUG:] POPUP DEBUG:  | Header: Seat Booked | Message: Seat Number: '1H' Has Now Been Booked By 'Deano'
+28-02-2019 01:18:10.356 | [DEBUG:] Seat Number: '1H' Has Now Been Booked By 'Deano'
+28-02-2019 01:19:12.304 | [DEBUG:] POPUP DEBUG:  | Header: Flight Added | Message: Flight 'KL65' added to database
+28-02-2019 01:19:12.304 | [DEBUG:] [34mFLIGHT DEBUG:Flight 'KL65' added to database[0m
+28-02-2019 01:19:12.401 | [DEBUG:] POPUP DEBUG:  | Header: Flight Added | Message: Flight: 'KL65' Added Successfully
