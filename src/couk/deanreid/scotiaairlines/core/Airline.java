@@ -87,7 +87,6 @@ public class Airline {
 
                 Flight aNewFlight = new Flight(flightNo, departure, arrival, rows, columns, date);
                 addFlight(aNewFlight);
-                Flight Flight = aNewFlight;
                 LogHelper.debug(Reference.TextPaint.BLUE + "Flight: '" + flightNo + "' Loaded from Database" + Reference.TextPaint.RESET);
 
             }
@@ -170,7 +169,6 @@ public class Airline {
      so that new values can be written
      */
     public void emptyDB() {
-        UI ui = new UI(this);
         PreparedStatement preparedStatement;// = null;
         String deleteSeat = "DELETE FROM Seat";
         String deletePassenger = "DELETE FROM Passenger";

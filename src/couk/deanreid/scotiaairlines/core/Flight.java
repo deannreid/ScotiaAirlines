@@ -599,8 +599,7 @@ public class Flight {
 
         // making sure seat number falls within total number of seats on flight
         try {
-            return !(Integer.parseInt(number) > columns || number.equalsIgnoreCase("") || letter.length() != 1
-                     || lastPartIsCharacter == false);
+            return !(Integer.parseInt(number) > columns || number.equalsIgnoreCase("") || letter.length() != 1);
         } catch (NumberFormatException e) {
             return false;
         }

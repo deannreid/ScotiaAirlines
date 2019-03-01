@@ -13,19 +13,19 @@ import java.util.Scanner;
 
 public class UIConsole {
 
-    private final Airline scotiaAirlineC;
-    String menuChoice = "";
-    boolean stopMainMenu = false;
-    boolean stopSubMenu = false;
-    boolean stopSubSubMenu = false;
+    //private final String menuChoice = "";
+    //private final boolean stopMainMenu = false;
+    //private final boolean stopSubMenu = false;
+    //private final boolean stopSubSubMenu = false;
     Scanner reader;
 
     /**
      * Console UI Class Constructor
      *
      * @param scotiaAir
+     * @param scotiaAirlineC
      */
-    public UIConsole(Airline scotiaAir) {
+    public UIConsole(Airline scotiaAir, Airline scotiaAirlineC) {
         scotiaAirlineC = scotiaAir;
         reader = new Scanner(System.in);
     }

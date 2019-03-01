@@ -163,7 +163,7 @@ public class Seat {
      */
     public String displaySeatDetails() {
         String output;
-        String seatStatus = "";
+        String seatStatus;
 
         switch (currentStatus) {
             case 1:
@@ -177,6 +177,9 @@ public class Seat {
             case 3:
                 seatStatus = "Booked";
                 break;
+            default:
+                seatStatus = "";
+                break;    
         }
 
         output = "<html> Seat No: " + seatNumber + "<br /> Current Status: "

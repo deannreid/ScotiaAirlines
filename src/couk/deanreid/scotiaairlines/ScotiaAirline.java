@@ -52,7 +52,7 @@ public class ScotiaAirline {
                 LogHelper.info(Reference.TextPaint.ORANGE + "UI DEBUG: GUI Disabled - No Display Detected. Running CLI" + Reference.TextPaint.RESET);
                 LogHelper.error(Reference.TextPaint.RED + "UI DEBUG: CLI Code is Incomplete. Please run in a GUI Enviironment" + Reference.TextPaint.RESET);
                 System.out.println(Reference.TextPaint.GREEN + "===========================" + Reference.TextPaint.RESET);
-                System.exit(0);
+                Runtime.getRuntime().exit(0);
 //UIConsole uic = new UIConsole(scotiaAirline);
                 //uic.mainMenu();
             }
@@ -112,6 +112,6 @@ public class ScotiaAirline {
         } catch (AWTException | MalformedURLException ex) {
             LogHelper.fatal(ex);
         }
-        System.exit(0);
+        Runtime.getRuntime().exit(0);
     }
 }

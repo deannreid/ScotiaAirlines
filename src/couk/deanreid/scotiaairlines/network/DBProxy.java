@@ -13,8 +13,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DBProxy {
     
@@ -38,8 +36,7 @@ public class DBProxy {
     
     private Connection createConnection() throws SQLException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
         Connection connection = null;
-        Statement stmt = null;
-        try {
+            try {
             Class.forName(DRIVER_CLASS).getConstructor().newInstance();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
             LogHelper.fatal("Check classpath. Cannot load db driver: " + DRIVER_CLASS);
