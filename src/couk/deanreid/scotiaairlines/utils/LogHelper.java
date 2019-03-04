@@ -41,6 +41,6 @@ public class LogHelper {
     public static void debug(Object object) {
         if (Reference.DEBUG_MODE) {
             log(Level.DEBUG, "[DEBUG:] " + object);
-        } else {}
+        }
     }
 }

@@ -38,7 +38,7 @@ public class Flight {
     private float totalFlightTakings;
     private HashMap<String, Seat> seats;
     private String status; //0.no status, 1.checking in, 2.boarding, 3.closed
-    double seatprice;
+    private double seatprice;
 
     /**
      Return the Departure information for the selected flight

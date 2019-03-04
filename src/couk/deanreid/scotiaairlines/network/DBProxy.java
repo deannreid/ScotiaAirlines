@@ -12,11 +12,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DBProxy {
     
-    static String getConnection;
+    private static String getConnection;
     
     private static final DBProxy SQLI = new DBProxy();
 
