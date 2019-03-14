@@ -57,7 +57,7 @@ public class UI {
 
         JLabel saTitle = new JLabel();
         saTitle.setFont(new java.awt.Font("Arial", 1, 18));
-        saTitle.setIcon(new ImageIcon(getClass().getResource("/resources/icon.png")));
+        saTitle.setIcon(new ImageIcon(getClass().getResource("/icon.png")));
         saTitle.setText(Reference.PROG_NAME + " Booking System");
 
         JPanel saPanel = new JPanel();
@@ -203,7 +203,7 @@ public class UI {
             }
         });
 
-        JLabel saTitle = new JLabel(new ImageIcon(getClass().getResource("/resources/adminmenu.png")), SwingConstants.CENTER);
+        JLabel saTitle = new JLabel(new ImageIcon(getClass().getResource("/adminmenu.png")), SwingConstants.CENTER);
         saTitle.setBounds(0, 0, 278, 85);
         saFrame.add(saTitle);
 
@@ -287,7 +287,7 @@ public class UI {
             }
         });
         //Set image title                  
-        JLabel saTitle = new JLabel(new ImageIcon(getClass().getResource("/resources/adminmenu.png")), SwingConstants.CENTER);
+        JLabel saTitle = new JLabel(new ImageIcon(getClass().getResource("/adminmenu.png")), SwingConstants.CENTER);
         saTitle.setBounds(0, 0, 278, 85);
         saFrame.add(saTitle);
 
@@ -434,7 +434,7 @@ public class UI {
             }
         });
 
-        JLabel title = new JLabel(new ImageIcon(getClass().getResource("/resources/adminmenu.png")));
+        JLabel title = new JLabel(new ImageIcon(getClass().getResource("/adminmenu.png")));
         title.setBounds(80, -10, 259, 100);
         saFrame.add(title);
 
@@ -516,7 +516,7 @@ public class UI {
             }
         });
 
-        JLabel title = new JLabel(new ImageIcon(getClass().getResource("/resources/tbselectflight.png")));
+        JLabel title = new JLabel(new ImageIcon(getClass().getResource("/tbselectflight.png")));
         title.setBounds(150, -10, 259, 100);
         saFrame.add(title);
 
@@ -594,7 +594,7 @@ public class UI {
         saFrame.setTitle(Reference.PROG_NAME + " Developer Menu | Version: " + Reference.VERSION_NUMBER);
 
         JLabel saLabel = new JLabel();
-        saLabel.setIcon(new ImageIcon(getClass().getResource("/resources/testmenu.png")));
+        saLabel.setIcon(new ImageIcon(getClass().getResource("/testmenu.png")));
         saLabel.setBounds(50, 0, 278, 85);
         saFrame.getContentPane().add(saLabel);
 
@@ -1137,7 +1137,7 @@ public class UI {
         saFrame.setLayout(null);
 
         //Set image title                  
-        JLabel saTitle = new JLabel(new ImageIcon(getClass().getResource("/resources/testmenu.png")), SwingConstants.CENTER);
+        JLabel saTitle = new JLabel(new ImageIcon(getClass().getResource("/testmenu.png")), SwingConstants.CENTER);
         saTitle.setBounds(70, 10, 278, 85);
         saFrame.add(saTitle);
 
@@ -1326,24 +1326,24 @@ public class UI {
         });
         saFrame.getContentPane().setLayout(null);
         JLabel sfTitle = new JLabel();
-        sfTitle.setIcon(new ImageIcon(getClass().getResource("/resources/mainmenu.png")));
+        sfTitle.setIcon(new ImageIcon(getClass().getResource("/mainmenu.png")));
         saFrame.add(sfTitle);
         sfTitle.setBounds(180, 0, 370, 100);
 
         JLabel imgFree = new JLabel();
-        imgFree.setIcon(new ImageIcon(getClass().getResource("/resources/seatFree.png")));
+        imgFree.setIcon(new ImageIcon(getClass().getResource("/seatFree.png")));
         imgFree.setText("Free");
         saFrame.add(imgFree);
         imgFree.setBounds(180, 630, 76, 50);
 
         JLabel imgReserved = new JLabel();
-        imgReserved.setIcon(new ImageIcon(getClass().getResource("/resources/seatReserved.png")));
+        imgReserved.setIcon(new ImageIcon(getClass().getResource("/seatReserved.png")));
         imgReserved.setText("Reserved");
         saFrame.add(imgReserved);
         imgReserved.setBounds(280, 630, 96, 50);
 
         JLabel imgBooked = new JLabel();
-        imgBooked.setIcon(new ImageIcon(getClass().getResource("/resources/seatBooked.png")));
+        imgBooked.setIcon(new ImageIcon(getClass().getResource("/seatBooked.png")));
         imgBooked.setText("Booked");
         saFrame.add(imgBooked);
         imgBooked.setBounds(400, 630, 76, 50);
