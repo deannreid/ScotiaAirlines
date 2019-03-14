@@ -1,9 +1,0 @@
-<#if licenseFirst??>
-${licenseFirst}
-</#if>
-${licensePrefix}Scotia Airlines - HND Computer Science
-${licensePrefix}Version 2.9 Release
-${licensePrefix}@Author: Dean D. Reid${licensePrefix}
-<#if licenseLast??>
-${licenseLast}
-</#if>
