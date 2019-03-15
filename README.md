@@ -6,4 +6,5 @@
  <br>Author: Dean D. Reid
 <br>
 <br>
+<h3>Test Logs in /Documentation directory</h3>
 Java Documentation: https://deannreid.github.io/ScotiaAirlines/
