@@ -43,4 +43,32 @@
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
+        <action>
+            <actionName>build-with-dependencies</actionName>
+            <reactor>also-make</reactor>
+            <packagings>
+                <packaging>*</packaging>
+            </packagings>
+            <goals>
+                <goal>install</goal>
+            </goals>
+            <properties>
+                <exec.args>-classpath %classpath couk.deanreid.scotiaairlines.ScotiaAirline</exec.args>
+                <exec.executable>java</exec.executable>
+            </properties>
+        </action>
+        <action>
+            <actionName>rebuild</actionName>
+            <packagings>
+                <packaging>*</packaging>
+            </packagings>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+            </goals>
+            <properties>
+                <exec.args>-classpath %classpath couk.deanreid.scotiaairlines.ScotiaAirline</exec.args>
+                <exec.executable>java</exec.executable>
+            </properties>
+        </action>
     </actions>
