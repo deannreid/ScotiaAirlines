@@ -410,7 +410,7 @@ public class Flight {
             case 1:
                 freeSeats += 1;
                 reservedSeats -= 1;
-                if (boarding == false && closed == false) {
+                if (!boarding && !closed) {
                     statusMessage = "Seats Available";
                     isFull = false;
                 }
@@ -419,7 +419,7 @@ public class Flight {
             case 2:
                 freeSeats += 1;
                 bookedSeats = (bookedSeats - 1);
-                if (boarding == false && closed == false) {
+                if (!boarding && !closed) {
                     statusMessage = "Seats Available";
                     isFull = false;
                 }
@@ -461,7 +461,7 @@ public class Flight {
     @SuppressWarnings("CallToPrintStackTrace")
     public void addFlightToDB() throws AWTException, MalformedURLException, ParseException {
         boolean shouldLeaveLoop = false;
-        if (shouldLeaveLoop == false) {
+        if (!shouldLeaveLoop) {
             try {
                 Connection connection = DBProxy.getConnection();
                 Statement stmt = connection.createStatement();
