@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class LogHelper {
 
-    final static Logger logHelper = LogManager.getLogger();
+    public final static Logger logHelper = LogManager.getLogger();
 
     public static void log(Level logLevel, Object object) {
         logHelper.log(logLevel, String.valueOf(object));
@@ -41,6 +41,6 @@ public class LogHelper {
     public static void debug(Object object) {
         if (Reference.DEBUG_MODE) {
             log(Level.DEBUG, "[DEBUG:] " + object);
-        } else {}
+        }
     }
 }

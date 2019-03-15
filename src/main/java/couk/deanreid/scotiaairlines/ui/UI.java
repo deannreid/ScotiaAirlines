@@ -720,7 +720,7 @@ public class UI {
                 closed = false;
                 checkingIn = false;
 
-                if (chosenFlight.isFull() == false) {
+                if (!chosenFlight.isFull()) {
                     chosenFlight.setBoarding(boarding);
                     chosenFlight.setCheckingIn(closed);
                     chosenFlight.setClosed(checkingIn);
@@ -878,7 +878,7 @@ public class UI {
             boolean boarding = chosenFlight.isBoarding();
             boolean closed = chosenFlight.isClosed();
 
-            if (boarding == true || closed == true) {
+            if (boarding || closed) {
                 try {
                     NotificationHandler.notify("Flight Error", "Cancellations not available " + chosenFlight.getStatusMessage());
                 } catch (AWTException | MalformedURLException ex) {
@@ -901,7 +901,7 @@ public class UI {
             boolean full = chosenFlight.isFull();
             boolean checkingIn = chosenFlight.isCheckingIn();
 
-            if (boarding == true || closed == true || full == true || checkingIn == true) {
+            if (boarding || closed || full || checkingIn) {
                 try {
                     NotificationHandler.notify("Flight Error", "Reservations not available " + chosenFlight.getStatusMessage());
                 } catch (AWTException | MalformedURLException ex) {
@@ -925,7 +925,7 @@ public class UI {
             boolean closed = chosenFlight.isClosed();
             boolean full = chosenFlight.isFull();
 
-            if (boarding == true || closed == true || full == true) {
+            if (boarding || closed || full) {
 
                 try {
                     NotificationHandler.notify("Flight Error", "Bookings not available " + chosenFlight.getStatusMessage());
