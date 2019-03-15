@@ -1,61 +1,35 @@
-14-03-2019 15:31:10.890 | [DEBUG:] Debug Mode is Enabled. Everything will show here.
-14-03-2019 15:31:10.890 | [DEBUG:] =======================
-14-03-2019 15:31:10.906 | [DEBUG:] Connecting to SQL database: comp-hons.uhi.ac.uk/pe10004084
-14-03-2019 15:31:11.125 | [DEBUG:] [32m=======================[0m
-14-03-2019 15:31:11.125 | [DEBUG:] Loading Flight Database
-14-03-2019 15:31:11.125 | [DEBUG:] [32m=======================[0m
-14-03-2019 15:31:11.125 | [DEBUG:] [34mFlight: 'KL65' Loaded from Database[0m
-14-03-2019 15:31:11.125 | [DEBUG:] [34mFlight: 'fe3' Loaded from Database[0m
-14-03-2019 15:31:11.125 | [DEBUG:] [34mFlight: 'RYR290' Loaded from Database[0m
-14-03-2019 15:31:11.125 | [DEBUG:] [34mFlight: 'RYR291' Loaded from Database[0m
-14-03-2019 15:31:11.125 | [DEBUG:] [34mFlight: 'EZY143' Loaded from Database[0m
-14-03-2019 15:31:11.125 | [DEBUG:] [34mFlight: 'BA1921' Loaded from Database[0m
-14-03-2019 15:31:11.125 | [DEBUG:] [34mFlight: 'BA1923' Loaded from Database[0m
-14-03-2019 15:31:11.125 | [DEBUG:] [34mFlight: 'efsf' Loaded from Database[0m
-14-03-2019 15:31:11.125 | [DEBUG:] [34mFlight: 'EZY142' Loaded from Database[0m
-14-03-2019 15:31:11.125 | [DEBUG:] [34mFlight: 'BA90' Loaded from Database[0m
-14-03-2019 15:31:11.125 | [INFO:] Flights Imported
-14-03-2019 15:31:11.125 | [DEBUG:] [32m===================================[0m
-14-03-2019 15:31:11.125 | [DEBUG:] Loading Seat and Passenger Database
-14-03-2019 15:31:11.125 | [DEBUG:] [32m===================================[0m
-14-03-2019 15:31:11.250 | [DEBUG:] [34mPassenger: 'wad' on flight: 'RYR291' Loaded from database[0m
-14-03-2019 15:31:11.250 | [INFO:] Passengers Imported
-14-03-2019 15:31:11.250 | [DEBUG:] [34mSeat 1a' on flight: 'RYR291' Loaded from Database[0m
-14-03-2019 15:31:11.318 | [INFO:] Passengers Imported
-14-03-2019 15:31:11.319 | [DEBUG:] [34mSeat 1b' on flight: 'RYR291' Loaded from Database[0m
-14-03-2019 15:31:11.362 | [DEBUG:] [34mPassenger: 'awd' on flight: 'RYR291' Loaded from database[0m
-14-03-2019 15:31:11.362 | [INFO:] Passengers Imported
-14-03-2019 15:31:11.362 | [DEBUG:] [34mSeat 2s' on flight: 'RYR291' Loaded from Database[0m
-14-03-2019 15:31:11.409 | [DEBUG:] [34mPassenger: 'deab' on flight: 'RYR290' Loaded from database[0m
-14-03-2019 15:31:11.409 | [INFO:] Passengers Imported
-14-03-2019 15:31:11.409 | [DEBUG:] [34mSeat 1F' on flight: 'RYR290' Loaded from Database[0m
-14-03-2019 15:31:11.409 | [INFO:] Seats Imported
-14-03-2019 15:31:11.409 | [DEBUG:] UI DEBUG:[32m Dark Mode Enabled![0m
-14-03-2019 15:31:11.597 | [DEBUG:] UI DEBUG:[32m GUI Loaded[0m
-14-03-2019 15:31:20.158 | [WARN:] [34mDATABASE DEBUG: Cleaning DB[0m
-14-03-2019 15:31:20.220 | [WARN:] [34mSEAT DEBUG: Seat Tables Emptied[0m
-14-03-2019 15:31:20.267 | [WARN:] [34mPASSENGER DEBUG: Passengers Emptied[0m
-14-03-2019 15:31:20.267 | [DEBUG:] SEAT DEBUG: Connecting and Preparing Statement
-14-03-2019 15:31:20.299 | [DEBUG:] SEAT DEBUG: Execute Statement: com.mysql.cj.jdbc.StatementImpl@1d0a705
-14-03-2019 15:31:20.299 | [DEBUG:] 1
-14-03-2019 15:31:20.299 | [DEBUG:] SEAT DEBUG: Connecting and Preparing Statement
-14-03-2019 15:31:20.345 | [DEBUG:] SEAT DEBUG: Execute Statement: com.mysql.cj.jdbc.StatementImpl@ac35a4
-14-03-2019 15:31:20.345 | [DEBUG:] 1
-14-03-2019 15:31:20.345 | [DEBUG:] SEAT DEBUG: Connecting and Preparing Statement
-14-03-2019 15:31:20.392 | [DEBUG:] SEAT DEBUG: Execute Statement: com.mysql.cj.jdbc.StatementImpl@1e2b864
-14-03-2019 15:31:20.408 | [DEBUG:] 1
-14-03-2019 15:31:20.408 | [DEBUG:] SEAT DEBUG: Connecting and Preparing Statement
-14-03-2019 15:31:20.439 | [DEBUG:] SEAT DEBUG: Execute Statement: com.mysql.cj.jdbc.StatementImpl@1dca80d
-14-03-2019 15:31:20.455 | [DEBUG:] 1
-14-03-2019 15:31:20.455 | [DEBUG:] SEAT DEBUG: Connecting and Preparing Statement
-14-03-2019 15:31:20.486 | [DEBUG:] PASSENGER DEBUG: Execute Statement: com.mysql.cj.jdbc.StatementImpl@32586a
-14-03-2019 15:31:20.486 | [DEBUG:] PASSENGER DEBUG:[34mPassenger Saved: wad[0m
-14-03-2019 15:31:20.486 | [INFO:] [34mPassenger Saved: wad[0m
-14-03-2019 15:31:20.486 | [DEBUG:] SEAT DEBUG: Connecting and Preparing Statement
-14-03-2019 15:31:20.533 | [DEBUG:] PASSENGER DEBUG: Execute Statement: com.mysql.cj.jdbc.StatementImpl@1ee6d20
-14-03-2019 15:31:20.533 | [DEBUG:] PASSENGER DEBUG:[34mPassenger Saved: awd[0m
-14-03-2019 15:31:20.533 | [INFO:] [34mPassenger Saved: awd[0m
-14-03-2019 15:31:20.533 | [DEBUG:] SEAT DEBUG: Connecting and Preparing Statement
-14-03-2019 15:31:20.580 | [DEBUG:] PASSENGER DEBUG: Execute Statement: com.mysql.cj.jdbc.StatementImpl@ef3b7b
-14-03-2019 15:31:20.580 | [DEBUG:] PASSENGER DEBUG:[34mPassenger Saved: deab[0m
-14-03-2019 15:31:20.580 | [INFO:] [34mPassenger Saved: deab[0m
+15-03-2019 12:45:21.624 | [DEBUG:] Debug Mode is Enabled. Everything will show here.
+15-03-2019 12:45:21.646 | [DEBUG:] =======================
+15-03-2019 12:45:21.646 | [DEBUG:] Connecting to SQL database: comp-hons.uhi.ac.uk/pe10004084
+15-03-2019 12:45:21.893 | [DEBUG:] [32m=======================[0m
+15-03-2019 12:45:21.893 | [DEBUG:] Loading Flight Database
+15-03-2019 12:45:21.893 | [DEBUG:] [32m=======================[0m
+15-03-2019 12:45:21.896 | [DEBUG:] [34mFlight: 'KL65' Loaded from Database[0m
+15-03-2019 12:45:21.897 | [DEBUG:] [34mFlight: 'fe3' Loaded from Database[0m
+15-03-2019 12:45:21.897 | [DEBUG:] [34mFlight: 'RYR290' Loaded from Database[0m
+15-03-2019 12:45:21.897 | [DEBUG:] [34mFlight: 'RYR291' Loaded from Database[0m
+15-03-2019 12:45:21.897 | [DEBUG:] [34mFlight: 'EZY143' Loaded from Database[0m
+15-03-2019 12:45:21.898 | [DEBUG:] [34mFlight: 'BA1921' Loaded from Database[0m
+15-03-2019 12:45:21.898 | [DEBUG:] [34mFlight: 'BA1923' Loaded from Database[0m
+15-03-2019 12:45:21.898 | [DEBUG:] [34mFlight: 'efsf' Loaded from Database[0m
+15-03-2019 12:45:21.898 | [DEBUG:] [34mFlight: 'EZY142' Loaded from Database[0m
+15-03-2019 12:45:21.899 | [DEBUG:] [34mFlight: 'BA90' Loaded from Database[0m
+15-03-2019 12:45:21.899 | [INFO:] Flights Imported
+15-03-2019 12:45:21.899 | [DEBUG:] [32m===================================[0m
+15-03-2019 12:45:21.899 | [DEBUG:] Loading Seat and Passenger Database
+15-03-2019 12:45:21.899 | [DEBUG:] [32m===================================[0m
+15-03-2019 12:45:21.999 | [DEBUG:] [34mPassenger: 'wad' on flight: 'RYR291' Loaded from database[0m
+15-03-2019 12:45:21.999 | [INFO:] Passengers Imported
+15-03-2019 12:45:21.999 | [DEBUG:] [34mSeat 1a' on flight: 'RYR291' Loaded from Database[0m
+15-03-2019 12:45:22.045 | [INFO:] Passengers Imported
+15-03-2019 12:45:22.045 | [DEBUG:] [34mSeat 1b' on flight: 'RYR291' Loaded from Database[0m
+15-03-2019 12:45:22.092 | [DEBUG:] [34mPassenger: 'awd' on flight: 'RYR291' Loaded from database[0m
+15-03-2019 12:45:22.093 | [INFO:] Passengers Imported
+15-03-2019 12:45:22.093 | [DEBUG:] [34mSeat 2s' on flight: 'RYR291' Loaded from Database[0m
+15-03-2019 12:45:22.137 | [DEBUG:] [34mPassenger: 'deab' on flight: 'RYR290' Loaded from database[0m
+15-03-2019 12:45:22.138 | [INFO:] Passengers Imported
+15-03-2019 12:45:22.138 | [DEBUG:] [34mSeat 1F' on flight: 'RYR290' Loaded from Database[0m
+15-03-2019 12:45:22.138 | [INFO:] Seats Imported
+15-03-2019 12:45:22.138 | [DEBUG:] UI DEBUG:[32m Dark Mode Enabled![0m
+15-03-2019 12:45:22.378 | [DEBUG:] UI DEBUG:[32m GUI Loaded[0m
+15-03-2019 12:45:24.070 | [DEBUG:] POPUP DEBUG:  | Header: Program Exit | Message: Adding changes to the database!
