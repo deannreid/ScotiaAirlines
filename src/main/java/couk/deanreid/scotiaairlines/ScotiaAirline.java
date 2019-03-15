@@ -25,12 +25,12 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class ScotiaAirline {
 
     /**
-     Main Class Startup
-
-     @param args
-
-     @throws SQLException
-     @throws IOException
+     * Main Class Startup
+     *
+     * @param args
+     *
+     * @throws SQLException
+     * @throws IOException
      */
     public static void main(String[] args) throws SQLException, IOException, Exception {
         if (Reference.DEBUG_MODE) {
@@ -44,18 +44,18 @@ public class ScotiaAirline {
 
 //If program is on server environment, load CLI else load GUI unless forced by code using debug
         //Allow forcing cli and to check if GUI is possible
-        if (Reference.FORCE_CLI) {
+        //if (Reference.FORCE_CLI) {
+        System.out.println(Reference.TextPaint.GREEN + "===========================" + Reference.TextPaint.RESET);
+        LogHelper.warn(Reference.TextPaint.ORANGE + "UI DEBUG: CLI Forced On" + Reference.TextPaint.RESET);
+        //Check if GUI is possible
+        if (GraphicsEnvironment.isHeadless()) {
+            LogHelper.info(Reference.TextPaint.ORANGE + "UI DEBUG: GUI Disabled - No Display Detected. Running CLI" + Reference.TextPaint.RESET);
+            LogHelper.error(Reference.TextPaint.RED + "UI DEBUG: CLI Code is Incomplete. Please run in a GUI Enviironment" + Reference.TextPaint.RESET);
             System.out.println(Reference.TextPaint.GREEN + "===========================" + Reference.TextPaint.RESET);
-            LogHelper.warn(Reference.TextPaint.ORANGE + "UI DEBUG: CLI Forced On" + Reference.TextPaint.RESET);
-            //Check if GUI is possible
-            if (!GraphicsEnvironment.isHeadless()) {
-                LogHelper.info(Reference.TextPaint.ORANGE + "UI DEBUG: GUI Disabled - No Display Detected. Running CLI" + Reference.TextPaint.RESET);
-                LogHelper.error(Reference.TextPaint.RED + "UI DEBUG: CLI Code is Incomplete. Please run in a GUI Enviironment" + Reference.TextPaint.RESET);
-                System.out.println(Reference.TextPaint.GREEN + "===========================" + Reference.TextPaint.RESET);
-                Runtime.getRuntime().exit(0);
+            Runtime.getRuntime().exit(0);
 //UIConsole uic = new UIConsole(scotiaAirline);
-                //uic.mainMenu();
-            }
+            //uic.mainMenu();
+            //  }
         } else {
             if (Reference.DARK_MODE) {
                 LogHelper.debug("UI DEBUG:" + Reference.TextPaint.GREEN + " Dark Mode Enabled!" + Reference.TextPaint.RESET);
@@ -92,9 +92,9 @@ public class ScotiaAirline {
     }
 
     /**
-     If user closes program via X then this will ensure current data is saved.
-
-     @param evt
+     * If user closes program via X then this will ensure current data is saved.
+     *
+     * @param evt
      */
     public static void windowClosing(WindowEvent evt) {
         try {
