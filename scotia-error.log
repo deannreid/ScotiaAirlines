@@ -39,9 +39,8 @@
 15-03-2019 13:29:23.838 | [WARN:] [34mPASSENGER DEBUG: Passengers Emptied[0m
 15-03-2019 13:29:23.838 | [DEBUG:] SEAT DEBUG: Connecting and Preparing Statement
 15-03-2019 13:29:23.870 | [DEBUG:] SEAT DEBUG: Execute Statement: com.mysql.cj.jdbc.StatementImpl@1fcf7b5
-15-03-2019 13:29:23.885 | [DEBUG:] 1
-15-03-2019 13:29:23.885 | [DEBUG:] SEAT DEBUG: Connecting and Preparing Statement
-15-03-2019 13:29:23.917 | [DEBUG:] SEAT DEBUG: Execute Statement: com.mysql.cj.jdbc.StatementImpl@84d677
+15-03-2019 13:29:23.885 | 15-03-2019 13:50:29.439 | [DEBUG:] POPUP DEBUG:  | Header: Program Exit | Message: Adding changes to the database!
+17 | [DEBUG:] SEAT DEBUG: Execute Statement: com.mysql.cj.jdbc.StatementImpl@84d677
 15-03-2019 13:29:23.917 | [DEBUG:] 1
 15-03-2019 13:29:23.917 | [DEBUG:] SEAT DEBUG: Connecting and Preparing Statement
 15-03-2019 13:29:23.963 | [DEBUG:] SEAT DEBUG: Execute Statement: com.mysql.cj.jdbc.StatementImpl@12f4368

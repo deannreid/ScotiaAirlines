@@ -45,7 +45,7 @@ public class Reference {
      Program Version and Build Number
      */
     public final String version = this.getClass().getPackage().getImplementationVersion();
-    public static final String VERSION_NUMBER = "3.0 FINAL (build 67)";
+    public static final String VERSION_NUMBER = "3.0 FINAL (build 68)";
 
     /**
      Not a very secret Secret...
