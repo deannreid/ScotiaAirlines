@@ -1279,11 +1279,6 @@ public class UI {
             } else if (btnOrdinaryPassenger.isEnabled()) {
                 saFrame.dispose();
                 saFrame.setVisible(false);
-                boolean yes = true;
-                boolean no = false;
-
-                String n = String.valueOf(false);
-
                 String promo = btnOrdinaryPromotion.toString();
                 PassengerOrdinary newPassenger = new PassengerOrdinary(passengerName, promo.charAt(0));
                 Flight currentFlight = scotiaAirline.getFlights(flightNumber);

@@ -7,7 +7,6 @@
 package couk.deanreid.scotiaairlines.core;
 
 import couk.deanreid.scotiaairlines.network.DBProxy;
-import couk.deanreid.scotiaairlines.ui.UI;
 import couk.deanreid.scotiaairlines.utils.LogHelper;
 import couk.deanreid.scotiaairlines.utils.Reference;
 import java.sql.*;
