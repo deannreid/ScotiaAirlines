@@ -12,39 +12,33 @@ import java.io.IOException;
 import java.util.Properties;
 
 public final class ConfigurationHandler {
-
-    public static void main(String[] args) {
-
-        Properties prop = new Properties();
+    public static void main (String[] args) {
+        Properties prop = new Properties ();
         FileOutputStream fos = null;
-
         try {
-
             // create new file in or open existing file from the project's root folder
-            fos = new FileOutputStream(Reference.CONFIG_FILE_NAME);
-            
+            fos = new FileOutputStream (Reference.CONFIG_FILE_NAME);
             // set properties
-            prop.put("DEBUG_MODE", "true");
-            prop.put("DARK_MODE", "true");           
-            
-            
-            prop.put("DB_URL", "comp-hons.uhi.ac.uk");
-            prop.put("DB_TABLE", "p10004084");
-            prop.put("DB_USER", "p10004084");
-            prop.put("DB_PASSWORD", "deanreid");
+            prop.put ("DEBUG_MODE", "true");
+            prop.put ("DARK_MODE", "true");
+            prop.put ("DB_URL", "comp-hons.uhi.ac.uk");
+            prop.put ("DB_TABLE", "p10004084");
+            prop.put ("DB_USER", "p10004084");
+            prop.put ("DB_PASSWORD", "deanreid");
             // store properties to the opened file
-            prop.store(fos, "Comments");
-
+            prop.store (fos, "Comments");
         } catch (IOException io) {
-            io.printStackTrace();
+            io.printStackTrace ();
         } finally {
             try {
-                if (fos != null) {
-                    fos.close();
+                if (fos
+                        != null) {
+                    fos.close ();
                 }
             } catch (IOException ex) {
-                ex.printStackTrace();
+                ex.printStackTrace ();
             }
         }
     }
+
 }

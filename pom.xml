@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>couk.deanreid</groupId>
     <artifactId>scotiaairlines</artifactId>
-    <version>3.0.0-FINAL</version>
+    <version>3.0.74-FINAL</version>
     <name>Scotia Airlines</name>
     <description>Booking System for Scotia Airlines
     </description>

@@ -43,19 +43,15 @@ public class ScotiaAirline {
         scotiaAirline.loadSeatsFromDB();
 
 //If program is on server environment, load CLI else load GUI unless forced by code using debug
-        //Allow forcing cli and to check if GUI is possible
-        //if (Reference.FORCE_CLI) {
         System.out.println(Reference.TextPaint.GREEN + "===========================" + Reference.TextPaint.RESET);
-        LogHelper.warn(Reference.TextPaint.ORANGE + "UI DEBUG: CLI Forced On" + Reference.TextPaint.RESET);
         //Check if GUI is possible
         if (GraphicsEnvironment.isHeadless()) {
-            LogHelper.info(Reference.TextPaint.ORANGE + "UI DEBUG: GUI Disabled - No Display Detected. Running CLI" + Reference.TextPaint.RESET);
+            LogHelper.info(Reference.TextPaint.ORANGE + "UI DEBUG: GUI Disabled - No Display Detected or running in a build environment. Running CLI" + Reference.TextPaint.RESET);
             LogHelper.error(Reference.TextPaint.RED + "UI DEBUG: CLI Code is Incomplete. Please run in a GUI Enviironment" + Reference.TextPaint.RESET);
             System.out.println(Reference.TextPaint.GREEN + "===========================" + Reference.TextPaint.RESET);
             Runtime.getRuntime().exit(0);
 //UIConsole uic = new UIConsole(scotiaAirline);
             //uic.mainMenu();
-            //  }
         } else {
             if (Reference.DARK_MODE) {
                 LogHelper.debug("UI DEBUG:" + Reference.TextPaint.GREEN + " Dark Mode Enabled!" + Reference.TextPaint.RESET);
