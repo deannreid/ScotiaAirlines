@@ -17,7 +17,7 @@ public class DBProxy {
     static String getConnection;
     private static final DBProxy SQLI = new DBProxy ();
     //Load Driver
-    public static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
+    public static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
 
     private DBProxy () {
         try {
