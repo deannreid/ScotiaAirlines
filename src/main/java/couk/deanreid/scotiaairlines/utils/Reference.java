@@ -54,7 +54,7 @@ public class Reference {
     /**
      * Table Name for Data
      */
-    public static final String DB_TABLE = "xenohost_scotiaairline";
+    public static final String DB_TABLE = "scotiaairline";
     /**
      * This just combines the Host and Table for college database
      */
