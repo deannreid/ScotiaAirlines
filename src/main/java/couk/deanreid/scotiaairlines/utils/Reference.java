@@ -15,7 +15,7 @@ public class Reference {
     /**
      * Enable Debug Mode All The Lines...
      */
-    public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_MODE = true;
     /**
      * Enable Dark Mode - Everyone has one of these nowadays - I Like it. The
      * Dark Side of the Force.
@@ -25,7 +25,7 @@ public class Reference {
      * Force the CLI - for Testing purposes
      * CLI is Broken.
      */
-    public static final boolean FORCE_CLI = true;
+    public static final boolean FORCE_CLI = false;
     /**
      * Set Configuration Filename.
      *
@@ -34,50 +34,41 @@ public class Reference {
     /**
      * Program Name
      */
-    public static final String PROG_NAME = "Bawbag Airlines (Formerly Scotia Airlines)";
+    public static final String PROG_NAME = "Scotia Airlines";
     /**
      * Program Version and Build Number
      */
     public final String version = this.getClass ().
             getPackage ().
             getImplementationVersion ();
-    public static final String VERSION_NUMBER = "3.0 FINAL (build 86)";
+    public static final String VERSION_NUMBER = "3.0 FINAL (build 74)";
     /**
      * Not a very secret Secret...
      */
-    public static final String PROG_SECRET = "http://xenohost.co.uk/deansfiles/OOPS/Seating/";
+    public static final String PROG_SECRET = "http://xenohost.co.uk/deancollege/images/img/15.jpg";
 //Database Related Constants    
     /**
      * Database URL
      */
-    public static final String DB_URL = "#########";
-    
-    /**
-     * Database Port
-     * @default: 3306
-     */
-    public static final String DB_PORT = "3306";
-    
+    public static final String DB_URL = "94.23.204.120";
     /**
      * Table Name for Data
      */
-    public static final String DB_TABLE = "###########";
- 
-    /**
-     * Database User
-     */
-    public static final String DB_USER = "###########";
-    /**
-     * Database Password
-     */
-    public static final String DB_PASSWORD = "##############";
-    
+    public static final String DB_TABLE = "scotiaairline";
     /**
      * This just combines the Host and Table for college database
      */
-    public static final String DB_FULLURL = DB_URL + ":" + DB_PORT + "/" + DB_TABLE;
-    
-
+    public static final String DB_FULLURL = DB_URL
+            + "/"
+            + DB_TABLE;
+    /**
+     * Database User
+     */
+    public static final String DB_USER = "xenohost_scotiaa";
+    /**
+     * Database Password
+     */
+    public static final String DB_PASSWORD = "jU[gUAMD+9C_";
 
     /**
      * List of Colours to Choose

@@ -39,8 +39,8 @@ public class ScotiaAirline {
             LogHelper.info("Debug Mode is Disabled. Only major errors will show");
         }
         Airline scotiaAirline = new Airline();
-        scotiaAirline.loadFlightsFromDB();
-        scotiaAirline.loadSeatsFromDB();
+      //  scotiaAirline.loadFlightsFromDB();
+      //  scotiaAirline.loadSeatsFromDB();
 
 //If program is on server environment, load CLI else load GUI unless forced by code using debug
         System.out.println(Reference.TextPaint.GREEN + "===========================" + Reference.TextPaint.RESET);
