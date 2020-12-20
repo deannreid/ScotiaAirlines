@@ -15,7 +15,7 @@ public class Reference {
     /**
      * Enable Debug Mode All The Lines...
      */
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
     /**
      * Enable Dark Mode - Everyone has one of these nowadays - I Like it. The
      * Dark Side of the Force.
@@ -25,7 +25,7 @@ public class Reference {
      * Force the CLI - for Testing purposes
      * CLI is Broken.
      */
-    public static final boolean FORCE_CLI = false;
+    public static final boolean FORCE_CLI = true;
     /**
      * Set Configuration Filename.
      *
@@ -34,41 +34,50 @@ public class Reference {
     /**
      * Program Name
      */
-    public static final String PROG_NAME = "Scotia Airlines";
+    public static final String PROG_NAME = "Bawbag Airlines (Formerly Scotia Airlines)";
     /**
      * Program Version and Build Number
      */
     public final String version = this.getClass ().
             getPackage ().
             getImplementationVersion ();
-    public static final String VERSION_NUMBER = "3.0 FINAL (build 74)";
+    public static final String VERSION_NUMBER = "3.0 FINAL (build 86)";
     /**
      * Not a very secret Secret...
      */
-    public static final String PROG_SECRET = "http://xenohost.co.uk/deancollege/images/img/15.jpg";
+    public static final String PROG_SECRET = "http://xenohost.co.uk/deansfiles/OOPS/Seating/";
 //Database Related Constants    
     /**
      * Database URL
      */
-    public static final String DB_URL = "comp-hons.uhi.ac.uk";
+    public static final String DB_URL = "#########";
+    
+    /**
+     * Database Port
+     * @default: 3306
+     */
+    public static final String DB_PORT = "3306";
+    
     /**
      * Table Name for Data
      */
-    public static final String DB_TABLE = "pe10004084";
-    /**
-     * This just combines the Host and Table for college database
-     */
-    public static final String DB_FULLURL = DB_URL
-            + "/"
-            + DB_TABLE;
+    public static final String DB_TABLE = "###########";
+ 
     /**
      * Database User
      */
-    public static final String DB_USER = "pe10004084";
+    public static final String DB_USER = "###########";
     /**
      * Database Password
      */
-    public static final String DB_PASSWORD = "deanreid";
+    public static final String DB_PASSWORD = "##############";
+    
+    /**
+     * This just combines the Host and Table for college database
+     */
+    public static final String DB_FULLURL = DB_URL + ":" + DB_PORT + "/" + DB_TABLE;
+    
+
 
     /**
      * List of Colours to Choose

@@ -41,12 +41,11 @@ public class NotificationHandler {
      * @throws AWTException
      * @throws MalformedURLException
      */
-    public void displayTray (String inputHeader, String inputMessage) throws AWTException, MalformedURLException {
+    public void displayTray (String inputHeader, String inputMessage) throws AWTException, NullPointerException, MalformedURLException {
         //Obtain only one instance of the SystemTray object
         SystemTray Notify = SystemTray.getSystemTray ();
-        Image image = Toolkit.getDefaultToolkit ().
-                createImage (getClass ().
-                        getResource ("/icon.png"));
+        System.out.println(this.getClass().getResource("/aviva.png"));
+        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource(""));
         TrayIcon trayIcon = new TrayIcon (image, Reference.PROG_NAME
                 + " Information System");
         trayIcon.setImageAutoSize (true);

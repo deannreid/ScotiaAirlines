@@ -21,10 +21,10 @@ public final class ConfigurationHandler {
             // set properties
             prop.put ("DEBUG_MODE", "true");
             prop.put ("DARK_MODE", "true");
-            prop.put ("DB_URL", "comp-hons.uhi.ac.uk");
-            prop.put ("DB_TABLE", "p10004084");
-            prop.put ("DB_USER", "p10004084");
-            prop.put ("DB_PASSWORD", "deanreid");
+            prop.put ("DB_URL", "########");
+            prop.put ("DB_TABLE", "##########");
+            prop.put ("DB_USER", "###########");
+            prop.put ("DB_PASSWORD", "#########");
             // store properties to the opened file
             prop.store (fos, "Comments");
         } catch (IOException io) {

@@ -15,6 +15,7 @@ import java.sql.SQLException;
 
 public class DBProxy {
     static String getConnection;
+    Connection connection = null;
     private static final DBProxy SQLI = new DBProxy ();
     //Load Driver
     public static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
@@ -23,27 +24,27 @@ public class DBProxy {
         try {
             LogHelper.debug ("=======================");
             LogHelper.debug ("Connecting to SQL database: "
-                    + Reference.DB_FULLURL);
+                    + Reference.DB_URL);
             Class.forName (DRIVER_CLASS);
         } catch (final ClassNotFoundException e) {
             LogHelper.fatal (e);
         }
     }
 
-    private Connection createConnection () throws SQLException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
-        Connection connection = null;
+    private Connection createConnection () throws SQLException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException { 
         try {
             Class.forName (DRIVER_CLASS).
                     getConstructor ().
                     newInstance ();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
             LogHelper.fatal ("Check classpath. Cannot load db driver: "
-                    + DRIVER_CLASS);
+                    + DRIVER_CLASS); 
             LogHelper.fatal (ex);
         }
         try {
-            connection = DriverManager.getConnection ("jdbc:mysql://"
-                    + Reference.DB_FULLURL, Reference.DB_USER, Reference.DB_PASSWORD);
+            connection = DriverManager.getConnection (
+            		"jdbc:mysql://"+Reference.DB_FULLURL,Reference.DB_USER, Reference.DB_PASSWORD
+            		);
         } catch (SQLException e) {
             LogHelper.warn (e);
             LogHelper.warn ("Driver loaded, but cannot connect to db: "
