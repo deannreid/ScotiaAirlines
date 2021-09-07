@@ -50,11 +50,11 @@ public class Reference {
     /**
      * Database URL
      */
-    public static final String DB_URL = "94.23.204.120";
+    public static final String DB_URL = "########";
     /**
      * Table Name for Data
      */
-    public static final String DB_TABLE = "scotiaairline";
+    public static final String DB_TABLE = "########";
     /**
      * This just combines the Host and Table for college database
      */
@@ -64,11 +64,11 @@ public class Reference {
     /**
      * Database User
      */
-    public static final String DB_USER = "xenohost_scotiaa";
+    public static final String DB_USER = "########";
     /**
      * Database Password
      */
-    public static final String DB_PASSWORD = "jU[gUAMD+9C_";
+    public static final String DB_PASSWORD = "########";
 
     /**
      * List of Colours to Choose
